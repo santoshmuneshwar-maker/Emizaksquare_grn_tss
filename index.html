@@ -1582,7 +1582,7 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
       <button class="btn btn-lime btn-sm" onclick="renderGRNDash()" style="font-weight:800">Refresh</button>
       <button class="btn btn-ghost btn-sm" onclick="exportGRNDash()">⬇ CSV</button>
       <button class="btn btn-primary btn-sm" onclick="exportGRNDashExcel()" style="font-weight:800;background:linear-gradient(135deg,#1d6f42,#21a366);box-shadow:0 2px 10px rgba(29,111,66,.35)">📊 Excel</button>
-      <button class="btn btn-lime btn-sm" onclick="exportGRNDashImage()" style="font-weight:800">🖼 Report</button>
+      <button class="btn btn-lime btn-sm" onclick="exportGRNDashImage()" style="font-weight:800">🖼 JPEG Report</button>
     </div>
   </div>
   <div id="gdKpiStrip" style="margin-bottom:14px;width:100%;min-width:0;overflow:hidden"></div>
@@ -7706,10 +7706,7 @@ function exportGRNDashImage(){
   body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 40%,#0f172a 100%);color:var(--ink);padding:28px;min-height:100vh}
   .page{max-width:1280px;margin:0 auto}
 
-  /* ── PRINT BUTTON ── */
-  .print-btn{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#3b82f6,#7c3aed);color:#fff;border:none;padding:11px 22px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(59,130,246,.5);z-index:999;display:flex;align-items:center;gap:7px;letter-spacing:.3px}
-  .print-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(59,130,246,.6)}
-  @media print{.print-btn{display:none}body{background:#f1f5f9;padding:12px}.chart-box{break-inside:avoid}.tbl-wrap{break-inside:avoid}}
+  @media print{body{background:#f1f5f9;padding:12px}.chart-box{break-inside:avoid}.tbl-wrap{break-inside:avoid}}
 
   /* ── HEADER ── */
   .report-header{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px 28px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12)}
@@ -7801,7 +7798,6 @@ function exportGRNDashImage(){
   /* ── FOOTER ── */
   .report-footer{margin-top:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-weight:500;letter-spacing:.5px}
 </style></head><body>
-<button class="print-btn" onclick="window.print()">🖨 Print / Save PDF</button>
 <div class="page">
 
   <!-- HEADER -->
@@ -8251,10 +8247,71 @@ new Chart(document.getElementById('c3'),{
 <\/script>
 </body></html>`;
 
-  const win=window.open('','_blank','width=1400,height=960');
-  win.document.write(html);
-  win.document.close();
-  toast('3D Report opened in new window — use Print to save as PDF','ok');
+  // ── JPEG EXPORT via html2canvas ──
+  // Inject html2canvas once, then render the report markup into an off-screen
+  // container inside the current document, capture it, and save as .jpg.
+  function _doJpegExport(reportHtml){
+    const _now2=new Date();const _p2=n=>String(n).padStart(2,'0');
+    const fname='GRN_Report_'+_p2(_now2.getDate())+_p2(_now2.getMonth()+1)+_now2.getFullYear()+'_'+_p2(_now2.getHours())+_p2(_now2.getMinutes())+'.jpg';
+
+    // Create a sandboxed off-screen container at fixed width so layout is stable
+    const wrap=document.createElement('div');
+    wrap.style.cssText='position:fixed;left:-9999px;top:0;width:1400px;background:#0f172a;z-index:-1;overflow:hidden';
+    // Strip the outer <html>/<head>/<body> tags — inject just the <body> content + styles
+    // We embed a <style> tag + the body content so fonts/colours render correctly
+    const bodyMatch=reportHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+    const styleMatch=reportHtml.match(/<style>([\s\S]*?)<\/style>/gi);
+    const linkMatch=reportHtml.match(/<link[^>]*>/gi)||[];
+    const bodyContent=bodyMatch?bodyMatch[1]:'';
+    const styles=(styleMatch||[]).join('\n');
+    const links=linkMatch.join('\n');
+    wrap.innerHTML=links+styles+bodyContent;
+    // Remove the print button from captured output
+    wrap.querySelectorAll('.print-btn').forEach(el=>el.remove());
+    document.body.appendChild(wrap);
+
+    // Wait for fonts + charts to settle (Chart.js animations are 1200ms)
+    const doCapture=()=>{
+      window.html2canvas(wrap,{
+        scale:2,              // 2× for sharp JPEG
+        useCORS:true,
+        allowTaint:true,
+        backgroundColor:'#0f172a',
+        width:1400,
+        windowWidth:1400,
+        logging:false
+      }).then(canvas=>{
+        document.body.removeChild(wrap);
+        canvas.toBlob(blob=>{
+          const url=URL.createObjectURL(blob);
+          const a=document.createElement('a');
+          a.href=url;a.download=fname;
+          document.body.appendChild(a);a.click();
+          document.body.removeChild(a);
+          setTimeout(()=>URL.revokeObjectURL(url),5000);
+          toast('Report saved as '+fname,'ok');
+        },'image/jpeg',0.95);
+      }).catch(err=>{
+        document.body.removeChild(wrap);
+        toast('JPEG export failed: '+err.message,'err');
+      });
+    };
+
+    // Allow charts to render (animation duration is 1200ms)
+    setTimeout(doCapture,1500);
+    toast('⏳ Generating JPEG report…','info');
+  }
+
+  // Load html2canvas if not already loaded, then export
+  if(typeof window.html2canvas==='function'){
+    _doJpegExport(html);
+  }else{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=()=>_doJpegExport(html);
+    s.onerror=()=>toast('Could not load html2canvas — check internet connection','err');
+    document.head.appendChild(s);
+  }
 }
 
 
