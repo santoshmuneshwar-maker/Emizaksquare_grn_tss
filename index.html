@@ -1371,35 +1371,58 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
               <div style="position:relative">
                 <pre id="gs-script-code" style="background:#0d1117;border-radius:8px;padding:10px 12px;font-size:10px;color:#7ee787;line-height:1.6;overflow-x:auto;white-space:pre;margin:0">function doGet(e){
   var ss=SpreadsheetApp.getActiveSpreadsheet();
-  // Support ?sheet=SheetName to pick a specific worksheet/tab
-  var sheetName=e&amp;&amp;e.parameter&amp;&amp;e.parameter.sheet?e.parameter.sheet:'';
-  var sh=sheetName?ss.getSheetByName(sheetName):ss.getActiveSheet();
-  if(!sh){
-    var out=ContentService.createTextOutput(JSON.stringify({error:'Sheet "'+sheetName+'" not found. Available: '+ss.getSheets().map(function(s){return s.getName();}).join(', ')}));
-    out.setMimeType(ContentService.MimeType.JSON);
-    return out;
+  var sheetParam=e&amp;&amp;e.parameter&amp;&amp;e.parameter.sheet?e.parameter.sheet:'';
+  var action=e&amp;&amp;e.parameter&amp;&amp;e.parameter.action?e.parameter.action:'data';
+
+  // Support multiple comma-separated sheet names
+  var sheetNames=sheetParam?sheetParam.split(',').map(function(s){return s.trim();}).filter(Boolean):[];
+  var sheets=sheetNames.length
+    ? sheetNames.map(function(n){return ss.getSheetByName(n);}).filter(Boolean)
+    : [ss.getActiveSheet()];
+
+  if(!sheets.length){
+    var avail=ss.getSheets().map(function(s){return s.getName();}).join(', ');
+    var out=ContentService.createTextOutput(JSON.stringify({error:'None of the requested sheets found. Available: '+avail}));
+    out.setMimeType(ContentService.MimeType.JSON);return out;
   }
-  var range=sh.getDataRange();
-  var data=range.getValues();
-  var disp=range.getDisplayValues();
-  var headers=data[0];
-  // Identify PO No. and Invoice No. columns to preserve display text exactly
-  var poIdx=-1,invIdx=-1;
-  for(var j=0;j&lt;headers.length;j++){
-    var h=String(headers[j]).toLowerCase().replace(/[\s._-]+/g,'');
-    if(h==='pono'||h==='ponumber'||h==='purchaseorderno'||h==='po')poIdx=j;
-    if(h==='invoiceno'||h==='invno'||h==='invoicenumber'||h==='invoice#'||h==='inv#')invIdx=j;
+
+  // ?action=hash — lightweight change detection across all sheets
+  if(action==='hash'){
+    var hashParts=[];
+    sheets.forEach(function(sh){
+      var vals=sh.getDataRange().getValues();
+      var rowCount=vals.length-1;
+      var tail='';var start=Math.max(1,vals.length-3);
+      for(var i=start;i&lt;vals.length;i++)tail+=vals[i].join('|');
+      hashParts.push(sh.getName()+':'+rowCount+':'+tail.length+':'+tail.slice(0,80));
+    });
+    var out=ContentService.createTextOutput(JSON.stringify({hash:hashParts.join('||'),rows:hashParts.length,ts:Date.now()}));
+    out.setMimeType(ContentService.MimeType.JSON);return out;
   }
-  var rows=[];
-  for(var i=1;i&lt;data.length;i++){
-    if(!data[i][0]&amp;&amp;!data[i][1])continue;
-    var row={};
+
+  // Default: full data fetch — merge rows from all requested sheets
+  var allRows=[];
+  sheets.forEach(function(sh){
+    var range=sh.getDataRange();
+    var data=range.getValues();
+    var disp=range.getDisplayValues();
+    var headers=data[0];
+    var poIdx=-1,invIdx=-1;
     for(var j=0;j&lt;headers.length;j++){
-      row[headers[j]]=(j===poIdx||j===invIdx)?disp[i][j]:data[i][j];
+      var h=String(headers[j]).toLowerCase().replace(/[\s._-]+/g,'');
+      if(h==='pono'||h==='ponumber'||h==='purchaseorderno'||h==='po')poIdx=j;
+      if(h==='invoiceno'||h==='invno'||h==='invoicenumber'||h==='invoice#'||h==='inv#')invIdx=j;
     }
-    rows.push(row);
-  }
-  var out=ContentService.createTextOutput(JSON.stringify({sheet:sh.getName(),data:rows}));
+    for(var i=1;i&lt;data.length;i++){
+      if(!data[i][0]&amp;&amp;!data[i][1])continue;
+      var row={_sourceSheet:sh.getName()};
+      for(var j=0;j&lt;headers.length;j++){
+        row[headers[j]]=(j===poIdx||j===invIdx)?disp[i][j]:data[i][j];
+      }
+      allRows.push(row);
+    }
+  });
+  var out=ContentService.createTextOutput(JSON.stringify({sheets:sheets.map(function(s){return s.getName();}),data:allRows}));
   out.setMimeType(ContentService.MimeType.JSON);
   return out;
 }</pre>
@@ -1411,17 +1434,28 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
             <div id="gs-panel-2" style="display:none">
               <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Paste the <strong style="color:var(--ink2)">Web App URL</strong> from your Apps Script deployment:</div>
               <input class="field-input" id="gsheet-inward-url" placeholder="https://script.google.com/macros/s/&#x2026;/exec" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheetUrlInput()">
-              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
-                <span style="font-size:10px;color:var(--ink3);white-space:nowrap;font-weight:700">&#x1F4CB; Worksheet/Tab:</span>
-                <input class="field-input" id="gsheet-inward-sheet" placeholder="Sheet tab name (blank = active sheet)" style="flex:1;font-size:10px;padding:5px 9px;font-family:var(--font-mono)" autocomplete="off" spellcheck="false" oninput="onGSheetSheetInput()" title="Enter the exact worksheet tab name inside the Google Sheet">
+              <!-- Multi-worksheet input -->
+              <div style="margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <span style="font-size:10px;color:var(--ink3);white-space:nowrap;font-weight:700">&#x1F4CB; Worksheets/Tabs:</span>
+                  <span style="font-size:9px;color:var(--ink3)">(comma-separated for multiple sheets)</span>
+                </div>
+                <input class="field-input" id="gsheet-inward-sheet" placeholder="e.g. June 2026, July 2026  (blank = active sheet)" style="width:100%;font-size:10px;padding:5px 9px;font-family:var(--font-mono)" autocomplete="off" spellcheck="false" oninput="onGSheetSheetInput()" title="Enter one or more worksheet tab names, comma-separated">
+                <div id="gs-sheet-tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:5px"></div>
               </div>
               <div id="gs-sheet-hint" style="display:none;font-size:9px;color:var(--teal);margin-bottom:6px;padding:4px 8px;background:rgba(8,145,178,.07);border-radius:5px;border:1px solid rgba(8,145,178,.2)">
-                &#x1F4CC; Will fetch from worksheet: <strong id="gs-sheet-hint-name"></strong>
+                &#x1F4CC; Will fetch from worksheets: <strong id="gs-sheet-hint-name"></strong>
               </div>
               <div style="display:flex;gap:6px;flex-wrap:wrap">
                 <button class="btn btn-lime btn-sm" id="gsheet-fetch-btn" onclick="fetchGSheetInward()" disabled style="flex:1;justify-content:center">&#x2B07; Fetch from Sheet</button>
                 <button class="btn btn-ghost btn-sm" id="gsheet-auto-btn" onclick="toggleGSheetAutoSync()" style="font-size:10px;white-space:nowrap">&#x1F504; Auto-sync: OFF</button>
                 <button class="btn btn-ghost btn-sm" onclick="debugGSheetCols()" style="font-size:10px;white-space:nowrap" title="Show raw column names from sheet">&#x1F50D; Debug Cols</button>
+              </div>
+              <!-- Live sync status strip -->
+              <div id="gs-livesync-strip" style="display:flex;align-items:center;gap:8px;margin-top:7px;padding:5px 10px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:7px;flex-wrap:wrap">
+                <span style="width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 6px var(--green);animation:pulse 2s infinite"></span>
+                <span style="font-size:10px;font-weight:700;color:var(--green)" id="gs-sync-status">✅ Live</span>
+                <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-family:var(--font-mono)" id="gs-sync-countdown">next check in 15s</span>
               </div>
               <div id="gsheet-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
               <div id="gsheet-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
@@ -1578,7 +1612,50 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
           <option value="">All dates</option>
         </select>
       </div>
-      <button class="btn btn-ghost btn-xs" onclick="document.getElementById('gdDateFrom').value='';document.getElementById('gdDateTo').value='';renderGRNDash()">✕ Clear</button>
+      <!-- Custom multi-select month filter -->
+      <div style="position:relative" id="gdMonthWrap">
+        <div id="gdMonthBtn" onclick="toggleGdMonthDropdown(event)" style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:4px 10px;box-shadow:var(--sh);cursor:pointer;user-select:none;min-width:140px">
+          <span style="font-size:10px;color:var(--ink3);font-weight:700;letter-spacing:.5px;white-space:nowrap">MONTH</span>
+          <span id="gdMonthLabel" style="font-size:11px;font-family:var(--font-mono);color:var(--ink2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">All months</span>
+          <span style="font-size:9px;color:var(--ink3);flex-shrink:0">▾</span>
+        </div>
+        <div id="gdMonthDropdown" style="display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:500;background:#fff;border:1.5px solid var(--border2);border-radius:10px;box-shadow:0 8px 24px rgba(37,99,235,.15);min-width:180px;overflow:hidden">
+          <div style="padding:8px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--ink3)">Select Months</span>
+            <div style="display:flex;gap:6px">
+              <span onclick="gdMonthSelectAll()" style="font-size:9px;font-weight:700;color:var(--accent);cursor:pointer">All</span>
+              <span style="color:var(--border2)">|</span>
+              <span onclick="gdMonthClearAll()" style="font-size:9px;font-weight:700;color:var(--red);cursor:pointer">Clear</span>
+            </div>
+          </div>
+          <div id="gdMonthList" style="max-height:220px;overflow-y:auto;padding:4px 0"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(217,119,6,.3);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--orange);font-weight:700;letter-spacing:.5px;white-space:nowrap">⏳ UNDER PROCESS</span>
+        <select id="gdFilterUnder" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Pending</option>
+          <option value="no">None</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(220,38,38,.25);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:.5px;white-space:nowrap">⚠️ GRN ISSUE</span>
+        <select id="gdFilterIssue" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Issue</option>
+          <option value="no">None</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(124,58,237,.3);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--purple);font-weight:700;letter-spacing:.5px;white-space:nowrap">📋 PENDANCY</span>
+        <select id="gdFilterPend" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Pendancy</option>
+          <option value="no">Cleared</option>
+        </select>
+      </div>
+      <button class="btn btn-ghost btn-xs" onclick="document.getElementById('gdDateFrom').value='';document.getElementById('gdDateTo').value='';gdMonthClearAll(false);document.getElementById('gdFilterUnder').value='';document.getElementById('gdFilterIssue').value='';document.getElementById('gdFilterPend').value='';renderGRNDash()">✕ Clear</button>
       <button class="btn btn-lime btn-sm" onclick="renderGRNDash()" style="font-weight:800">Refresh</button>
       <button class="btn btn-ghost btn-sm" onclick="exportGRNDash()">⬇ CSV</button>
       <button class="btn btn-primary btn-sm" onclick="exportGRNDashExcel()" style="font-weight:800;background:linear-gradient(135deg,#1d6f42,#21a366);box-shadow:0 2px 10px rgba(29,111,66,.35)">📊 Excel</button>
@@ -1589,6 +1666,7 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
   <div class="ps-sheet-wrap">
     <div class="ps-sheet-toolbar">
       <span class="ps-sheet-title">Date-wise GRN Status</span>
+      <span id="gd-active-filters" style="display:none;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#fffbeb;color:var(--orange);border:1.5px solid rgba(217,119,6,.3);cursor:pointer" onclick="document.getElementById('gdDateFrom').value='';document.getElementById('gdDateTo').value='';gdMonthClearAll(false);document.getElementById('gdFilterUnder').value='';document.getElementById('gdFilterIssue').value='';document.getElementById('gdFilterPend').value='';renderGRNDash()"></span>
       <span class="ps-sheet-count" id="gd-tbl-count"></span>
     </div>
     <div class="ps-sheet-scroll" id="gdSheetScroll">
@@ -2613,9 +2691,16 @@ function startSSE(){
         const obj=d.data;
         if(obj===null){
           // Entire scanned node deleted from Firebase console
+          const _now=Date.now();const _GRACE=5*60*1000;
           const pendingIds=new Set(writeQueue.filter(w=>w.path&&w.path.startsWith('scanned/')).map(w=>w.path.replace('scanned/','')));
-          // Keep only pending records
-          scannedAll=scannedAll.filter(r=>pendingIds.has(r.id));
+          // Keep pending records, recently scanned, and current-session records
+          scannedAll=scannedAll.filter(r=>
+            !_deletedScanIds.has(r.id)&&(
+              pendingIds.has(r.id)||
+              (r.ts&&(_now-r.ts)<_GRACE)||
+              (session&&r.sessionStart===session.startTime&&r.tbl===session.tbl)
+            )
+          );
           LS.save('scanned',scannedAll);
           lastSyncTs=new Date();updateSyncUI();updateHeaderStats();
           debouncedSync('adminRefresh',refreshActiveAdminPage,300);
@@ -2663,16 +2748,28 @@ function stopSSE(){if(sseSource){sseSource.close();sseSource=null;}const sseEl=d
 
 function _mergeFirebaseScans(fbObj){
   // fbObj is the FULL scanned node from Firebase (from SSE 'put' or full pull)
-  // Records in local but NOT in fbObj have been deleted from Firebase — remove them too
-  // Exception: keep records that are pending in our write queue (not yet synced)
+  // FIX: protect local records that are pending OR were scanned recently (within 5 min)
+  // to prevent records from vanishing due to stale Firebase snapshots on reconnect.
+  const now=Date.now();
+  const RECENT_GRACE_MS=5*60*1000; // 5-minute grace window for recently-scanned records
   const pendingIds=new Set(writeQueue.filter(w=>w.path&&w.path.startsWith('scanned/')).map(w=>w.path.replace('scanned/','')));
   // Build merged map: start from Firebase as ground truth
   const merged={};
   // Keep all Firebase records — except those explicitly deleted by admin this session
   Object.entries(fbObj||{}).forEach(([id,val])=>{if(val&&!_deletedScanIds.has(id))merged[id]=val;});
-  // Keep local records that are pending (not yet pushed to Firebase)
-  scannedAll.forEach(r=>{if(pendingIds.has(r.id)&&!merged[r.id])merged[r.id]=r;});
-  // Note: local records NOT in Firebase and NOT pending are treated as deleted — drop them
+  // Keep local records that are:
+  //   (a) pending in the write queue (not yet pushed to Firebase), OR
+  //   (b) scanned within the last 5 minutes (grace window for in-flight writes), OR
+  //   (c) from the current active session (protect against partial Firebase snapshots)
+  scannedAll.forEach(r=>{
+    if(merged[r.id])return; // already in Firebase — skip
+    if(_deletedScanIds.has(r.id))return; // admin-deleted — skip
+    const isPending=pendingIds.has(r.id);
+    const isRecent=(r.ts&&(now-r.ts)<RECENT_GRACE_MS);
+    const isActiveSession=(session&&r.sessionStart===session.startTime&&r.tbl===session.tbl);
+    if(isPending||isRecent||isActiveSession)merged[r.id]=r;
+    // else: record is old, not pending, not in Firebase → treat as deleted (intended behaviour)
+  });
   scannedAll=Object.values(merged).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0));
   LS.save('scanned',scannedAll);
 }
@@ -3595,19 +3692,27 @@ let gsheetAutoSyncOn=false;
 function onGSheetUrlInput(){
   const url=(document.getElementById('gsheet-inward-url').value||'').trim();
   document.getElementById('gsheet-fetch-btn').disabled=!url;
-  // Save URL persistently so it survives page reload
-  if(url)LS.save('gsheet_inward_url',url);
-  else LS.remove('gsheet_inward_url');
+  if(url){
+    LS.save('gsheet_inward_url',url);
+    // Reset hash so the next poll triggers a fresh full fetch
+    _gsLastHash='';
+    // Start live sync if not already running
+    _startGSheetLiveSync();
+  }else{
+    LS.remove('gsheet_inward_url');
+  }
 }
 
 function onGSheetSheetInput(){
   const sh=(document.getElementById('gsheet-inward-sheet').value||'').trim();
   const hint=document.getElementById('gs-sheet-hint');
   const hintName=document.getElementById('gs-sheet-hint-name');
-  if(sh&&hint&&hintName){hint.style.display='block';hintName.textContent=sh;}
-  else if(hint){hint.style.display='none';}
-  if(sh)LS.save('gsheet_inward_sheet',sh);
-  else LS.remove('gsheet_inward_sheet');
+  // Render tag pills for each comma-separated sheet name
+  const tagContainer=document.getElementById('gs-sheet-tags');
+  if(tagContainer){
+    const names=sh.split(',').map(s=>s.trim()).filter(Boolean);
+    tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
+  }
 }
 
 function saveGsColOverrides(){
@@ -3665,20 +3770,44 @@ async function fetchGSheetInward(silent){
   const btn=document.getElementById('gsheet-fetch-btn');
   if(!silent&&btn)btn.disabled=true;
   try{
-    const sheetName=(document.getElementById('gsheet-inward-sheet')||{value:''}).value.trim();
+    const sheetInput=(document.getElementById('gsheet-inward-sheet')||{value:''}).value.trim();
+    // Support multiple comma-separated sheet names
+    const sheetNames=sheetInput?sheetInput.split(',').map(s=>s.trim()).filter(Boolean):[''];
     const sep=rawUrl.includes('?')?'&':'?';
-    const sheetParam=sheetName?('&sheet='+encodeURIComponent(sheetName)):'';
-    const resp=await fetch(rawUrl+sep+'_cb='+Date.now()+sheetParam,{cache:'no-cache'});
-    if(!resp.ok)throw new Error('HTTP '+resp.status);
-    const json=await resp.json();
-    const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
-    if(!rows||!rows.length){
-      setGSheetStatus('⚠ No rows returned — check the sheet has data','err');
+    let allRows=[];
+    let fetchLog=[];
+    for(let si=0;si<sheetNames.length;si++){
+      const sn=sheetNames[si];
+      const sheetParam=sn?('&sheet='+encodeURIComponent(sn)):'';
+      const label=sn||'(active sheet)';
+      if(sheetNames.length>1){
+        setGSheetStatus('⏳ Fetching sheet '+(si+1)+'/'+sheetNames.length+': '+label+'…','load');
+      }
+      const resp=await fetch(rawUrl+sep+'_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+      if(!resp.ok)throw new Error('HTTP '+resp.status+' on sheet: '+label);
+      const json=await resp.json();
+      const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
+      if(!rows||!rows.length){
+        fetchLog.push('⚠ '+label+': no rows');
+        continue;
+      }
+      // Tag each row with the source worksheet name
+      const tagged=rows.map(r=>({...r,_sourceSheet:sn||''}));
+      allRows=allRows.concat(tagged);
+      fetchLog.push('✓ '+label+': '+rows.length+' rows');
+    }
+    if(!allRows.length){
+      setGSheetStatus('⚠ No rows returned from any sheet — check sheet names and data','err');
       if(!silent&&btn)btn.disabled=false;
       return;
     }
-    setGSheetStatus('✓ Fetched '+rows.length+' rows — processing…','ok');
-    processGSheetInwardRows(rows,silent);
+    const summary=sheetNames.length>1?('✓ '+allRows.length+' rows from '+sheetNames.length+' sheets'):('✓ Fetched '+allRows.length+' rows');
+    setGSheetStatus(summary+' — processing…','ok');
+    if(!silent&&sheetNames.length>1)toast(fetchLog.join(' | '),'ok');
+    processGSheetInwardRows(allRows,silent);
+    // Re-sync hash after manual fetch so the poller has a fresh baseline
+    _gsLastHash='';
+    _gsHashPoll();
     if(!silent&&btn)btn.disabled=false;
   }catch(err){
     setGSheetStatus('✗ '+err.message+' — Check Web App URL and ensure access is set to Anyone','err');
@@ -3717,14 +3846,19 @@ function restoreGSheetPrefs(){
   }
   // Restore column overrides
   restoreGsColOverrides();
-  // Restore saved sheet/tab name
+  // Restore saved sheet/tab names (supports multiple comma-separated)
   const savedSheet=LS.load('gsheet_inward_sheet','');
   if(savedSheet){
     const shInp=document.getElementById('gsheet-inward-sheet');
     if(shInp){shInp.value=savedSheet;}
     const hint=document.getElementById('gs-sheet-hint');
     const hintName=document.getElementById('gs-sheet-hint-name');
-    if(hint&&hintName){hint.style.display='block';hintName.textContent=savedSheet;}
+    const names=savedSheet.split(',').map(s=>s.trim()).filter(Boolean);
+    if(hint&&hintName){hint.style.display='block';hintName.textContent=names.join(', ');}
+    const tagContainer=document.getElementById('gs-sheet-tags');
+    if(tagContainer&&names.length){
+      tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">\u{1F4CB} ${n}</span>`).join('');
+    }
   }
   // Restore auto-sync button appearance only (interval is owned by initUI's setInterval)
   if(LS.load('gsheet_auto_sync','')===('on')){
@@ -3846,6 +3980,7 @@ function processGSheetInwardRows(rows,silent){
   const data=rows.map((r,i)=>({
     id:'inv'+Date.now()+i,
     srNo:i+1,
+    _sourceSheet:r._sourceSheet||'',
     date:             fmtDate(get(r,GSHEET_INWARD_COLS.date)),
     vendorName:       get(r,GSHEET_INWARD_COLS.vendorName),
     poNo:             getRaw(r,GSHEET_INWARD_COLS.poNo),
@@ -6571,9 +6706,26 @@ function renderPOStatus(){
   let rows=[];
   if(inwardData.length){
     rows=inwardData.map((inv,idx)=>{
-      // Match scans by PO+Invoice key so each invoice row sees only its own scans
+      // Match scans strictly by PO+Invoice key when invNo is present.
+      // For a multi-invoice PO, scans recorded against Invoice A must NOT
+      // appear on Invoice B's row — so no fallback to the whole-PO bucket.
       const piKey=inv.poNo+'||'+inv.invNo;
-      const poScans=(inv.invNo&&scansByPOInv[piKey])?scansByPOInv[piKey]:scansByPO[inv.poNo]||[];
+      const hasPIKey=inv.invNo&&inv.invNo!=='—'&&scansByPOInv[piKey]&&scansByPOInv[piKey].length>0;
+      const poHasMultipleInvoices=(()=>{
+        const invNosForPO=[...new Set(inwardData.filter(r=>r.poNo===inv.poNo).map(r=>r.invNo).filter(Boolean))];
+        return invNosForPO.length>1;
+      })();
+      // Only fall back to PO-level scans when this PO has a single invoice
+      // (or no invNo at all) — never when multiple invoices exist for the same PO.
+      let poScans;
+      if(hasPIKey){
+        poScans=scansByPOInv[piKey];
+      }else if(!poHasMultipleInvoices){
+        poScans=scansByPO[inv.poNo]||[];
+      }else{
+        // Multi-invoice PO but no scans recorded under this specific invoice yet
+        poScans=scansByPOInv[piKey]||[];
+      }
       const totalScanned=poScans.length;
       const scanTables=[...new Set(poScans.map(r=>r.tbl))].sort((a,b)=>a-b);
       const scanCartons=[...new Set(poScans.map(r=>r.tbl+'__'+r.carton).filter(r=>r.includes('__')&&r.split('__')[1]))].length;
@@ -6739,13 +6891,11 @@ function renderPOStatus(){
     const r0=grp.rows[0];
     const invRows=grp.rows;
 
-    // Table breakdown sorted by table number — shared across all invoices of this PO
-    const tbEntries=Object.entries(r0.tableBreakdown||{}).sort((a,b)=>Number(a[0])-Number(b[0]));
-    const tbList=tbEntries.length?tbEntries:[['—',{units:0,cartons:new Set()}]];
-    const tbCount=tbList.length;
+    // For multi-invoice POs each invoice has its own table breakdown.
+    // tbCount here is the max table count across all invoices (for rowspan calc).
+    const allTbEntries=invRows.map(inv=>Object.entries(inv.tableBreakdown||{}).sort((a,b)=>Number(a[0])-Number(b[0])));
+    const tbCount=Math.max(...allTbEntries.map(e=>e.length),1);
     const invCount=invRows.length;
-    // Total physical rows = one per table × one per invoice
-    const totalRows=tbCount*invCount;
 
     // Helper: build per-invoice right-side cells — each invoice has its OWN status/TAT/GRN
     const buildInvRight=(inv,rsInv)=>{
@@ -6794,13 +6944,13 @@ function renderPOStatus(){
         +`<td${rsInv}>${grnRemarkCell}</td>`;
     };
 
-    // Each invoice row repeats the PO details (requirement: separate row per unique Invoice No.)
-    const makeSharedLeft=(rowNum)=>
+    // Each invoice row shows its OWN vehicle arrived date and vendor — not always r0.
+    const makeSharedLeft=(rowNum,inv)=>
       `<td class="ps-fr ps-fr-num ps-row-num">${rowNum}</td>`
-      +`<td class="ps-fr ps-fr-date td-ts">${r0.date||'\u2014'}</td>`
-      +`<td class="ps-fr ps-fr-vendor" style="font-size:11px;overflow:hidden;text-overflow:ellipsis">${r0.vendorName||'\u2014'}</td>`
-      +`<td class="ps-fr ps-fr-po"><span class="po-badge">${r0.poNo}</span></td>`
-      +`<td style="font-family:var(--font-mono);font-size:10px;color:var(--ink3)">${r0.newPO||'\u2014'}</td>`;
+      +`<td class="ps-fr ps-fr-date td-ts">${inv.date||'\u2014'}</td>`
+      +`<td class="ps-fr ps-fr-vendor" style="font-size:11px;overflow:hidden;text-overflow:ellipsis">${inv.vendorName||'\u2014'}</td>`
+      +`<td class="ps-fr ps-fr-po"><span class="po-badge">${inv.poNo}</span></td>`
+      +`<td style="font-family:var(--font-mono);font-size:10px;color:var(--ink3)">${inv.newPO||'\u2014'}</td>`;
 
     const html=[];
     // Flatten: one row per invoice (repeat PO details on each row)
@@ -6813,7 +6963,8 @@ function renderPOStatus(){
         +`<td class="td-num" style="color:var(--accent);font-weight:700">${inv.totalInvQty!==undefined&&inv.totalInvQty!=='\u2014'?inv.totalInvQty:'\u2014'}</td>`
         +`<td class="td-num">${inv.noOfCartons!==undefined&&inv.noOfCartons!=='\u2014'?inv.noOfCartons:'\u2014'}</td>`;
       // Table breakdown — show first table on this row; additional tables as sub-rows within invoice
-      const tbEntries2=Object.entries(r0.tableBreakdown||{}).sort((a,b)=>Number(a[0])-Number(b[0]));
+      // Table breakdown for THIS invoice (not shared r0 — each invoice has its own scans)
+      const tbEntries2=Object.entries(inv.tableBreakdown||{}).sort((a,b)=>Number(a[0])-Number(b[0]));
       const tbList2=tbEntries2.length?tbEntries2:[['\u2014',{units:0,cartons:new Set()}]];
       const t0=tbList2[0];
       const tBadge0=t0[0]==='\u2014'?'<span class="rmk-none">\u2014</span>'
@@ -6822,7 +6973,7 @@ function renderPOStatus(){
         +`<td class="td-num" style="color:var(--green);font-weight:700">${t0[0]==='\u2014'?'\u2014':t0[1].units}</td>`
         +`<td class="td-num" style="color:var(--teal);font-weight:700">${t0[0]==='\u2014'?'\u2014':t0[1].cartons.size}</td>`;
       const rowBg=ii%2===0?'':'background:#fafbff';
-      html.push(`<tr style="${sepStyle};${rowBg}"${isLast?' class="ps-group-end"':''}>${makeSharedLeft(gi*100+ii+1)}${invCols}${tCells0}${invRight}</tr>`);
+      html.push(`<tr style="${sepStyle};${rowBg}"${isLast?' class="ps-group-end"':''}>${makeSharedLeft(gi*100+ii+1,inv)}${invCols}${tCells0}${invRight}</tr>`);
       // Additional tables as extra rows (no PO repeat, just table info)
       tbList2.slice(1).forEach(([t,v],ti)=>{
         const tBadge=`<span class="tbl-badge" style="font-size:10px;padding:3px 8px">T${String(t).padStart(2,'0')}</span>`;
@@ -6933,6 +7084,68 @@ function exportPOStatus(){
 }
 
 // ── GRN DASHBOARD ─────────────────────────────────────────────────────────────
+// ── GRN Dashboard: Month multi-select helpers ──
+function _gdGetSelectedMonths(){
+  const list=document.getElementById('gdMonthList');
+  if(!list)return[];
+  return [...list.querySelectorAll('input[data-month]:checked')].map(cb=>cb.dataset.month);
+}
+function _gdUpdateMonthLabel(){
+  const lbl=document.getElementById('gdMonthLabel');
+  if(!lbl)return;
+  const sel=_gdGetSelectedMonths();
+  const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  if(sel.length===0){lbl.textContent='All months';lbl.style.color='var(--ink3)';}
+  else if(sel.length===1){const[y,m]=sel[0].split('-');lbl.textContent=MONTH_NAMES[parseInt(m)-1]+' '+y;lbl.style.color='var(--accent)';}
+  else{lbl.textContent=sel.length+' months selected';lbl.style.color='var(--accent)';}
+  // Update button border to highlight when active
+  const btn=document.getElementById('gdMonthBtn');
+  if(btn){btn.style.borderColor=sel.length>0?'var(--accent)':'var(--border)';}
+}
+function _gdMonthChanged(){
+  _gdUpdateMonthLabel();
+  renderGRNDash();
+}
+function toggleGdMonthDropdown(e){
+  e.stopPropagation();
+  const dd=document.getElementById('gdMonthDropdown');
+  if(!dd)return;
+  const isOpen=dd.style.display!=='none';
+  // Close all other dropdowns, open this one
+  document.querySelectorAll('.gd-custom-dd').forEach(el=>{el.style.display='none';});
+  dd.style.display=isOpen?'none':'block';
+  if(!isOpen){
+    // Position: flip up if near bottom of viewport
+    const wrap=document.getElementById('gdMonthWrap');
+    if(wrap){
+      const rect=wrap.getBoundingClientRect();
+      const spaceBelow=window.innerHeight-rect.bottom;
+      dd.style.top=spaceBelow<250?'auto':'calc(100% + 4px)';
+      dd.style.bottom=spaceBelow<250?'calc(100% + 4px)':'auto';
+    }
+  }
+}
+function gdMonthSelectAll(rerender){
+  const list=document.getElementById('gdMonthList');
+  if(!list)return;
+  list.querySelectorAll('input[data-month]').forEach(cb=>{cb.checked=true;});
+  _gdUpdateMonthLabel();
+  if(rerender!==false)renderGRNDash();
+}
+function gdMonthClearAll(rerender){
+  const list=document.getElementById('gdMonthList');
+  if(!list)return;
+  list.querySelectorAll('input[data-month]').forEach(cb=>{cb.checked=false;});
+  _gdUpdateMonthLabel();
+  if(rerender!==false)renderGRNDash();
+}
+// Close month dropdown when clicking outside
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('gdMonthWrap');
+  const dd=document.getElementById('gdMonthDropdown');
+  if(dd&&wrap&&!wrap.contains(e.target))dd.style.display='none';
+});
+
 function _gdPopulateDateDropdowns(){
   const fromSel=document.getElementById("gdDateFrom");
   const toSel=document.getElementById("gdDateTo");
@@ -6949,6 +7162,34 @@ function _gdPopulateDateDropdowns(){
   toSel.innerHTML=blankOpt+opts;
   if(curFrom)fromSel.value=curFrom;
   if(curTo)toSel.value=curTo;
+  // Populate Month multi-select dropdown
+  const monthList=document.getElementById('gdMonthList');
+  if(monthList){
+    const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthSet=new Set();
+    inwardData.forEach(i=>{
+      const d=_gdParseDate(i.date||'');
+      if(d){const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;monthSet.add(key);}
+    });
+    const sortedMonths=[...monthSet].sort();
+    // Preserve existing checked state
+    const prevChecked=new Set(_gdGetSelectedMonths());
+    monthList.innerHTML=sortedMonths.map(k=>{
+      const [y,m]=k.split('-');
+      const label=MONTH_NAMES[parseInt(m)-1]+' '+y;
+      const checked=prevChecked.size===0||prevChecked.has(k)?'':'';
+      return `<label style="display:flex;align-items:center;gap:8px;padding:6px 12px;cursor:pointer;font-size:11px;color:var(--ink2);transition:background .1s" onmouseover="this.style.background='#f5f7ff'" onmouseout="this.style.background=''">`+
+        `<input type="checkbox" data-month="${k}" style="accent-color:var(--accent);width:13px;height:13px;cursor:pointer" onchange="_gdMonthChanged()">`+
+        `<span style="font-family:var(--font-mono);font-weight:600">${label}</span></label>`;
+    }).join('');
+    // Restore checked state
+    if(prevChecked.size>0){
+      monthList.querySelectorAll('input[data-month]').forEach(cb=>{
+        if(prevChecked.has(cb.dataset.month))cb.checked=true;
+      });
+    }
+    _gdUpdateMonthLabel();
+  }
 }
 function _gdParseDate(s){
   if(!s||!s.trim()||s==='—')return null;
@@ -6981,12 +7222,17 @@ function renderGRNDash(){
   }
   const fromVal=(document.getElementById('gdDateFrom').value||'').trim();
   const toVal  =(document.getElementById('gdDateTo').value||'').trim();
+  const selectedMonths=_gdGetSelectedMonths(); // array of 'YYYY-MM' strings, empty = all
+  const filterUnder=(document.getElementById('gdFilterUnder')?document.getElementById('gdFilterUnder').value||'':'');
+  const filterIssue=(document.getElementById('gdFilterIssue')?document.getElementById('gdFilterIssue').value||'':'');
+  const filterPend=(document.getElementById('gdFilterPend')?document.getElementById('gdFilterPend').value||'':'');
 
   // Group inwardData by Vehicle Arrived Date
   const byDate={};
   inwardData.forEach(inv=>{
     const d=inv.date||'—';
     if(!_gdDateMatchFilter(d,fromVal,toVal))return;
+    if(selectedMonths.length>0){const pd=_gdParseDate(d);if(pd){const key=`${pd.getFullYear()}-${String(pd.getMonth()+1).padStart(2,'0')}`;if(!selectedMonths.includes(key))return;}}
     if(!byDate[d])byDate[d]=[];
     byDate[d].push(inv);
   });
@@ -6997,6 +7243,35 @@ function renderGRNDash(){
     if(da&&db)return da-db;
     return a.localeCompare(b);
   });
+
+  // Apply status filters — compute per-date counts and filter out non-matching dates
+  const _gdComputeRowStats=invList=>{
+    const trueUnder=invList.filter(i=>i.grnStatus!=='Done'&&!(i.grnRemark&&i.grnRemark.trim()&&!(i.grnRemark||'').toLowerCase().includes('grn done')));
+    const issueList=invList.filter(i=>i.grnStatus!=='Done'&&i.grnRemark&&i.grnRemark.trim()&&!(i.grnRemark||'').toLowerCase().includes('grn done'));
+    const pendList=invList.filter(i=>i.grnStatus!=='Done');
+    return{underCount:trueUnder.length,issueCount:issueList.length,pendCount:pendList.length};
+  };
+  const filteredDates=sortedDates.filter(date=>{
+    if(!filterUnder&&!filterIssue&&!filterPend)return true;
+    const stats=_gdComputeRowStats(byDate[date]);
+    if(filterUnder==='yes'&&stats.underCount===0)return false;
+    if(filterUnder==='no'&&stats.underCount>0)return false;
+    if(filterIssue==='yes'&&stats.issueCount===0)return false;
+    if(filterIssue==='no'&&stats.issueCount>0)return false;
+    if(filterPend==='yes'&&stats.pendCount===0)return false;
+    if(filterPend==='no'&&stats.pendCount>0)return false;
+    return true;
+  });
+
+  if(!filteredDates.length){
+    document.getElementById('gdBody').innerHTML='<tr><td colspan="22" class="empty-cell">No entries match the selected filters</td></tr>';
+    document.getElementById('gdKpiStrip').innerHTML='';
+    document.getElementById('gd-tbl-count').textContent='0 dates';
+    return;
+  }
+  // Use filteredDates as the working sorted date list
+  const _origSortedDates=sortedDates; void _origSortedDates;
+  sortedDates.length=0; filteredDates.forEach(d=>sortedDates.push(d));
 
   if(!sortedDates.length){
     document.getElementById('gdBody').innerHTML='<tr><td colspan="22" class="empty-cell">No entries match the date filter</td></tr>';
@@ -7045,21 +7320,25 @@ function renderGRNDash(){
     const pBoxes=pendList.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0);
     const pQty=pendList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
 
-    // Daily capacity cap = 30,000 units
-    // Walk all invoices in order; qty within cap goes to TAT pool, qty over cap → beyondCapacity
+    // ── Beyond Capacity ──
+    // Sum all invoice qty for this date. Any qty beyond 30,000 goes into Beyond Capacity.
+    // Walk invoices in arrival order; each invoice contributes up to its full qty within the cap,
+    // then the remainder (or entire qty if cap already exhausted) is Beyond Capacity.
     const DAILY_CAP=30000;
     let capRemaining=DAILY_CAP;
     let beyondCapQty=0;
-    // Build a map: invId → qty that falls within capacity (for TAT calc)
+    // withinCapQty[inv.id] = the portion of that invoice's qty that falls within the 30k cap
     const withinCapQty={};
     invList.forEach(inv=>{
       const qty=parseInt(inv.totalInvQty)||0;
       if(capRemaining<=0){
+        // Cap already exhausted — entire invoice qty is beyond capacity
         beyondCapQty+=qty;
       }else if(qty<=capRemaining){
         withinCapQty[inv.id]=qty;
         capRemaining-=qty;
       }else{
+        // Partially within cap
         withinCapQty[inv.id]=capRemaining;
         beyondCapQty+=qty-capRemaining;
         capRemaining=0;
@@ -7067,10 +7346,27 @@ function renderGRNDash(){
     });
     const beyond=beyondCapQty;
 
-    // TAT — only for done invoices that have GRN Date, using within-capacity qty only
-    const tatList=doneList.filter(i=>_gdParseDate(i.grnDate)&&(withinCapQty[i.id]||0)>0);
-    const above=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(withinCapQty[i.id]||0),0);
-    const within=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(withinCapQty[i.id]||0),0);
+    // ── Within TAT / Above TAT ──
+    // TAT uses the full totalInvQty of each invoice.
+    // Rule: TAT columns together cannot exceed the daily capacity (30,000).
+    // If uQty >= 30,000 and Within TAT qty >= 30,000 → Above TAT must be 0,
+    // because the entire capacity is already accounted for by Within TAT invoices.
+    const tatList=invList.filter(i=>_gdParseDate(i.grnDate)&&_gdParseDate(i.issueResolvedDate));
+    let rawAbove=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+    let rawWithin=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+    // Apply capacity cap: if total invoice qty >= DAILY_CAP and within already fills the cap → above = 0
+    let above=rawAbove,within=rawWithin;
+    if(uQty>=DAILY_CAP){
+      if(rawWithin>=DAILY_CAP){
+        // Within TAT fills or exceeds capacity — no room left for Above TAT
+        within=DAILY_CAP;
+        above=0;
+      }else{
+        // Within TAT is under cap — Above TAT can only fill the remaining capacity
+        within=rawWithin;
+        above=Math.min(rawAbove,DAILY_CAP-rawWithin);
+      }
+    }
     const tatTotal=above+within;
     const abovePct=tatTotal>0?((above/tatTotal)*100).toFixed(2)+'%':'0.00%';
     const withinPct=tatTotal>0?((within/tatTotal)*100).toFixed(2)+'%':'0.00%';
@@ -7145,6 +7441,21 @@ function renderGRNDash(){
 
   document.getElementById('gdBody').innerHTML=rows.join('');
   document.getElementById('gd-tbl-count').textContent=sortedDates.length+' date'+(sortedDates.length!==1?'s':'');
+  // Active filter badge
+  (function(){
+    const activeBadge=document.getElementById('gd-active-filters');
+    if(!activeBadge)return;
+    const activeFilters=[];
+    if(selectedMonths.length>0){const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const labels=selectedMonths.map(k=>{const[y,m]=k.split('-');return mn[parseInt(m)-1]+' '+y;});activeFilters.push('Month: '+labels.join(', '));}
+    if(filterUnder==='yes')activeFilters.push('⏳ Has Under Process');
+    else if(filterUnder==='no')activeFilters.push('⏳ No Under Process');
+    if(filterIssue==='yes')activeFilters.push('⚠️ Has GRN Issue');
+    else if(filterIssue==='no')activeFilters.push('⚠️ No GRN Issue');
+    if(filterPend==='yes')activeFilters.push('📋 Has Pendancy');
+    else if(filterPend==='no')activeFilters.push('📋 Cleared');
+    if(activeFilters.length){activeBadge.textContent='🔍 '+activeFilters.join(' · ')+' · ✕ Clear';activeBadge.style.display='inline-flex';}
+    else{activeBadge.style.display='none';}
+  })();
 
   // ── KPI Dashboard ──
   // Today's date in DD/MM/YYYY format for display
@@ -7655,9 +7966,15 @@ function exportGRNDashImage(){
     const iInv=issueList.length,iQty=issueList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
     const DAILY_CAP=30000;let capRem=DAILY_CAP,bcQty=0;const wc={};
     invList.forEach(inv=>{const q=parseInt(inv.totalInvQty)||0;if(capRem<=0){bcQty+=q;}else if(q<=capRem){wc[inv.id]=q;capRem-=q;}else{wc[inv.id]=capRem;bcQty+=q-capRem;capRem=0;}});
-    const tatList=doneList.filter(i=>_gdParseDate(i.grnDate)&&(wc[i.id]||0)>0);
-    const above=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(wc[i.id]||0),0);
-    const within=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(wc[i.id]||0),0);
+    // TAT: if uQty>=30k and within>=30k → above=0 (capacity fully consumed by Within TAT)
+    const tatList=invList.filter(i=>_gdParseDate(i.grnDate)&&_gdParseDate(i.issueResolvedDate));
+    const rawAboveJ=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+    const rawWithinJ=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+    let above,within;
+    if(uQty>=DAILY_CAP){
+      if(rawWithinJ>=DAILY_CAP){within=DAILY_CAP;above=0;}
+      else{within=rawWithinJ;above=Math.min(rawAboveJ,DAILY_CAP-rawWithinJ);}
+    }else{above=rawAboveJ;within=rawWithinJ;}
     return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty};
   });
 
@@ -7673,6 +7990,17 @@ function exportGRNDashImage(){
   const generatedOn=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
   const dateRange=fromVal&&toVal?`${fromVal} – ${toVal}`:fromVal?`From ${fromVal}`:toVal?`Till ${toVal}`:'All Dates';
   const n=v=>v===0?'—':v.toLocaleString();
+
+  // ── Today's Inward Details & GRN Qty (always today's date, independent of date filter) ──
+  const _todayKey=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()}`;
+  const _todayInward=inwardData.filter(i=>i.date===_todayKey);
+  const _tidInv=_todayInward.length;
+  const _tidBoxes=_todayInward.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0);
+  const _tidQty=_todayInward.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+  const _todayGRN=inwardData.filter(i=>i.grnDate&&i.grnDate===_todayKey);
+  const _tgInv=_todayGRN.length;
+  const _tgBoxes=_todayGRN.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0);
+  const _tgQty=_todayGRN.reduce((s,i)=>s+(parseInt(i.grnQty)||parseInt(i.totalInvQty)||0),0);
 
   const tableRows=summary.map((r,i)=>{
     const t2=r.above+r.within;
@@ -7795,8 +8123,41 @@ function exportGRNDashImage(){
   .grn{color:#4ade80;font-weight:700}.ylw{color:#fbbf24;font-weight:700}.red{color:#f87171;font-weight:700}.pur{color:#c084fc;font-weight:700}
   td.grn{color:#4ade80}td.ylw{color:#fbbf24}td.red{color:#f87171}td.pur{color:#c084fc}
 
+  /* ── TODAY KPI CARDS ── */
+  .today-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+  .tkpi-card{
+    border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 6px 0 rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15);
+  }
+  .tkpi-hdr{
+    display:flex;align-items:center;gap:10px;padding:13px 16px;
+  }
+  .tkpi-icon{
+    width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    font-size:18px;flex-shrink:0;background:rgba(255,255,255,.22);
+    box-shadow:0 2px 6px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  .tkpi-title{
+    font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+    color:#fff;flex:1;text-shadow:0 1px 3px rgba(0,0,0,.25);
+  }
+  .tkpi-date{font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.7);flex-shrink:0;}
+  .tkpi-body{background:#fff;border-radius:0 0 16px 16px;flex:1;display:flex;flex-direction:column;}
+  .tkpi-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px;}
+  .tkpi-row+.tkpi-row{border-top:1px solid rgba(0,0,20,.07);}
+  .tkpi-row-left{display:flex;align-items:center;gap:8px;}
+  .tkpi-row-icon{font-size:15px;flex-shrink:0;}
+  .tkpi-row-label{font-size:12px;font-weight:600;color:#374151;}
+  .tkpi-row-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;flex-shrink:0;}
+  .tkpi-val-blue{color:#1d4ed8;}
+  .tkpi-val-green{color:#065f46;}
+  /* card colour themes */
+  .tkpi-inward .tkpi-hdr{background:linear-gradient(135deg,#1d4ed8,#3b82f6,#60a5fa);}
+  .tkpi-grn    .tkpi-hdr{background:linear-gradient(135deg,#065f46,#059669,#34d399);}
+
   /* ── FOOTER ── */
   .report-footer{margin-top:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-weight:500;letter-spacing:.5px}
+
 </style></head><body>
 <div class="page">
 
@@ -7877,6 +8238,53 @@ function exportGRNDashImage(){
         <div class="kpi-lbl">Above TAT</div>
         <div class="kpi-val">${abovePct}%</div>
         <div class="kpi-sub">${n(T.above)} units<br>delayed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODAY'S INWARD & GRN KPI CARDS -->
+  <div class="section-label">📅 Today's Summary — ${_todayKey}</div>
+  <div class="today-kpi-grid">
+    <div class="tkpi-card tkpi-inward">
+      <div class="tkpi-hdr">
+        <div class="tkpi-icon">🚛</div>
+        <div class="tkpi-title">Today's Inward Details</div>
+        <div class="tkpi-date">${_todayKey}</div>
+      </div>
+      <div class="tkpi-body">
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📋</span><span class="tkpi-row-label">No. of Invoices</span></div>
+          <span class="tkpi-row-val tkpi-val-blue">${n(_tidInv)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">🗃️</span><span class="tkpi-row-label">Total Boxes</span></div>
+          <span class="tkpi-row-val tkpi-val-blue">${n(_tidBoxes)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📊</span><span class="tkpi-row-label">Total Inv. Qty</span></div>
+          <span class="tkpi-row-val tkpi-val-blue">${n(_tidQty)}</span>
+        </div>
+      </div>
+    </div>
+    <div class="tkpi-card tkpi-grn">
+      <div class="tkpi-hdr">
+        <div class="tkpi-icon">✅</div>
+        <div class="tkpi-title">Today's GRN Qty</div>
+        <div class="tkpi-date">${_todayKey}</div>
+      </div>
+      <div class="tkpi-body">
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📋</span><span class="tkpi-row-label">No. of Invoices</span></div>
+          <span class="tkpi-row-val tkpi-val-green">${n(_tgInv)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">🗃️</span><span class="tkpi-row-label">Total Boxes</span></div>
+          <span class="tkpi-row-val tkpi-val-green">${n(_tgBoxes)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📦</span><span class="tkpi-row-label">Total GRN Qty</span></div>
+          <span class="tkpi-row-val tkpi-val-green">${n(_tgQty)}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -8247,33 +8655,36 @@ new Chart(document.getElementById('c3'),{
 <\/script>
 </body></html>`;
 
-  // ── JPEG EXPORT via html2canvas ──
-  // Inject html2canvas once, then render the report markup into an off-screen
-  // container inside the current document, capture it, and save as .jpg.
+  // ── JPEG EXPORT via hidden iframe + html2canvas ──
+  // Scripts injected via innerHTML do NOT execute (browser security rule), so
+  // Chart.js never runs and html2canvas captures a blank page.
+  // Fix: render the full HTML document inside a hidden <iframe> so all scripts
+  // execute normally, wait for charts to finish, then capture with html2canvas.
   function _doJpegExport(reportHtml){
     const _now2=new Date();const _p2=n=>String(n).padStart(2,'0');
     const fname='GRN_Report_'+_p2(_now2.getDate())+_p2(_now2.getMonth()+1)+_now2.getFullYear()+'_'+_p2(_now2.getHours())+_p2(_now2.getMinutes())+'.jpg';
 
-    // Create a sandboxed off-screen container at fixed width so layout is stable
-    const wrap=document.createElement('div');
-    wrap.style.cssText='position:fixed;left:-9999px;top:0;width:1400px;background:#0f172a;z-index:-1;overflow:hidden';
-    // Strip the outer <html>/<head>/<body> tags — inject just the <body> content + styles
-    // We embed a <style> tag + the body content so fonts/colours render correctly
-    const bodyMatch=reportHtml.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-    const styleMatch=reportHtml.match(/<style>([\s\S]*?)<\/style>/gi);
-    const linkMatch=reportHtml.match(/<link[^>]*>/gi)||[];
-    const bodyContent=bodyMatch?bodyMatch[1]:'';
-    const styles=(styleMatch||[]).join('\n');
-    const links=linkMatch.join('\n');
-    wrap.innerHTML=links+styles+bodyContent;
-    // Remove the print button from captured output
-    wrap.querySelectorAll('.print-btn').forEach(el=>el.remove());
-    document.body.appendChild(wrap);
+    // Build iframe positioned off-screen at fixed width
+    const iframe=document.createElement('iframe');
+    iframe.style.cssText='position:fixed;left:-9999px;top:0;width:1400px;height:900px;border:none;z-index:-1;visibility:hidden';
+    document.body.appendChild(iframe);
 
-    // Wait for fonts + charts to settle (Chart.js animations are 1200ms)
+    // Write the full HTML into the iframe (scripts will execute)
+    const iDoc=iframe.contentDocument||iframe.contentWindow.document;
+    iDoc.open();
+    iDoc.write(reportHtml);
+    iDoc.close();
+
+    // Wait for Chart.js animations (1200ms) + font load + small buffer
     const doCapture=()=>{
-      window.html2canvas(wrap,{
-        scale:2,              // 2× for sharp JPEG
+      // Resize iframe to full content height before capture
+      const body=iframe.contentDocument.body;
+      const h=Math.max(body.scrollHeight,body.offsetHeight,900);
+      iframe.style.height=h+'px';
+
+      // Inject html2canvas into the PARENT document, then capture the iframe's body
+      window.html2canvas(body,{
+        scale:2,
         useCORS:true,
         allowTaint:true,
         backgroundColor:'#0f172a',
@@ -8281,7 +8692,7 @@ new Chart(document.getElementById('c3'),{
         windowWidth:1400,
         logging:false
       }).then(canvas=>{
-        document.body.removeChild(wrap);
+        document.body.removeChild(iframe);
         canvas.toBlob(blob=>{
           const url=URL.createObjectURL(blob);
           const a=document.createElement('a');
@@ -8292,26 +8703,29 @@ new Chart(document.getElementById('c3'),{
           toast('Report saved as '+fname,'ok');
         },'image/jpeg',0.95);
       }).catch(err=>{
-        document.body.removeChild(wrap);
+        document.body.removeChild(iframe);
         toast('JPEG export failed: '+err.message,'err');
       });
     };
 
-    // Allow charts to render (animation duration is 1200ms)
-    setTimeout(doCapture,1500);
+    // 2200ms: Chart.js animation (1200ms) + font load + render buffer
+    setTimeout(doCapture,2200);
     toast('⏳ Generating JPEG report…','info');
   }
 
-  // Load html2canvas if not already loaded, then export
-  if(typeof window.html2canvas==='function'){
-    _doJpegExport(html);
-  }else{
-    const s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-    s.onload=()=>_doJpegExport(html);
-    s.onerror=()=>toast('Could not load html2canvas — check internet connection','err');
-    document.head.appendChild(s);
+  // Load html2canvas into parent page if not already loaded, then export
+  function _launchExport(reportHtml){
+    if(typeof window.html2canvas==='function'){
+      _doJpegExport(reportHtml);
+    }else{
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      s.onload=()=>_doJpegExport(reportHtml);
+      s.onerror=()=>toast('Could not load html2canvas — check internet connection','err');
+      document.head.appendChild(s);
+    }
   }
+  _launchExport(html);
 }
 
 
@@ -8367,8 +8781,102 @@ function initUI(){
   }
 
   setInterval(()=>{if(fbConfig&&isOnline&&writeQueue.length>0)flushQueue();},30000);
-  // Re-fetch Google Sheet every 5 min — always on (auto-sync is always enabled after login)
-  setInterval(()=>{if(currentUser&&LS.load('gsheet_inward_url',''))_autoFetchGSheet();},5*60*1000);
+  // ── IMMEDIATE GOOGLE SHEET SYNC ──
+  // Poll a lightweight hash endpoint every 15 s. Full data fetch only when hash changes.
+  _startGSheetLiveSync();
+}
+
+// ── GSheet live-sync state ──
+let _gsLastHash='';       // last known hash string from the sheet
+let _gsSyncTimer=null;    // the setInterval handle
+let _gsSyncCountdown=0;   // seconds until next poll (for UI display)
+let _gsSyncCountTimer=null;
+
+function _startGSheetLiveSync(){
+  if(_gsSyncTimer)return; // already running
+  _gsSyncTimer=setInterval(_gsHashPoll, 15000);
+  // Run immediately once on login
+  _gsHashPoll();
+  // Countdown display — ticks every second
+  _gsSyncCountdown=15;
+  if(_gsSyncCountTimer)clearInterval(_gsSyncCountTimer);
+  _gsSyncCountTimer=setInterval(()=>{
+    _gsSyncCountdown=Math.max(0,_gsSyncCountdown-1);
+    const el=document.getElementById('gs-sync-countdown');
+    if(el)el.textContent=_gsSyncCountdown>0?'next check in '+_gsSyncCountdown+'s':'checking…';
+  },1000);
+}
+
+async function _gsHashPoll(){
+  const url=LS.load('gsheet_inward_url','');
+  if(!url||!currentUser)return;
+  _gsSyncCountdown=15; // reset countdown
+  try{
+    const sep=url.includes('?')?'&':'?';
+    // For multi-sheet: use all sheet names joined for the hash check
+    const _savedSheets=(()=>{const s=LS.load('gsheet_inward_sheet','');return s?s.split(',').map(x=>x.trim()).filter(Boolean):[];})();
+    const sheetParam=_savedSheets.length?'&sheet='+encodeURIComponent(_savedSheets.join(',')):'';
+    const resp=await fetch(url+sep+'action=hash&_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+    if(!resp.ok)return;
+    const json=await resp.json();
+    const newHash=json.hash||'';
+    if(!newHash)return;
+    if(newHash!==_gsLastHash){
+      // Hash changed — sheet was updated — do full fetch immediately
+      const wasEmpty=!_gsLastHash;
+      _gsLastHash=newHash;
+      await _autoFetchGSheetAsync();
+      if(!wasEmpty){
+        // Flash a "Sheet updated" indicator
+        const el=document.getElementById('gs-sync-status');
+        if(el){el.textContent='⚡ Sheet updated — synced';el.style.color='var(--green)';}
+        setTimeout(()=>{
+          const el2=document.getElementById('gs-sync-status');
+          if(el2){el2.textContent='✅ Live';el2.style.color='var(--green)';}
+        },4000);
+      }else{
+        const el=document.getElementById('gs-sync-status');
+        if(el){el.textContent='✅ Live';el.style.color='var(--green)';}
+      }
+    }else{
+      // Hash unchanged — no change in sheet
+      const el=document.getElementById('gs-sync-status');
+      if(el&&el.textContent!=='✅ Live'){el.textContent='✅ Live';el.style.color='var(--green)';}
+    }
+  }catch(e){
+    const el=document.getElementById('gs-sync-status');
+    if(el){el.textContent='⚠ Check failed';el.style.color='var(--orange)';}
+  }
+}
+
+// Async version of _autoFetchGSheet — awaitable for use in hash-poll
+async function _autoFetchGSheetAsync(){
+  const url=LS.load('gsheet_inward_url','');
+  if(!url)return;
+  try{
+    const sep=url.includes('?')?'&':'?';
+    const savedSheetInput=LS.load('gsheet_inward_sheet','')||'';
+    const sheetNames=savedSheetInput?savedSheetInput.split(',').map(s=>s.trim()).filter(Boolean):[''];
+    let allRows=[];
+    for(const sn of sheetNames){
+      const sheetParam=sn?'&sheet='+encodeURIComponent(sn):'';
+      const resp=await fetch(url+sep+'_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+      if(!resp.ok)continue;
+      const json=await resp.json();
+      const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
+      if(!rows||!rows.length)continue;
+      allRows=allRows.concat(rows.map(r=>({...r,_sourceSheet:sn||''})));
+    }
+    if(!allRows.length)return;
+    processGSheetInwardRows(allRows,true);
+    if(currentUser){
+      const sheetLabel=sheetNames.filter(Boolean).length>1?sheetNames.filter(Boolean).length+' sheets':'sheet';
+      setBanner('connected','✅ '+sheetLabel+' synced · '+allRows.length+' rows · '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}));
+      setTimeout(()=>{
+        if(fbConfig&&currentUser)setBanner('connected',currentUser.type==='admin'?'✅ Firebase live · '+scannedAll.length+' records':'✅ Firebase live · Table '+String(currentUser.table).padStart(2,'0'));
+      },4000);
+    }
+  }catch(e){/* silent */}
 }
 
 // ── AUTO-FETCH Google Sheet silently on page open ──
