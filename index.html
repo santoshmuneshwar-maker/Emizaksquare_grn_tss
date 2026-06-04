@@ -1079,6 +1079,65 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
   position:absolute;bottom:-3px;left:0;right:0;height:3px;
   background:inherit;filter:brightness(.65);
 }
+
+/* ══════════════════════════════════════════════════
+   STO GRN DASHBOARD — mirrors GRN Dashboard styles
+══════════════════════════════════════════════════ */
+#sgdTable{border-collapse:separate;border-spacing:0;font-family:'Inter',system-ui,sans-serif;font-size:11px;}
+#sgdTable thead tr:first-child th{padding:8px 12px;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;border-bottom:none;position:sticky;top:0;z-index:5;white-space:nowrap;}
+#sgdTable thead tr:nth-child(2) th{padding:7px 10px;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;border-bottom:3px solid rgba(0,0,0,.08);position:sticky;top:36px;z-index:5;white-space:nowrap;text-align:right;}
+#sgdTable .gd-col-unload{background:linear-gradient(180deg,#dbeafe,#bfdbfe)!important;color:#1e3a8a!important;border-left:2px solid #93c5fd;}
+#sgdTable .gd-col-unload-sub{background:linear-gradient(180deg,#eff6ff,#dbeafe)!important;color:#1d4ed8!important;border-left:2px solid #93c5fd;}
+#sgdTable td.gd-col-unload-cell{background:linear-gradient(180deg,#f0f7ff,#e8f2ff)!important;color:#1d4ed8;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-unload-cell{background:#e0eeff!important;}
+#sgdTable .gd-col-grn{background:linear-gradient(180deg,#a7f3d0,#6ee7b7)!important;color:#064e3b!important;border-left:2px solid #34d399;}
+#sgdTable .gd-col-grn-sub{background:linear-gradient(180deg,#ecfdf5,#d1fae5)!important;color:#065f46!important;border-left:2px solid #34d399;}
+#sgdTable td.gd-col-grn-cell{background:linear-gradient(180deg,#f0fdf8,#e8fdf2)!important;color:#065f46;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-grn-cell{background:#dcfce7!important;}
+#sgdTable .gd-col-under{background:linear-gradient(180deg,#fde68a,#fcd34d)!important;color:#78350f!important;border-left:2px solid #fbbf24;}
+#sgdTable .gd-col-under-sub{background:linear-gradient(180deg,#fffbeb,#fef3c7)!important;color:#92400e!important;border-left:2px solid #fbbf24;}
+#sgdTable td.gd-col-under-cell{background:linear-gradient(180deg,#fffef0,#fffbe8)!important;color:#b45309;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-under-cell{background:#fef9c3!important;}
+#sgdTable .gd-col-issue{background:linear-gradient(180deg,#fecaca,#fca5a5)!important;color:#7f1d1d!important;border-left:2px solid #f87171;}
+#sgdTable .gd-col-issue-sub{background:linear-gradient(180deg,#fff1f2,#ffe4e6)!important;color:#991b1b!important;border-left:2px solid #f87171;}
+#sgdTable td.gd-col-issue-cell{background:linear-gradient(180deg,#fff8f8,#fff0f0)!important;color:#dc2626;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-issue-cell{background:#fee2e2!important;}
+#sgdTable .gd-col-pend{background:linear-gradient(180deg,#fed7aa,#fdba74)!important;color:#7c2d12!important;border-left:2px solid #fb923c;}
+#sgdTable .gd-col-pend-sub{background:linear-gradient(180deg,#fff7ed,#ffedd5)!important;color:#9a3412!important;border-left:2px solid #fb923c;}
+#sgdTable td.gd-col-pend-cell{background:linear-gradient(180deg,#fff9f0,#fff4e8)!important;color:#ea580c;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-pend-cell{background:#fed7aa!important;}
+#sgdTable .gd-col-tat{background:linear-gradient(180deg,#ddd6fe,#c4b5fd)!important;color:#3b0764!important;border-left:2px solid #a78bfa;}
+#sgdTable .gd-col-tat-sub{background:linear-gradient(180deg,#f5f3ff,#ede9fe)!important;color:#4c1d95!important;border-left:2px solid #a78bfa;}
+#sgdTable td.gd-col-tat-cell.tat-beyond{color:#7c3aed;font-weight:700;}
+#sgdTable td.gd-col-tat-cell.tat-above{color:#dc2626;font-weight:700;}
+#sgdTable td.gd-col-tat-cell.tat-within{color:#059669;font-weight:700;}
+#sgdTable td.gd-col-tat-cell.tat-pct-above{color:#dc2626;font-weight:700;}
+#sgdTable td.gd-col-tat-cell.tat-pct-within{color:#059669;font-weight:700;}
+#sgdTable td.gd-col-tat-cell{background:linear-gradient(180deg,#faf8ff,#f5f0ff)!important;font-weight:600;}
+#sgdTable tr:nth-child(even) td.gd-col-tat-cell{background:#ede9fe!important;}
+#sgdTable td.ps-fr{background:linear-gradient(180deg,#f0f3ff,#e8edff)!important;}
+#sgdTable tr:nth-child(even) td.ps-fr{background:#e8edff!important;}
+#sgdTable tr:hover td.ps-fr{background:#dde5ff!important;}
+#sgdTable tr:hover td{filter:brightness(.97);}
+#sgdTable .gd-total-row td{font-weight:800!important;border-top:3px solid #7c9ee0!important;font-size:11.5px;}
+#sgdTable .gd-total-row td.ps-fr{background:linear-gradient(135deg,#c7d2fe,#a5b4fc)!important;color:#1e3a8a!important;}
+#sgdTable .gd-total-row td.gd-col-unload-cell{background:linear-gradient(135deg,#bfdbfe,#93c5fd)!important;color:#1e40af!important;}
+#sgdTable .gd-total-row td.gd-col-grn-cell{background:linear-gradient(135deg,#a7f3d0,#6ee7b7)!important;color:#065f46!important;}
+#sgdTable .gd-total-row td.gd-col-under-cell{background:linear-gradient(135deg,#fde68a,#fcd34d)!important;color:#78350f!important;}
+#sgdTable .gd-total-row td.gd-col-issue-cell{background:linear-gradient(135deg,#fecaca,#fca5a5)!important;color:#7f1d1d!important;}
+#sgdTable .gd-total-row td.gd-col-pend-cell{background:linear-gradient(135deg,#fed7aa,#fdba74)!important;color:#7c2d12!important;}
+#sgdTable .gd-total-row td.gd-col-tat-cell{background:linear-gradient(135deg,#ddd6fe,#c4b5fd)!important;color:#3b0764!important;}
+#sgdTable thead tr:first-child th.gd-col-unload{border-top:3px solid #3b82f6;}
+#sgdTable thead tr:first-child th.gd-col-grn{border-top:3px solid #10b981;}
+#sgdTable thead tr:first-child th.gd-col-under{border-top:3px solid #f59e0b;}
+#sgdTable thead tr:first-child th.gd-col-issue{border-top:3px solid #ef4444;}
+#sgdTable thead tr:first-child th.gd-col-pend{border-top:3px solid #f97316;}
+#sgdTable thead tr:first-child th.gd-col-tat{border-top:3px solid #8b5cf6;}
+#sgdTable thead tr:nth-child(2) th::after{content:'';display:block;position:absolute;bottom:-3px;left:0;right:0;height:3px;background:inherit;filter:brightness(.65);}
+/* STO KPI — pink/purple theme for Today's STO card */
+.gd-kpi-sto-today .gd-kpi-hdr{background:linear-gradient(135deg,#be185d,#db2777,#f472b6);}
+.gd-kpi-sto-today::before{background:linear-gradient(135deg,#9d174d,#be185d);}
+.gd-kpi-sto-today .gd-kpi-row-val{color:#be185d;}
 </style>
 <body>
 <div class="page-hero"></div>
@@ -1493,6 +1552,64 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
             </div>
           </div>
 
+          <!-- ══ SECOND GOOGLE SHEET SOURCE ══ -->
+          <div style="margin-bottom:10px;padding:11px 13px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:var(--r)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="font-size:14px">📗</span>
+              <span style="font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.3px">Second Google Sheet Source</span>
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto">(merges with Sheet 1)</span>
+            </div>
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect a second Apps Script Web App URL. Its rows will be merged into the same inward register (duplicate Invoice Nos. are updated, unique ones are added).</div>
+            <input class="field-input" id="gsheet2-inward-url" placeholder="https://script.google.com/macros/s/…/exec  (Sheet 2)" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheet2UrlInput()">
+            <div style="margin-bottom:6px">
+              <div style="font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:700">📋 Worksheets/Tabs (comma-separated, blank = active sheet):</div>
+              <input class="field-input" id="gsheet2-inward-sheet" placeholder="e.g. GRN Register, May 2026" style="width:100%;font-size:10px;padding:5px 9px;font-family:var(--font-mono)" autocomplete="off" spellcheck="false" oninput="onGSheet2SheetInput()">
+              <div id="gs2-sheet-tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:5px"></div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px">
+              <button class="btn btn-teal btn-sm" id="gsheet2-fetch-btn" onclick="fetchGSheet2Inward()" disabled style="flex:1;justify-content:center">⬇ Fetch Sheet 2</button>
+              <button class="btn btn-ghost btn-sm" onclick="debugGSheet2Cols()" style="font-size:10px;white-space:nowrap" title="Show raw column names from Sheet 2">🔍 Debug Cols</button>
+            </div>
+            <!-- Live sync status for Sheet 2 -->
+            <div id="gs2-livesync-strip" style="display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(8,145,178,.06);border:1px solid rgba(8,145,178,.2);border-radius:7px;flex-wrap:wrap">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;box-shadow:0 0 6px var(--teal);animation:pulse 2s infinite"></span>
+              <span style="font-size:10px;font-weight:700;color:var(--teal)" id="gs2-sync-status">— Waiting</span>
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-family:var(--font-mono)" id="gs2-sync-countdown"></span>
+            </div>
+            <div id="gsheet2-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
+            <div id="gsheet2-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
+          </div>
+          <!-- ══ /SECOND GOOGLE SHEET SOURCE ══ -->
+          <!-- ══ STO GOOGLE SHEET SOURCE ══ -->
+          <div style="margin-bottom:10px;padding:11px 13px;background:linear-gradient(135deg,#fdf4ff,#faf0ff);border:1.5px solid rgba(124,58,237,.25);border-radius:var(--r)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="font-size:14px">📒</span>
+              <span style="font-size:11px;font-weight:800;color:var(--purple);letter-spacing:.3px">STO Google Sheet Source</span>
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto">(Stock Transfer Order register)</span>
+            </div>
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect an Apps Script Web App URL for your STO register. STO data powers the <strong>STO Status</strong> tab — showing transfer order progress, scanning status, and GRN details.</div>
+            <input class="field-input" id="gsheet-sto-url" placeholder="https://script.google.com/macros/s/…/exec  (STO Sheet)" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheetStoUrlInput()">
+            <div style="margin-bottom:6px">
+              <div style="font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:700">📋 Worksheets/Tabs (comma-separated, blank = active sheet):</div>
+              <input class="field-input" id="gsheet-sto-sheet" placeholder="e.g. STO Register, May 2026" style="width:100%;font-size:10px;padding:5px 9px;font-family:var(--font-mono)" autocomplete="off" spellcheck="false" oninput="onGSheetStoSheetInput()">
+              <div id="sto-sheet-tags" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:5px"></div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px">
+              <button class="btn btn-mrp btn-sm" id="gsheet-sto-fetch-btn" onclick="fetchGSheetSto()" disabled style="flex:1;justify-content:center">⬇ Fetch STO Sheet</button>
+              <button class="btn btn-ghost btn-sm" onclick="debugGSheetStoCols()" style="font-size:10px;white-space:nowrap" title="Show raw column names from STO Sheet">🔍 Debug Cols</button>
+            </div>
+            <!-- Live sync status for STO -->
+            <div id="sto-livesync-strip" style="display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2);border-radius:7px;flex-wrap:wrap">
+              <span style="width:7px;height:7px;border-radius:50%;background:var(--purple);flex-shrink:0;box-shadow:0 0 6px var(--purple);animation:pulse 2s infinite"></span>
+              <span style="font-size:10px;font-weight:700;color:var(--purple)" id="sto-sync-status">— Waiting</span>
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-family:var(--font-mono)" id="sto-sync-countdown"></span>
+            </div>
+            <div id="gsheet-sto-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
+            <div id="gsheet-sto-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
+          </div>
+          <!-- ══ /STO GOOGLE SHEET SOURCE ══ -->
+
+
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
             <div style="flex:1;height:1px;background:var(--border)"></div>
             <span style="font-size:10px;color:var(--ink3);font-weight:700;white-space:nowrap">OR UPLOAD FILE</span>
@@ -1595,6 +1712,179 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
   </div>
 </div>
 
+
+<!-- ════ PAGE: STO STATUS ════ -->
+<div class="page" id="page-stostatus">
+  <div class="pg-hd">
+    <div><div class="pg-title">🔄 STO Status</div><div class="pg-sub">Stock Transfer Order register linked with scan &amp; remarks</div></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-mrp btn-sm" onclick="renderSTOStatus()" style="font-weight:800">↻ Refresh</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportSTOStatus()">⬇ Export</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+    <input class="field-input" id="stoDateFilter" placeholder="Filter by date…" oninput="debouncedSync('stoDateF',renderSTOStatus,300)" style="width:130px;padding:6px 10px;font-size:11px">
+    <input class="field-input" id="stoSTOFilter" placeholder="Filter by STO No…" oninput="debouncedSync('stoSTOF',renderSTOStatus,300)" list="sto-sto-datalist" style="width:160px;padding:6px 10px;font-size:11px">
+    <datalist id="sto-sto-datalist"></datalist>
+    <select class="field-select" id="stoScanStatus" onchange="renderSTOStatus()" style="width:140px;padding:6px 10px;font-size:11px">
+      <option value="">All GRN Status</option>
+      <option value="Done">GRN Done</option>
+      <option value="Pending">Pending</option>
+      <option value="Under Process">Under Process</option>
+    </select>
+    <button class="btn btn-ghost btn-xs" onclick="clearSTOFilters()">✕ Clear</button>
+    <span id="sto-count" style="font-size:11px;color:var(--ink3);margin-left:4px"></span>
+  </div>
+  <div style="display:block;margin-bottom:14px" id="stoKpiStrip"></div>
+  <div class="ps-sheet-wrap">
+    <div class="ps-sheet-toolbar">
+      <span class="ps-sheet-title">STO Status Register</span>
+      <span class="ps-sheet-count" id="sto-tbl-count"></span>
+    </div>
+    <div class="ps-sheet-scroll" id="stoSheetScroll">
+      <table class="ps-sheet-table">
+        <thead>
+          <tr>
+            <th class="ps-fr ps-fr-num">#</th>
+            <th class="ps-fr ps-fr-date" onclick="stoSortBy('date')" title="Sort by Date" style="cursor:pointer">DATE ⇅</th>
+            <th class="ps-fr ps-fr-vendor" onclick="stoSortBy('vendorName')" title="Sort by Origin Site" style="cursor:pointer">Origin Site ⇅</th>
+            <th class="ps-fr ps-fr-po" onclick="stoSortBy('stoNo')" title="Sort by STO No." style="cursor:pointer">STO NO. ⇅</th>
+            <th onclick="stoSortBy('newStoNo')" title="Sort by New/Correct STO No." style="cursor:pointer;color:var(--orange)">New STO No. /<br>Correct STO No. ⇅</th>
+            <th onclick="stoSortBy('inboundNo')" title="Sort by Inbound No." style="cursor:pointer;color:var(--teal)">Inbound No. ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('shipQty')" title="Sort by Ship Qty" style="cursor:pointer;color:var(--accent)">Ship Qty ⇅</th>
+            <th onclick="stoSortBy('tableNo')" title="Sort by Table No." style="cursor:pointer;color:var(--teal)">TABLE NO ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('grnQty')" title="Sort by GRN Qty" style="cursor:pointer;color:var(--green)">GRN Qty ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('shortReceivedQty')" title="Sort by Short Received" style="cursor:pointer;color:var(--orange)">Short Received<br>Qty ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('barcodeIssue')" title="Sort by Barcode Issue" style="cursor:pointer;color:var(--red)">Barcode<br>Issue ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('invalidSku')" title="Sort by Invalid SKU" style="cursor:pointer;color:var(--red)">Invalid SKU /<br>SKU not in STO ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('excessQty')" title="Sort by Excess Qty" style="cursor:pointer;color:var(--orange)">Excess Qty<br>_ tolerance % ⇅</th>
+            <th class="ps-num-hd" onclick="stoSortBy('totalReceivedQty')" title="Sort by Total Received" style="cursor:pointer;color:var(--green);font-weight:800">Total<br>Received Qty ⇅</th>
+            <th onclick="stoSortBy('grnStatus')" title="Sort by GRN Status" style="cursor:pointer;color:var(--accent)">GRN Status ⇅</th>
+            <th style="color:var(--orange)">GRN Remarks</th>
+            <th onclick="stoSortBy('issueRaisedDate')" title="Sort by Issue Raised Date" style="cursor:pointer;color:var(--red)">Issue Raised<br>Date ⇅</th>
+            <th onclick="stoSortBy('issueResolvedDate')" title="Sort by Issue Resolved Date" style="cursor:pointer;color:var(--teal)">Issue Resolved<br>Date ⇅</th>
+            <th onclick="stoSortBy('grnDate')" title="Sort by GRN Date" style="cursor:pointer;color:var(--green)">GRN Date ⇅</th>
+            <th onclick="stoSortBy('qcHandoverDate')" title="Sort by QC Handover Date" style="cursor:pointer;color:var(--purple)">QC Handover<br>Date ⇅</th>
+          </tr>
+        </thead>
+        <tbody id="stoBody"><tr><td colspan="20" class="empty-cell">Upload STO register to see STO status</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PAGE: STO GRN DASHBOARD ════ -->
+<div class="page" id="page-stogrndash">
+  <div class="pg-hd">
+    <div><div class="pg-title">📦 Date-wise STO GRN Dashboard</div><div class="pg-sub">STO-wise transfer · GRN accomplishment · issue &amp; pendency analysis</div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--ink3);font-weight:700;letter-spacing:.5px;white-space:nowrap">FROM</span>
+        <select id="sgdDateFrom" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:130px;background:transparent" onchange="renderSTOGRNDash()">
+          <option value="">All dates</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--ink3);font-weight:700;letter-spacing:.5px;white-space:nowrap">TO</span>
+        <select id="sgdDateTo" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:130px;background:transparent" onchange="renderSTOGRNDash()">
+          <option value="">All dates</option>
+        </select>
+      </div>
+      <!-- Month multi-select -->
+      <div style="position:relative" id="sgdMonthWrap">
+        <div id="sgdMonthBtn" onclick="toggleSgdMonthDropdown(event)" style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--border);border-radius:8px;padding:4px 10px;box-shadow:var(--sh);cursor:pointer;user-select:none;min-width:140px">
+          <span style="font-size:10px;color:var(--ink3);font-weight:700;letter-spacing:.5px;white-space:nowrap">MONTH</span>
+          <span id="sgdMonthLabel" style="font-size:11px;font-family:var(--font-mono);color:var(--ink2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">All months</span>
+          <span style="font-size:9px;color:var(--ink3);flex-shrink:0">▾</span>
+        </div>
+        <div id="sgdMonthDropdown" class="gd-custom-dd" style="display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:500;background:#fff;border:1.5px solid var(--border2);border-radius:10px;box-shadow:0 8px 24px rgba(37,99,235,.15);min-width:180px;overflow:hidden">
+          <div style="padding:8px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--ink3)">Select Months</span>
+            <div style="display:flex;gap:6px">
+              <span onclick="sgdMonthSelectAll()" style="font-size:9px;font-weight:700;color:var(--accent);cursor:pointer">All</span>
+              <span style="color:var(--border2)">|</span>
+              <span onclick="sgdMonthClearAll()" style="font-size:9px;font-weight:700;color:var(--red);cursor:pointer">Clear</span>
+            </div>
+          </div>
+          <div id="sgdMonthList" style="max-height:220px;overflow-y:auto;padding:4px 0"></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(217,119,6,.3);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--orange);font-weight:700;letter-spacing:.5px;white-space:nowrap">⏳ UNDER PROCESS</span>
+        <select id="sgdFilterUnder" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderSTOGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Pending</option>
+          <option value="no">None</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(220,38,38,.25);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:.5px;white-space:nowrap">⚠️ WITH ISSUE</span>
+        <select id="sgdFilterIssue" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderSTOGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Issue</option>
+          <option value="no">None</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid rgba(124,58,237,.3);border-radius:8px;padding:4px 10px;box-shadow:var(--sh)">
+        <span style="font-size:10px;color:var(--purple);font-weight:700;letter-spacing:.5px;white-space:nowrap">📋 PENDANCY</span>
+        <select id="sgdFilterPend" class="field-select" style="border:none;box-shadow:none;padding:3px 6px;font-size:11px;font-family:var(--font-mono);min-width:80px;background:transparent" onchange="renderSTOGRNDash()">
+          <option value="">All</option>
+          <option value="yes">Has Pendancy</option>
+          <option value="no">Cleared</option>
+        </select>
+      </div>
+      <button class="btn btn-ghost btn-xs" onclick="clearSTOGRNFilters()">✕ Clear</button>
+      <button class="btn btn-mrp btn-sm" onclick="renderSTOGRNDash()" style="font-weight:800">↻ Refresh</button>
+      <button class="btn btn-ghost btn-sm" onclick="exportSTOGRNDash()">⬇ CSV</button>
+      <button class="btn btn-primary btn-sm" onclick="exportSTOGRNDashExcel()" style="font-weight:800;background:linear-gradient(135deg,#1d6f42,#21a366);box-shadow:0 2px 10px rgba(29,111,66,.35)">📊 Excel</button>
+      <button class="btn btn-lime btn-sm" onclick="exportSTODashImage()" style="font-weight:800;background:linear-gradient(135deg,#be185d,#9d174d);box-shadow:0 2px 10px rgba(190,24,93,.4)">🖼 JPEG Report</button>
+      <button class="btn btn-lime btn-sm" onclick="exportCombinedDashImage()" style="font-weight:800">🖼 Combined JPEG Report</button>
+    </div>
+  </div>
+  <div id="sgdKpiStrip" style="margin-bottom:14px;width:100%;min-width:0;overflow:hidden"></div>
+  <div class="ps-sheet-wrap">
+    <div class="ps-sheet-toolbar">
+      <span class="ps-sheet-title">Date-wise STO GRN Status</span>
+      <span id="sgd-active-filters" style="display:none;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;background:#fffbeb;color:var(--orange);border:1.5px solid rgba(217,119,6,.3);cursor:pointer" onclick="clearSTOGRNFilters()"></span>
+      <span class="ps-sheet-count" id="sgd-tbl-count"></span>
+    </div>
+    <div class="ps-sheet-scroll" id="sgdSheetScroll">
+      <table class="ps-sheet-table" id="sgdTable">
+        <thead>
+          <tr>
+            <th class="ps-fr ps-fr-num" rowspan="2" style="background:linear-gradient(180deg,#c7d2fe,#a5b4fc);color:#1e3a8a;text-align:center;vertical-align:middle">#</th>
+            <th class="ps-fr ps-fr-date" rowspan="2" style="min-width:110px;background:linear-gradient(180deg,#c7d2fe,#a5b4fc);color:#1e3a8a;vertical-align:middle">STO Date</th>
+            <th colspan="2" class="gd-col-unload" style="text-align:center">📦 STO Transfer Details</th>
+            <th colspan="2" class="gd-col-grn" style="text-align:center">✅ Accomplished GRN Details</th>
+            <th colspan="2" class="gd-col-under" style="text-align:center">⏳ Under Process</th>
+            <th colspan="2" class="gd-col-issue" style="text-align:center">⚠️ GRN Pending with Issue</th>
+            <th colspan="2" class="gd-col-pend" style="text-align:center">📋 Total Pendency</th>
+            <th colspan="2" class="gd-col-hdone" style="text-align:center;background:linear-gradient(180deg,#d1fae5,#a7f3d0);color:#065f46">🤝 Handover Done</th>
+            <th colspan="2" class="gd-col-hpend" style="text-align:center;background:linear-gradient(180deg,#fce7f3,#fbcfe8);color:#831843">📬 Handover Pending</th>
+          </tr>
+          <tr>
+            <th class="ps-num-hd gd-col-unload-sub">No. of STOs</th>
+            <th class="ps-num-hd gd-col-unload-sub">Total Ship Qty</th>
+            <th class="ps-num-hd gd-col-grn-sub">No. of STOs</th>
+            <th class="ps-num-hd gd-col-grn-sub">Total GRN Qty</th>
+            <th class="ps-num-hd gd-col-under-sub">No. of STOs</th>
+            <th class="ps-num-hd gd-col-under-sub">Total Ship Qty</th>
+            <th class="ps-num-hd gd-col-issue-sub">No. of STOs</th>
+            <th class="ps-num-hd gd-col-issue-sub">Total Ship Qty</th>
+            <th class="ps-num-hd gd-col-pend-sub">No. of STOs</th>
+            <th class="ps-num-hd gd-col-pend-sub">Total Ship Qty</th>
+            <th class="ps-num-hd gd-col-hdone-sub" style="background:linear-gradient(180deg,#d1fae5,#a7f3d0)!important;color:#065f46!important">No. of Inb.</th>
+            <th class="ps-num-hd gd-col-hdone-sub" style="background:linear-gradient(180deg,#d1fae5,#a7f3d0)!important;color:#065f46!important">Total Qty</th>
+            <th class="ps-num-hd gd-col-hpend-sub" style="background:linear-gradient(180deg,#fce7f3,#fbcfe8)!important;color:#831843!important">No. of STOs</th>
+            <th class="ps-num-hd gd-col-hpend-sub" style="background:linear-gradient(180deg,#fce7f3,#fbcfe8)!important;color:#831843!important">Total Qty</th>
+          </tr>
+        </thead>
+        <tbody id="sgdBody"><tr><td colspan="16" class="empty-cell">Fetch STO register from Google Sheet to see STO GRN dashboard</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- ════ PAGE: GRN DASHBOARD ════ -->
 <div class="page" id="page-grndash">
   <div class="pg-hd">
@@ -1660,6 +1950,7 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
       <button class="btn btn-ghost btn-sm" onclick="exportGRNDash()">⬇ CSV</button>
       <button class="btn btn-primary btn-sm" onclick="exportGRNDashExcel()" style="font-weight:800;background:linear-gradient(135deg,#1d6f42,#21a366);box-shadow:0 2px 10px rgba(29,111,66,.35)">📊 Excel</button>
       <button class="btn btn-lime btn-sm" onclick="exportGRNDashImage()" style="font-weight:800">🖼 JPEG Report</button>
+      <button class="btn btn-primary btn-sm" onclick="exportCombinedDashImage()" style="font-weight:800;background:linear-gradient(135deg,#be185d,#7c3aed);box-shadow:0 2px 10px rgba(124,58,237,.35)">🖼 Combined JPEG Report</button>
     </div>
   </div>
   <div id="gdKpiStrip" style="margin-bottom:14px;width:100%;min-width:0;overflow:hidden"></div>
@@ -2541,7 +2832,7 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
 <script>
 
 const TOTAL_TABLES=10;
-let poData=[],scannedAll=[],inwardData=[];
+let poData=[],scannedAll=[],inwardData=[],stoData=[];
 let mrpMaster={},tablePINs={};
 let session=null,selectModeOn=false;
 let dateFilter='all',shiftFilterVal='all',dashDateFilt='all';
@@ -2583,15 +2874,17 @@ function saveAll(){
   LS.save('scanned',scannedAll);LS.save('tablePINs',tablePINs);
   LS.save('mrp',mrpMaster);LS.save('adminCreds',adminCredentials);
   LS.save('inward',inwardData);
+  LS.save('sto',stoData);
 }
 function loadAll(){
   poData=LS.load('po',[]);
   scannedAll=LS.load('scanned',[]);tablePINs=LS.load('tablePINs',{});
-  mrpMaster=LS.load('mrp',{});inwardData=LS.load('inward',[]);
+  mrpMaster=LS.load('mrp',{});inwardData=LS.load('inward',[]);stoData=LS.load('sto',[]);
   adminCredentials=LS.load('adminCreds',{username:'',password:''});
   for(let i=1;i<=TOTAL_TABLES;i++){if(!tablePINs[i])tablePINs[i]='';}
   scannedAll.forEach((r,i)=>{if(!r.id)r.id='r'+Date.now()+i;if(!r.ts)r.ts=Date.now()-i;if(!r.shift||r.shift==='—')r.shift=shiftFromTime(r.time);});
   inwardData.forEach((r,i)=>{if(!r.id)r.id='inv'+Date.now()+i;});
+  stoData.forEach((r,i)=>{if(!r.id)r.id='sto'+Date.now()+i;});
   // Restore write queue
   const rawQ=LS.load('writeQueue',[]);
   writeQueue=rawQ.map(w=>({...w,method:w.method||(w.path&&w.path.startsWith('scanned/')?'patch':'put')}));
@@ -2819,8 +3112,8 @@ async function pullFromFirebase(fullPull=false){
 
     // ── Static data: PO, SKU, MRP, PINs — fetch only on first pull ──
     if(isFirstPull){
-      const [fbPO,fbMRP,fbPINs,fbCreds,fbInward,fbInwardMeta]=await Promise.all([
-        fbGet('po'),fbGet('mrp'),fbGet('pins'),fbGet('adminCreds'),fbGet('inward'),fbGet('inward_meta')
+      const [fbPO,fbMRP,fbPINs,fbCreds,fbInward,fbInwardMeta,fbSTO]=await Promise.all([
+        fbGet('po'),fbGet('mrp'),fbGet('pins'),fbGet('adminCreds'),fbGet('inward'),fbGet('inward_meta'),fbGet('sto')
       ]);
       // Seed the inward meta timestamp so we don't replay old signals after login
       if(fbInwardMeta&&fbInwardMeta.ts)lastKnownInwardMetaTs=fbInwardMeta.ts;
@@ -2831,6 +3124,10 @@ async function pullFromFirebase(fullPull=false){
       if(!LS.load('inward_cleared',false)){
         if(Array.isArray(fbInward)&&fbInward.length){inwardData=fbInward;LS.save('inward',inwardData);}
         else if(fbInward&&typeof fbInward==='object'&&!Array.isArray(fbInward)){const arr=Object.values(fbInward).filter(Boolean);if(arr.length){inwardData=arr;LS.save('inward',inwardData);}}
+      }
+      if(!LS.load('sto_cleared',false)){
+        if(Array.isArray(fbSTO)&&fbSTO.length){stoData=fbSTO;LS.save('sto',stoData);}
+        else if(fbSTO&&typeof fbSTO==='object'&&!Array.isArray(fbSTO)){const arr=Object.values(fbSTO).filter(Boolean);if(arr.length){stoData=arr;LS.save('sto',stoData);}}
       }
       if(fbMRP&&typeof fbMRP==='object')mrpMaster=fbMRP,LS.save('mrp',mrpMaster);
       if(fbPINs&&typeof fbPINs==='object')tablePINs=fbPINs,LS.save('tablePINs',tablePINs);
@@ -2851,7 +3148,7 @@ async function forceSyncAll(){
   if(!fbConfig){toast('Connect Firebase first','err');return;}
   setBanner('syncing','⟳ Full sync…');
   const scanObj={};scannedAll.forEach(r=>{scanObj[r.id]=r;});
-  const results=await Promise.all([fbPut('po',poData),fbPatch('scanned',scanObj),fbPut('mrp',mrpMaster),fbPut('pins',tablePINs),fbPut('inward',inwardData),fbPut('adminCreds',{u:adminCredentials.username,p:adminCredentials.password})]);
+  const results=await Promise.all([fbPut('po',poData),fbPatch('scanned',scanObj),fbPut('mrp',mrpMaster),fbPut('pins',tablePINs),fbPut('inward',inwardData),fbPut('sto',stoData),fbPut('adminCreds',{u:adminCredentials.username,p:adminCredentials.password})]);
   writeQueue=[];LS.save('writeQueue',[]);updateQueueBadge();
   const ok=results.filter(Boolean).length;lastSyncTs=new Date();updateSyncUI();
   setBanner('connected','✅ Full sync — '+ok+'/6 OK');toast('Full sync complete','ok');
@@ -3006,7 +3303,7 @@ function refreshActiveAdminPage(){
   if(!currentUser||currentUser.type!=='admin')return;
   const activePage=document.querySelector('.page.active');if(!activePage)return;
   const pid=activePage.id.replace('page-','');
-  if(pid==='records')renderRecordsPage();else if(pid==='dashboard')renderDashboard();else if(pid==='postatus')renderPOStatus();else if(pid==='grndash')renderGRNDash();else if(pid==='scan')renderScannedTable();
+  if(pid==='records')renderRecordsPage();else if(pid==='dashboard')renderDashboard();else if(pid==='postatus')renderPOStatus();else if(pid==='stostatus')renderSTOStatus();else if(pid==='grndash')renderGRNDash();else if(pid==='scan')renderScannedTable();
 }
 function updateQueueBadge(){
   const cnt=writeQueue.length;
@@ -3226,11 +3523,15 @@ function onLoginSuccess(){
         startInwardMetaPoll();
         setBanner('connected','✅ Firebase live · '+scannedAll.length+' records');
         _autoFetchGSheet(); // fetch GSheet after Firebase data is fresh
+        _autoFetchGSheet2Async();
+        _autoFetchGSheetStoAsync();
       });
     }else{
       setBanner('setup','💾 Local storage active · Go to 🔥 Storage tab to connect Firebase');
       // Still fetch GSheet even without Firebase
       setTimeout(_autoFetchGSheet,500);
+      setTimeout(_autoFetchGSheet2Async,900);
+      setTimeout(_autoFetchGSheetStoAsync,1200);
     }
   }else{
     goPage('scan');
@@ -3246,6 +3547,8 @@ function onLoginSuccess(){
         setBanner('connected','✅ Firebase live · Table '+String(currentUser.table).padStart(2,'0'));
         refreshPODropdown();
         _autoFetchGSheet(); // fetch GSheet after Firebase sync
+        _autoFetchGSheet2Async();
+        _autoFetchGSheetStoAsync();
       });
     }else{
       setBanner('setup','⚠ Firebase not set up — tap below to connect');
@@ -3253,6 +3556,8 @@ function onLoginSuccess(){
       if(mqs)mqs.style.display='block';
       // Still fetch GSheet even without Firebase
       setTimeout(_autoFetchGSheet,500);
+      setTimeout(_autoFetchGSheet2Async,900);
+      setTimeout(_autoFetchGSheetStoAsync,1200);
     }
   }
   refreshPODropdown();updateHeaderStats();
@@ -3267,6 +3572,8 @@ function buildNavigation(){
       <div class="htab" onclick="goPage('admin')" id="tab-admin">⚙️ Settings</div>
       <div class="htab" onclick="goPage('records')" id="tab-records">Records</div>
       <div class="htab" onclick="goPage('postatus')" id="tab-postatus" style="color:var(--orange)">📋 PO Status</div>
+      <div class="htab" onclick="goPage('stostatus')" id="tab-stostatus" style="color:var(--purple)">🔄 STO Status</div>
+      <div class="htab" onclick="goPage('stogrndash')" id="tab-stogrndash" style="color:var(--mrp)">📦 STO Dashboard</div>
       <div class="htab" onclick="goPage('grndash')" id="tab-grndash" style="color:var(--purple)">📊 GRN Dashboard</div>
       <div class="htab" onclick="goPage('mrpmaster')" id="tab-mrpmaster">MRP Master</div>
       <div class="htab" onclick="goPage('dashboard')" id="tab-dashboard">Dashboard</div>`;
@@ -3277,6 +3584,8 @@ function buildNavigation(){
         <button class="mob-nav-btn" onclick="goPage('upload')" id="mob-tab-upload"><span class="mob-nav-icon">📤</span><span class="mob-nav-lbl">Upload</span></button>
         <button class="mob-nav-btn" onclick="goPage('records')" id="mob-tab-records"><span class="mob-nav-icon">📄</span><span class="mob-nav-lbl">Records</span></button>
         <button class="mob-nav-btn" onclick="goPage('postatus')" id="mob-tab-postatus"><span class="mob-nav-icon">📋</span><span class="mob-nav-lbl">PO Status</span></button>
+        <button class="mob-nav-btn" onclick="goPage('stostatus')" id="mob-tab-stostatus"><span class="mob-nav-icon">🔄</span><span class="mob-nav-lbl">STO</span></button>
+        <button class="mob-nav-btn" onclick="goPage('stogrndash')" id="mob-tab-stogrndash"><span class="mob-nav-icon">📦</span><span class="mob-nav-lbl">STO Dash</span></button>
         <button class="mob-nav-btn" onclick="goPage('grndash')" id="mob-tab-grndash"><span class="mob-nav-icon">📊</span><span class="mob-nav-lbl">GRN Dash</span></button>
         <button class="mob-nav-btn" onclick="goPage('dashboard')" id="mob-tab-dashboard"><span class="mob-nav-icon">📊</span><span class="mob-nav-lbl">Dashboard</span></button>
         <button class="mob-nav-btn" onclick="goPage('admin')" id="mob-tab-admin"><span class="mob-nav-icon">⚙️</span><span class="mob-nav-lbl">Settings</span></button>`;
@@ -3362,8 +3671,9 @@ function goPage(id){
   if(id==='records')renderRecordsPage();
   if(id==='dashboard')renderDashboard();
   if(id==='mrpmaster')renderMRPMaster();
-  if(id==='postatus')renderPOStatus();
+  if(id==='postatus')renderPOStatus();else if(id==='stostatus')renderSTOStatus();
   if(id==='grndash')renderGRNDash();
+  if(id==='stogrndash')renderSTOGRNDash();
   if(id==='summary')renderTableSummary();
   if(id==='admin'){buildTableCredentialsGrid();loadAdminSettings();}
   if(id==='connect'){updateSyncUI();populateClearDataDropdowns();}
@@ -3495,9 +3805,10 @@ function confirmUpload(){
     renderPOPreview();refreshPODropdown();
     if(fbConfig)queueWrite('po',poData);
   }else if(type==='inward'){
-    // Merge by unique Invoice No. — preserve existing rows not in new upload
+    // Merge by unique Invoice No. — preserve existing rows not in new upload.
+    // Also preserve Sheet 2 rows (_gs2:true) whose invNo is not being replaced.
     const newInvNos=new Set(data.map(r=>r.invNo).filter(Boolean));
-    const kept=inwardData.filter(r=>r.invNo&&!newInvNos.has(r.invNo));
+    const kept=inwardData.filter(r=>r._gs2?!newInvNos.has(r.invNo):(r.invNo&&!newInvNos.has(r.invNo)));
     inwardData=[...kept,...data];
     LS.save('inward',inwardData);LS.save('inward_fname',fname);
     LS.remove('inward_cleared');
@@ -3675,6 +3986,8 @@ function clearInward(){
   inwardData=[];
   LS.remove('inward');LS.remove('inward_fname');
   LS.save('inward_cleared',true);
+  // Also clear Sheet 2 hash so it re-fetches cleanly next time
+  _gs2LastHash='';
   document.getElementById('inward-ok').classList.remove('show');
   document.getElementById('inward-preview').style.display='none';
   const fi=document.getElementById('inward-file');if(fi)fi.value='';
@@ -4025,9 +4338,13 @@ function processGSheetInwardRows(rows,silent){
 
   if(silent){
     // ── SILENT MODE: merge directly, never open a modal ──
-    // Preserve existing grnStatus/grnRemark edits for rows already in inwardData
+    // Preserve existing grnStatus/grnRemark edits for rows already in inwardData.
+    // IMPORTANT: also preserve Sheet 2 rows (_gs2:true) that Sheet 1 doesn't cover.
     const newInvNos=new Set(data.map(r=>r.invNo).filter(Boolean));
-    const kept=inwardData.filter(r=>r.invNo&&!newInvNos.has(r.invNo));
+    const kept=inwardData.filter(r=>{
+      if(r._gs2)return!newInvNos.has(r.invNo); // preserve Sheet 2 rows not covered by Sheet 1
+      return r.invNo&&!newInvNos.has(r.invNo);  // preserve non-Sheet-2 rows not in this batch
+    });
     const merged=data.map(newRow=>{
       if(!newRow.invNo)return newRow;
       const existing=inwardData.find(e=>e.invNo===newRow.invNo);
@@ -4091,6 +4408,496 @@ async function debugGSheetCols(){
 }
 
 // ── /GOOGLE SHEETS → INWARD REGISTER ────────────────────────────────────────
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ── SECOND GOOGLE SHEET SOURCE (Sheet 2) ─────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+
+function onGSheet2UrlInput(){
+  const url=(document.getElementById('gsheet2-inward-url').value||'').trim();
+  document.getElementById('gsheet2-fetch-btn').disabled=!url;
+  if(url){
+    LS.save('gsheet2_inward_url',url);
+    _gs2LastHash='';
+    _startGSheet2LiveSync();
+  }else{
+    LS.remove('gsheet2_inward_url');
+  }
+}
+
+function onGSheet2SheetInput(){
+  const sh=(document.getElementById('gsheet2-inward-sheet').value||'').trim();
+  if(sh)LS.save('gsheet2_inward_sheet',sh);else LS.remove('gsheet2_inward_sheet');
+  const tagContainer=document.getElementById('gs2-sheet-tags');
+  if(tagContainer){
+    const names=sh.split(',').map(s=>s.trim()).filter(Boolean);
+    tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
+  }
+}
+
+function setGSheet2Status(msg,type){
+  const el=document.getElementById('gsheet2-status');
+  if(!el)return;
+  el.style.display=msg?'block':'none';
+  if(!msg)return;
+  const styles={
+    ok:'background:#dcfce7;color:#166534;border:1px solid #bbf7d0',
+    err:'background:#fee2e2;color:#991b1b;border:1px solid #fecaca',
+    load:'background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe',
+  };
+  el.style.cssText='display:block;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px;'+styles[type||'load'];
+  el.textContent=msg;
+}
+
+async function fetchGSheet2Inward(silent){
+  const rawUrl=(document.getElementById('gsheet2-inward-url').value||'').trim();
+  if(!rawUrl){if(!silent)toast('Paste the Sheet 2 Web App URL first','warn');return;}
+  setGSheet2Status('⏳ Fetching from Sheet 2…','load');
+  const btn=document.getElementById('gsheet2-fetch-btn');
+  if(!silent&&btn)btn.disabled=true;
+  try{
+    const sheetInput=(document.getElementById('gsheet2-inward-sheet')||{value:''}).value.trim();
+    const sheetNames=sheetInput?sheetInput.split(',').map(s=>s.trim()).filter(Boolean):[''];
+    const sep=rawUrl.includes('?')?'&':'?';
+    let allRows=[];
+    let fetchLog=[];
+    for(let si=0;si<sheetNames.length;si++){
+      const sn=sheetNames[si];
+      const sheetParam=sn?('&sheet='+encodeURIComponent(sn)):'';
+      const label=sn||'(active sheet)';
+      if(sheetNames.length>1){setGSheet2Status('⏳ Fetching sheet '+(si+1)+'/'+sheetNames.length+': '+label+'…','load');}
+      const resp=await fetch(rawUrl+sep+'_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+      if(!resp.ok)throw new Error('HTTP '+resp.status+' on sheet: '+label);
+      const json=await resp.json();
+      const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
+      if(!rows||!rows.length){fetchLog.push('⚠ '+label+': no rows');continue;}
+      const tagged=rows.map(r=>({...r,_sourceSheet:sn||''}));
+      allRows=allRows.concat(tagged);
+      fetchLog.push('✓ '+label+': '+rows.length+' rows');
+    }
+    if(!allRows.length){
+      setGSheet2Status('⚠ No rows returned from Sheet 2 — check sheet names and data','err');
+      if(!silent&&btn)btn.disabled=false;
+      return;
+    }
+    const summary=sheetNames.length>1?('✓ '+allRows.length+' rows from '+sheetNames.length+' sheets'):('✓ Fetched '+allRows.length+' rows from Sheet 2');
+    setGSheet2Status(summary+' — processing…','ok');
+    if(!silent&&sheetNames.length>1)toast(fetchLog.join(' | '),'ok');
+    // Process & merge Sheet 2 rows into inwardData (silent mode: no modal)
+    _processGSheet2Rows(allRows,silent);
+    _gs2LastHash='';
+    _gsHash2Poll();
+    if(!silent&&btn)btn.disabled=false;
+  }catch(err){
+    setGSheet2Status('✗ '+err.message+' — Check Web App URL and ensure access is set to Anyone','err');
+    if(!silent&&btn)btn.disabled=false;
+  }
+}
+
+function _processGSheet2Rows(rows,silent){
+  // Re-use the same column mapping / processing as Sheet 1
+  // but always merge silently (Sheet 2 is always auto-merged, not confirm-dialog)
+  applyGsColOverrides();
+  const get=(r,keys)=>{
+    for(const k of keys){if(r[k]!==undefined&&r[k]!==null&&String(r[k]).trim()!=='')return String(r[k]).trim();}
+    const rKeys=Object.keys(r);
+    for(const k of keys){
+      const kl=k.toLowerCase().replace(/[\s._-]+/g,'');
+      const found=rKeys.find(rk=>rk.toLowerCase().replace(/[\s._-]+/g,'')===kl);
+      if(found&&r[found]!==undefined&&r[found]!==null&&String(r[found]).trim()!=='')return String(r[found]).trim();
+    }
+    return '';
+  };
+  const getRaw=(r,keys)=>{
+    for(const k of keys){if(r[k]!==undefined&&r[k]!==null&&String(r[k]).trim()!=='')return String(r[k]).trim();}
+    const rKeys=Object.keys(r);
+    for(const k of keys){
+      const kl=k.toLowerCase().replace(/[\s._-]+/g,'');
+      const found=rKeys.find(rk=>rk.toLowerCase().replace(/[\s._-]+/g,'')===kl);
+      if(found&&r[found]!==undefined&&r[found]!==null)return String(r[found]).trim();
+    }
+    return '';
+  };
+  const fmtDate=(raw)=>{
+    if(!raw||raw==='0'||raw==='')return '';
+    if(/^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/.test(raw))return raw;
+    if(/^\d{4,6}$/.test(raw)){const d=new Date((parseInt(raw)-25569)*86400*1000);return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();}
+    try{const d=new Date(raw);if(!isNaN(d.getTime())&&d.getFullYear()>1970){return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();}}catch(e){}
+    return raw;
+  };
+  const fmtNum=(raw)=>{if(raw===undefined||raw===null||raw==='')return 0;const n=parseInt(String(raw).replace(/[^0-9]/g,''));return isNaN(n)?0:n;};
+
+  const data=rows.map((r,i)=>({
+    id:'inv2'+Date.now()+i,
+    srNo:i+1,
+    _sourceSheet:r._sourceSheet||'',
+    _gs2:true,  // flag: came from Sheet 2
+    date:             fmtDate(get(r,GSHEET_INWARD_COLS.date)),
+    vendorName:       get(r,GSHEET_INWARD_COLS.vendorName),
+    poNo:             getRaw(r,GSHEET_INWARD_COLS.poNo),
+    newPO:            get(r,GSHEET_INWARD_COLS.newPO),
+    invNo:            getRaw(r,GSHEET_INWARD_COLS.invNo),
+    invDate:          fmtDate(get(r,GSHEET_INWARD_COLS.invDate)),
+    totalInvQty:      fmtNum(get(r,GSHEET_INWARD_COLS.totalInvQty)),
+    noOfCartons:      fmtNum(get(r,GSHEET_INWARD_COLS.noOfCartons)),
+    grnStatus:        get(r,GSHEET_INWARD_COLS.grnStatus)||'Pending',
+    grnRemark:        get(r,GSHEET_INWARD_COLS.grnRemark)||'',
+    issueResolvedDate:fmtDate(get(r,GSHEET_INWARD_COLS.issueResolvedDate)),
+    grnDate:          fmtDate(get(r,GSHEET_INWARD_COLS.grnDate)),
+    grnQty:           get(r,GSHEET_INWARD_COLS.grnQty)||'',
+    tat:              get(r,GSHEET_INWARD_COLS.tat)||'',
+  })).filter(x=>x.poNo);
+
+  if(!data.length){
+    const actualCols=rows.length>0?Object.keys(rows[0]):[];
+    setGSheet2Status('⚠ PO No. column not matched in Sheet 2.'+(actualCols.length?' Cols: ['+actualCols.slice(0,8).join(', ')+']':''),'err');
+    return;
+  }
+
+  // Merge: Sheet 2 rows into inwardData
+  // Rows with matching invNo → update; rows with new invNo → add; rows with no invNo → add fresh
+  const newInvNos=new Set(data.map(r=>r.invNo).filter(Boolean));
+  const merged=data.map(newRow=>{
+    if(!newRow.invNo)return newRow;
+    const existing=inwardData.find(e=>e.invNo===newRow.invNo);
+    if(!existing)return newRow;
+    // Preserve manual GRN edits, merge sheet data for structural fields
+    return{...newRow,
+      grnStatus:existing.grnStatus||newRow.grnStatus,
+      grnRemark:existing.grnRemark||newRow.grnRemark,
+      issueResolvedDate:newRow.issueResolvedDate||existing.issueResolvedDate||'',
+      grnDate:newRow.grnDate||existing.grnDate||'',
+      grnQty:newRow.grnQty||existing.grnQty||'',
+      tat:newRow.tat||existing.tat||'',
+      id:existing.id||newRow.id
+    };
+  });
+  // Keep inwardData rows NOT from Sheet 2 (those from Sheet 1 / manual upload)
+  const kept=inwardData.filter(r=>!r._gs2||!r.invNo||!newInvNos.has(r.invNo));
+  inwardData=[...kept,...merged];
+  LS.save('inward',inwardData);
+  LS.save('inward_fname','Sheet 1 + Sheet 2');
+  LS.remove('inward_cleared');
+
+  // Update UI
+  const cntEl=document.getElementById('inward-cnt');
+  if(cntEl)cntEl.textContent=inwardData.length+' records · '+[...new Set(inwardData.map(r=>r.poNo))].length+' POs';
+  const okEl=document.getElementById('inward-ok');if(okEl)okEl.classList.add('show');
+  const nameEl=document.getElementById('inward-name');if(nameEl)nameEl.textContent='Sheet 1 + Sheet 2 (auto)';
+  if(typeof renderInwardPreview==='function')renderInwardPreview();
+  const activePO=session?session.po:(document.getElementById('selPO')?document.getElementById('selPO').value:'');
+  refreshInvNoDropdown(activePO||undefined);
+  if(fbConfig&&currentUser&&currentUser.type==='admin'){
+    queueWrite('inward',inwardData);
+    fbPut('inward_meta',{status:'set',ts:Date.now(),count:inwardData.length,uploadedBy:'auto-gsheet2'});
+  }
+  if(!silent){setGSheet2Status('✅ '+data.length+' rows from Sheet 2 merged into register','ok');}
+  const gs2StatusEl=document.getElementById('gs2-sync-status');
+  if(gs2StatusEl){gs2StatusEl.textContent='✅ Synced ('+data.length+' rows)';gs2StatusEl.style.color='var(--teal)';}
+  // Re-render active dashboard page so Sheet 2 data appears immediately
+  if(currentUser&&currentUser.type==='admin'){
+    const _ap2=document.querySelector('.page.active');
+    if(_ap2){const _pid2=_ap2.id.replace('page-','');
+      if(_pid2==='grndash')renderGRNDash();
+      else if(_pid2==='postatus')renderPOStatus();
+      else if(_pid2==='stostatus')renderSTOStatus();
+      else if(_pid2==='dashboard')renderDashboard();
+    }
+  }
+}
+
+async function debugGSheet2Cols(){
+  const rawUrl=(document.getElementById('gsheet2-inward-url').value||'').trim();
+  if(!rawUrl){toast('Paste the Sheet 2 Web App URL first','warn');return;}
+  const dbg=document.getElementById('gsheet2-debug');
+  if(dbg){dbg.style.display='block';dbg.textContent='Fetching column names from Sheet 2…';}
+  try{
+    const sheetName2=(document.getElementById('gsheet2-inward-sheet')||{value:''}).value.trim();
+    const sep=rawUrl.includes('?')?'&':'?';
+    const sheetParam2=sheetName2?('&sheet='+encodeURIComponent(sheetName2)):'';
+    const resp=await fetch(rawUrl+sep+'_cb='+Date.now()+sheetParam2,{cache:'no-cache'});
+    if(!resp.ok)throw new Error('HTTP '+resp.status);
+    const json=await resp.json();
+    const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:[]);
+    if(!rows.length){if(dbg)dbg.textContent='No rows returned from Sheet 2.';return;}
+    const keys=Object.keys(rows[0]);
+    const sample=rows[0];
+    let out='Sheet 2 — Column names ('+keys.length+' columns):\n\n';
+    keys.forEach(k=>{out+='  "'+k+'" : '+JSON.stringify(sample[k])+'\n';});
+    if(dbg)dbg.textContent=out;
+    setGSheet2Status('Showing '+keys.length+' column names below','load');
+  }catch(err){if(dbg)dbg.textContent='Error: '+err.message;}
+}
+
+// ── Sheet 2 live-sync state ──
+let _gs2LastHash='';
+let _gs2SyncTimer=null;
+let _gs2SyncCountdown=0;
+let _gs2CountTimer=null;
+
+function _startGSheet2LiveSync(){
+  if(_gs2SyncTimer)return;
+  _gs2SyncTimer=setInterval(_gsHash2Poll,15000);
+  _gsHash2Poll();
+  _gs2SyncCountdown=15;
+  if(_gs2CountTimer)clearInterval(_gs2CountTimer);
+  _gs2CountTimer=setInterval(()=>{
+    _gs2SyncCountdown=Math.max(0,_gs2SyncCountdown-1);
+    const el=document.getElementById('gs2-sync-countdown');
+    if(el)el.textContent=_gs2SyncCountdown>0?'next check in '+_gs2SyncCountdown+'s':'checking…';
+  },1000);
+}
+
+async function _gsHash2Poll(){
+  const url=LS.load('gsheet2_inward_url','');
+  if(!url||!currentUser)return;
+  _gs2SyncCountdown=15;
+  try{
+    const sep=url.includes('?')?'&':'?';
+    const savedSheets=(()=>{const s=LS.load('gsheet2_inward_sheet','');return s?s.split(',').map(x=>x.trim()).filter(Boolean):[];})();
+    const sheetParam=savedSheets.length?'&sheet='+encodeURIComponent(savedSheets.join(',')):'';
+    const resp=await fetch(url+sep+'action=hash&_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+    if(!resp.ok)return;
+    const json=await resp.json();
+    const newHash=json.hash||'';
+    if(!newHash)return;
+    if(newHash!==_gs2LastHash){
+      const wasEmpty=!_gs2LastHash;
+      _gs2LastHash=newHash;
+      await _autoFetchGSheet2Async();
+      const el=document.getElementById('gs2-sync-status');
+      if(el){
+        el.textContent=wasEmpty?'✅ Synced':'⚡ Sheet 2 updated — synced';
+        el.style.color='var(--teal)';
+        if(!wasEmpty)setTimeout(()=>{const e2=document.getElementById('gs2-sync-status');if(e2){e2.textContent='✅ Live';e2.style.color='var(--teal)';}},4000);
+      }
+    }else{
+      const el=document.getElementById('gs2-sync-status');
+      if(el&&el.textContent!=='✅ Live'){el.textContent='✅ Live';el.style.color='var(--teal)';}
+    }
+  }catch(e){
+    const el=document.getElementById('gs2-sync-status');
+    if(el){el.textContent='⚠ Check failed';el.style.color='var(--orange)';}
+  }
+}
+
+
+async function _autoFetchGSheetStoAsync(){
+  const url=LS.load('gsheet_sto_url','');
+  if(!url)return;
+  try{await fetchGSheetSto(true);}catch(e){/* silent */}
+}
+
+async function _autoFetchGSheet2Async(){
+  const url=LS.load('gsheet2_inward_url','');
+  if(!url)return;
+  try{
+    const sep=url.includes('?')?'&':'?';
+    const savedSheetInput=LS.load('gsheet2_inward_sheet','')||'';
+    const sheetNames=savedSheetInput?savedSheetInput.split(',').map(s=>s.trim()).filter(Boolean):[''];
+    let allRows=[];
+    for(const sn of sheetNames){
+      const sheetParam=sn?'&sheet='+encodeURIComponent(sn):'';
+      const resp=await fetch(url+sep+'_cb='+Date.now()+sheetParam,{cache:'no-cache'});
+      if(!resp.ok)continue;
+      const json=await resp.json();
+      const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
+      if(!rows||!rows.length)continue;
+      allRows=allRows.concat(rows.map(r=>({...r,_sourceSheet:sn||''})));
+    }
+    if(!allRows.length)return;
+    _processGSheet2Rows(allRows,true);
+  }catch(e){/* silent */}
+}
+
+function restoreGSheet2Prefs(){
+  const savedUrl=LS.load('gsheet2_inward_url','');
+  if(savedUrl){
+    const inp=document.getElementById('gsheet2-inward-url');
+    if(inp){inp.value=savedUrl;}
+    const btn=document.getElementById('gsheet2-fetch-btn');if(btn)btn.disabled=false;
+    // Kick off live sync immediately
+    _startGSheet2LiveSync();
+  }
+  const savedSheet=LS.load('gsheet2_inward_sheet','');
+  if(savedSheet){
+    const shInp=document.getElementById('gsheet2-inward-sheet');
+    if(shInp){shInp.value=savedSheet;}
+    const names=savedSheet.split(',').map(s=>s.trim()).filter(Boolean);
+    const tagContainer=document.getElementById('gs2-sheet-tags');
+    if(tagContainer&&names.length){
+      tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
+    }
+  }
+}
+// ══════════════════════════════════════════════════════════════════════════════
+// ── /SECOND GOOGLE SHEET SOURCE ──────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ── STO GOOGLE SHEET SOURCE ──────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+
+function onGSheetStoUrlInput(){
+  const url=(document.getElementById('gsheet-sto-url').value||'').trim();
+  document.getElementById('gsheet-sto-fetch-btn').disabled=!url;
+  if(url)LS.save('gsheet_sto_url',url);else LS.remove('gsheet_sto_url');
+}
+function onGSheetStoSheetInput(){
+  const sh=(document.getElementById('gsheet-sto-sheet').value||'').trim();
+  if(sh)LS.save('gsheet_sto_sheet',sh);else LS.remove('gsheet_sto_sheet');
+  const names=sh?sh.split(',').map(x=>x.trim()).filter(Boolean):[];
+  const tagContainer=document.getElementById('sto-sheet-tags');
+  if(tagContainer)tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(124,58,237,.09);color:var(--purple);border:1px solid rgba(124,58,237,.25)">📋 ${n}</span>`).join('');
+}
+function _stoStatusMsg(msg,ok){
+  const el=document.getElementById('gsheet-sto-status');
+  if(!el)return;el.style.display='block';
+  el.style.background=ok?'#f0fdf4':'#fff1f2';el.style.color=ok?'var(--green)':'var(--red)';
+  el.style.border=ok?'1px solid rgba(16,185,129,.2)':'1px solid rgba(220,38,38,.2)';
+  el.textContent=msg;
+}
+async function fetchGSheetSto(silent){
+  const rawUrl=(document.getElementById('gsheet-sto-url').value||'').trim();
+  if(!rawUrl){if(!silent)toast('Paste the Apps Script Web App URL first','warn');return;}
+  const btn=document.getElementById('gsheet-sto-fetch-btn');
+  const sheetInput=(document.getElementById('gsheet-sto-sheet')||{value:''}).value.trim();
+  const sheetNames=sheetInput?sheetInput.split(',').map(x=>x.trim()).filter(Boolean):[''];
+  const statusEl=document.getElementById('sto-sync-status');
+  const dbgEl=document.getElementById('gsheet-sto-status');
+  if(btn){btn.disabled=true;btn.textContent='⏳ Fetching…';}
+  if(statusEl)statusEl.textContent='Fetching…';
+  const sep=rawUrl.includes('?')?'&':'?';
+  let allRows=[],fetchLog=[];
+  try{
+    for(let si=0;si<sheetNames.length;si++){
+      const sn=sheetNames[si];
+      const sheetParam=sn?('&sheet='+encodeURIComponent(sn)):'';
+      const label=sn||'(active sheet)';
+      const fetchUrl=rawUrl+sep+'_cb='+Date.now()+sheetParam;
+      const resp=await fetch(fetchUrl,{cache:'no-cache'});
+      if(!resp.ok)throw new Error('HTTP '+resp.status+' for sheet: '+label);
+      const json=await resp.json();
+      const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
+      if(!rows||!rows.length){fetchLog.push('⚠ '+label+': no rows');continue;}
+      fetchLog.push('✓ '+label+': '+rows.length+' rows');
+      rows.forEach(row=>{
+        const r={};
+        for(const k of Object.keys(row)){const v=String(row[k]===null||row[k]===undefined?'':row[k]).trim();r[k.trim()]=v;}
+        // normalise column names — maps actual STO sheet headers
+        const find=(...aliases)=>{for(const a of aliases){const k=Object.keys(r).find(x=>x.toLowerCase().replace(/[\s_\-\/\.]/g,'')===a.toLowerCase().replace(/[\s_\-\/\.]/g,''));if(k&&r[k]&&r[k]!=='—')return r[k];}return '';};
+        const stoNo=find('stono','sto no.','sto no','sto number','sto#','transferorderno','transferorder');
+        if(!stoNo)return; // skip blank rows
+        // ── date formatter: handles raw strings, Google Sheets serial numbers, and JS Date strings ──
+        const fmtDate=(raw)=>{
+          if(!raw||raw==='0'||raw==='')return '';
+          // Already a formatted date (dd/mm/yyyy or dd-mm-yyyy)
+          if(/^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/.test(raw))return raw;
+          // Google Sheets serial number (days since Dec 30 1899)
+          if(/^\d{4,6}$/.test(raw)){
+            const d=new Date((parseInt(raw)-25569)*86400*1000);
+            return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();
+          }
+          // JS Date string from Apps Script e.g. "Thu May 21 2026 00:00:00 GMT+0530"
+          try{
+            const d=new Date(raw);
+            if(!isNaN(d.getTime())&&d.getFullYear()>1970){
+              return d.getDate().toString().padStart(2,'0')+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getFullYear();
+            }
+          }catch(e){}
+          return raw;
+        };
+        const norm={
+          id:'sto'+Math.random().toString(36).substr(2,9),
+          date:fmtDate(find('date'))||'',
+          vendorName:find('originsite','origin site','fromlocation','from location','from','vendor','supplier','source')||'—',
+          stoNo,
+          newStoNo:find('newstonno','new sto no','correctstono','correct sto no','new sto no  correct sto no','newstonocorrectstono')||'',
+          inboundNo:find('inboundno','inbound no.','inbound no','inboundnumber','inbound#','inboundno.')||'',
+          shipQty:parseInt(find('shipqty','ship qty','shipquantity','shipped qty','shipped quantity','shippedqty'))||0,
+          tableNo:find('tableno','table no','table no.','table number','table#')||'',
+          grnQty:parseInt(find('grnqty','grn qty','grnquantity','grn quantity'))||0,
+          shortReceivedQty:parseInt(find('shortreceivedqty','short received qty','shortreceived','short received quantity','shortreceivedqty'))||0,
+          barcodeIssue:parseInt(find('barcodeissue','barcode issue','barcode issues'))||0,
+          invalidSku:parseInt(find('invalidsku','invalid sku','skudoesnotbelongtosto','sku does not belong to sto','invalidskuskudoesnotbelongtosto'))||0,
+          excessQty:parseInt(find('excessqtytolerancepercentage','excess qty  tolerance percentage','excess qty _ tolerance percentage','excessqty','excess qty'))||0,
+          totalReceivedQty:parseInt(find('totalreceivedqty','total received qty','totalreceived','total received quantity','totalreceivedqty'))||0,
+          grnStatus:find('grnstatus','grn status','status')||'Pending',
+          grnRemark:find('grnremarks','grn remarks','grnremark','grn remark','remarks','remark')||'',
+          issueRaisedDate:fmtDate(find('issueraiseddate','issue raised date','issuedate','issue date'))||'',
+          issueResolvedDate:fmtDate(find('issueresolveddate','issue resolved date','resolveddate'))||'',
+          grnDate:fmtDate(find('grndate','grn date','grncompletiondate'))||'',
+          qcHandoverDate:fmtDate(find('qchandoverdate','qc handover date','qchandover','handoverdate','handover date'))||'',
+        };
+        allRows.push(norm);
+      });
+    }
+  }catch(err){
+    if(btn){btn.disabled=false;btn.textContent='⬇ Fetch STO Sheet';}
+    const msg=err.message||'Network error';
+    if(statusEl)statusEl.textContent='⚠ Failed';
+    _stoStatusMsg('✗ '+msg+' — Check Web App URL and ensure access is set to Anyone','err');
+    if(!silent)toast('STO fetch failed: '+msg,'err');
+    return;
+  }
+  if(btn){btn.disabled=false;btn.textContent='⬇ Fetch STO Sheet';}
+  if(allRows.length===0){
+    const msg=fetchLog.join(' | ')||'No valid STO rows found (check STO NO. column exists)';
+    _stoStatusMsg('⚠ '+msg,false);
+    if(statusEl)statusEl.textContent='⚠ No data';
+    if(!silent)toast('No STO rows found — check sheet & column names','warn');
+    return;
+  }
+  // Merge: update existing by stoNo, add new
+  allRows.forEach(nr=>{
+    const idx=stoData.findIndex(x=>x.stoNo&&x.stoNo===nr.stoNo);
+    if(idx>=0){stoData[idx]={...stoData[idx],...nr,id:stoData[idx].id};}
+    else{stoData.push(nr);}
+  });
+  LS.save('sto',stoData);
+  if(typeof queueWrite==='function'&&typeof fbConfig!=='undefined'&&fbConfig)queueWrite('sto',stoData);
+  const summary=sheetNames.length>1?'✅ '+allRows.length+' rows from '+sheetNames.length+' sheets':'✅ Fetched '+allRows.length+' STO rows';
+  if(statusEl)statusEl.textContent=summary;
+  _stoStatusMsg(summary,true);
+  if(!silent)toast('STO Sheet: '+allRows.length+' rows fetched','ok');
+  const activePage=document.querySelector('.page.active');
+  if(activePage&&activePage.id==='page-stostatus')renderSTOStatus();
+}
+function debugGSheetStoCols(){
+  const rawUrl=(document.getElementById('gsheet-sto-url').value||'').trim();
+  const dbg=document.getElementById('gsheet-sto-debug');
+  if(!rawUrl){toast('Enter STO Sheet URL first','warn');return;}
+  if(dbg){dbg.style.display='block';dbg.textContent='Fetching raw columns…';}
+  const sheetName=(document.getElementById('gsheet-sto-sheet')||{value:''}).value.trim().split(',')[0].trim();
+  let url=rawUrl+(rawUrl.includes('?')?'&':'?')+'t='+Date.now();
+  if(sheetName)url+='&sheet='+encodeURIComponent(sheetName);
+  fetchWithTimeout(url,{},12000).then(r=>r.text()).then(text=>{
+    let parsed;try{parsed=JSON.parse(text);}catch(e){if(dbg)dbg.textContent='Invalid JSON: '+text.substring(0,200);return;}
+    const arr=Array.isArray(parsed)?parsed:(parsed&&Array.isArray(parsed.data)?parsed.data:[]);
+    const cols=arr.length?Object.keys(arr[0]):[];
+    if(dbg)dbg.textContent='Columns ('+cols.length+'): '+cols.join(', ')+'\n\nFirst row: '+JSON.stringify(arr[0]||{},null,2);
+  }).catch(e=>{if(dbg)dbg.textContent='Error: '+e.message;});
+}
+function restoreGSheetStoPrefs(){
+  const savedUrl=LS.load('gsheet_sto_url','');
+  if(savedUrl){
+    const inp=document.getElementById('gsheet-sto-url');
+    if(inp){inp.value=savedUrl;}
+    const btn=document.getElementById('gsheet-sto-fetch-btn');if(btn)btn.disabled=false;
+  }
+  const savedSheet=LS.load('gsheet_sto_sheet','');
+  if(savedSheet){
+    const shInp=document.getElementById('gsheet-sto-sheet');
+    if(shInp){shInp.value=savedSheet;}
+    const names=savedSheet.split(',').map(s=>s.trim()).filter(Boolean);
+    const tagContainer=document.getElementById('sto-sheet-tags');
+    if(tagContainer&&names.length){
+      tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(124,58,237,.09);color:var(--purple);border:1px solid rgba(124,58,237,.25)">📋 ${n}</span>`).join('');
+    }
+  }
+}
+// ── /STO GOOGLE SHEET SOURCE ──────────────────────────────────────────────────
+
 
 function loadSampleInward(){
   const today=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'2-digit',year:'numeric'});
@@ -7083,6 +7890,739 @@ function exportPOStatus(){
   a.download='PO_Status_'+new Date().toISOString().slice(0,10)+'.csv';a.click();toast('PO Status exported — '+srNo+' invoices','ok');
 }
 
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ── STO STATUS PAGE ──────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+
+function clearSTOFilters(){
+  document.getElementById('stoDateFilter').value='';document.getElementById('stoSTOFilter').value='';
+  document.getElementById('stoScanStatus').value='';renderSTOStatus();
+}
+let stoSortCol=null,stoSortDir=1;
+function stoSortBy(col){
+  if(stoSortCol===col){stoSortDir=-stoSortDir;}else{stoSortCol=col;stoSortDir=1;}
+  renderSTOStatus();
+}
+function renderSTOStatus(){
+  const fDate=(document.getElementById('stoDateFilter').value||'').trim().toLowerCase();
+  const fSTO=(document.getElementById('stoSTOFilter').value||'').trim().toLowerCase();
+  const fGRN=document.getElementById('stoScanStatus').value; // reused filter — filters by GRN Status
+
+  // Populate STO No datalist
+  const dl=document.getElementById('sto-sto-datalist');
+  if(dl)dl.innerHTML=[...new Set(stoData.map(r=>r.stoNo).filter(Boolean))].map(s=>`<option value="${s}">`).join('');
+
+  let filtered=stoData.filter(inv=>{
+    if(fDate&&!(inv.date||'').toLowerCase().includes(fDate))return false;
+    if(fSTO&&!(inv.stoNo||'').toLowerCase().includes(fSTO))return false;
+    // filter by GRN Status (the filter dropdown label says "Scanning Status" but for STO we apply to GRN Status)
+    if(fGRN){
+      const gs=(inv.grnStatus||'').toLowerCase();
+      if(fGRN==='Done'&&!gs.includes('done'))return false;
+      if(fGRN==='Under Process'&&!gs.includes('under'))return false;
+      if(fGRN==='Pending'&&gs.includes('done'))return false;
+    }
+    return true;
+  });
+
+  if(stoSortCol){
+    filtered=[...filtered].sort((a,b)=>{
+      let av=a[stoSortCol]??'',bv=b[stoSortCol]??'';
+      if(typeof av==='number'&&typeof bv==='number')return(av-bv)*stoSortDir;
+      return String(av).localeCompare(String(bv))*stoSortDir;
+    });
+  }
+
+  const total=filtered.length;
+  const grnDone=filtered.filter(r=>(r.grnStatus||'').toLowerCase().includes('done')).length;
+  const hasIssue=filtered.filter(r=>{
+    const anyIssue=(r.shortReceivedQty||0)+(r.barcodeIssue||0)+(r.invalidSku||0)+(r.excessQty||0);
+    return anyIssue>0;
+  }).length;
+  const sumShipQty=filtered.reduce((s,r)=>s+(r.shipQty||0),0);
+  const sumGrnQty=filtered.reduce((s,r)=>s+(r.grnQty||0),0);
+
+  document.getElementById('sto-count').textContent=total?total+' STO entries':'';
+  document.getElementById('sto-tbl-count').textContent=total+' entries';
+
+  // KPI strip
+  const kpiEl=document.getElementById('stoKpiStrip');
+  if(kpiEl){
+    kpiEl.style.display='grid';
+    kpiEl.style.gridTemplateColumns='repeat(5,1fr)';
+    kpiEl.style.gap='10px';
+    kpiEl.innerHTML=[
+      {lbl:'Total STO Entries',val:total,col:'var(--accent)',bg:'#eff6ff',bdr:'rgba(37,99,235,.2)'},
+      {lbl:'GRN Done',val:grnDone,col:'var(--green)',bg:'#f0fdf4',bdr:'rgba(5,150,105,.2)'},
+      {lbl:'With Issue',val:hasIssue,col:'var(--red)',bg:'#fff1f2',bdr:'rgba(220,38,38,.2)'},
+      {lbl:'Total Ship Qty',val:sumShipQty.toLocaleString('en-IN'),col:'var(--teal)',bg:'#f0fdff',bdr:'rgba(8,145,178,.2)'},
+      {lbl:'Total GRN Qty',val:sumGrnQty.toLocaleString('en-IN'),col:'var(--green)',bg:'#f0fdf4',bdr:'rgba(5,150,105,.2)'},
+    ].map(k=>`<div style="background:${k.bg};border:1.5px solid ${k.bdr};border-radius:var(--r);padding:12px 16px;box-shadow:var(--sh)">
+      <div style="font-family:var(--font-mono);font-size:22px;font-weight:800;color:${k.col}">${k.val}</div>
+      <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink3);margin-top:2px;font-weight:700">${k.lbl}</div>
+    </div>`).join('');
+  }
+
+  const body=document.getElementById('stoBody');
+  if(!body)return;
+  if(!filtered.length){
+    body.innerHTML='<tr><td colspan="20" class="empty-cell">'+(stoData.length?'No STO entries match filters':'Upload STO register or fetch from Google Sheet to see STO status')+'</td></tr>';
+    return;
+  }
+
+  // Helper: numeric cell — shows value or dash, with colour coding
+  const numCell=(val,col,warnAbove)=>{
+    const n=parseInt(val)||0;
+    const clr=warnAbove!==undefined&&n>0?warnAbove:'';
+    return `<td class="td-num" style="${clr?'color:'+clr+';font-weight:700':''}">${n||'—'}</td>`;
+  };
+
+  // GRN Status badge
+  const grnBadge=(status)=>{
+    const s=(status||'Pending').toLowerCase();
+    let col,bg,bdr,ico;
+    if(s.includes('done')){col='var(--green)';bg='var(--green-d)';bdr='rgba(5,150,105,.3)';ico='✅';}
+    else if(s.includes('hold')||s.includes('issue')){col='var(--red)';bg='var(--red-d)';bdr='rgba(220,38,38,.25)';ico='⚠';}
+    else{col='var(--orange)';bg='var(--orange-d)';bdr='rgba(217,119,6,.3)';ico='⏳';}
+    return `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;color:${col};background:${bg};border:1px solid ${bdr}">${ico} ${status||'Pending'}</span>`;
+  };
+
+  // Date cell — mono, teal
+  const dateCell=(d,col)=>`<td class="td-ts" style="color:${col||'var(--ink2)'}">${d||'—'}</td>`;
+
+  body.innerHTML=filtered.map((inv,i)=>{
+    const rowBg=i%2===0?'':'background:#fafbff';
+    const anyIssue=(inv.shortReceivedQty||0)+(inv.barcodeIssue||0)+(inv.invalidSku||0)+(inv.excessQty||0);
+    const rowBorder=anyIssue>0?'border-left:3px solid var(--red)':'';
+
+    // Remark cell
+    const rmk=inv.grnRemark||'';
+    const remarkCell=rmk
+      ?`<td><span class="rmk-badge" title="${rmk}">${rmk.length>22?rmk.substring(0,22)+'…':rmk}</span></td>`
+      :`<td><span class="rmk-none">—</span></td>`;
+
+    // New STO No cell — highlight if different from stoNo
+    const newStoCell=inv.newStoNo
+      ?`<td style="font-family:var(--font-mono);font-size:10px;color:var(--orange);font-weight:700">${inv.newStoNo}</td>`
+      :`<td><span class="rmk-none">—</span></td>`;
+
+    // Table No cell — styled as tbl-badge if filled
+    const tableCell=inv.tableNo
+      ?`<td style="text-align:center"><span style="display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;background:linear-gradient(135deg,#eff6ff,#f0fdff);color:var(--teal);border:1.5px solid rgba(8,145,178,.25)">${inv.tableNo}</span></td>`
+      :`<td><span class="rmk-none">—</span></td>`;
+
+    return `<tr style="border-bottom:1px solid #d0d7f0;${rowBg};${rowBorder}">
+      <td class="ps-fr ps-fr-num ps-row-num">${i+1}</td>
+      <td class="ps-fr ps-fr-date td-ts">${inv.date||'—'}</td>
+      <td class="ps-fr ps-fr-vendor" style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis" title="${inv.vendorName||''}">${inv.vendorName||'—'}</td>
+      <td class="ps-fr ps-fr-po"><span class="po-badge" style="background:linear-gradient(135deg,#fdf4ff,#f5f3ff);color:var(--purple);border-color:rgba(124,58,237,.25)">${inv.stoNo}</span></td>
+      ${newStoCell}
+      <td style="font-family:var(--font-mono);font-size:10px;color:var(--teal)">${inv.inboundNo||'—'}</td>
+      <td class="td-num" style="color:var(--accent);font-weight:700">${inv.shipQty||'—'}</td>
+      ${tableCell}
+      <td class="td-num" style="color:var(--green);font-weight:700">${inv.grnQty||'—'}</td>
+      ${numCell(inv.shortReceivedQty,'var(--orange)',0)}
+      ${numCell(inv.barcodeIssue,'var(--red)',0)}
+      ${numCell(inv.invalidSku,'var(--red)',0)}
+      ${numCell(inv.excessQty,'var(--orange)',0)}
+      <td class="td-num" style="color:var(--green);font-weight:800">${inv.totalReceivedQty||'—'}</td>
+      <td>${grnBadge(inv.grnStatus)}</td>
+      ${remarkCell}
+      ${dateCell(inv.issueRaisedDate,'var(--red)')}
+      ${dateCell(inv.issueResolvedDate,'var(--teal)')}
+      ${dateCell(inv.grnDate,'var(--green)')}
+      ${dateCell(inv.qcHandoverDate,'var(--purple)')}
+    </tr>`;
+  }).join('');
+}
+function exportSTOStatus(){
+  if(!stoData.length){toast('No STO data to export','warn');return;}
+  const q=v=>`"${String(v||'').replace(/"/g,'""')}"`;
+  const header=['Sr. No.','DATE','Origin Site','STO NO.','New STO No. / Correct STO No.','Inbound No.','Ship Qty','TABLE NO','GRN Qty','Short Received Qty','Barcode Issue','Invalid SKU / SKU does not belong to STO','Excess Qty _ tolerance percentage','Total Received Qty','GRN Status','GRN Remarks','Issue Raised Date','Issue Resolved Date','GRN Date','QC Handover Date'];
+  const rows=stoData.map((inv,idx)=>[
+    idx+1,
+    inv.date||'',
+    q(inv.vendorName||''),
+    inv.stoNo||'',
+    inv.newStoNo||'',
+    inv.inboundNo||'',
+    inv.shipQty||0,
+    inv.tableNo||'',
+    inv.grnQty||0,
+    inv.shortReceivedQty||0,
+    inv.barcodeIssue||0,
+    inv.invalidSku||0,
+    inv.excessQty||0,
+    inv.totalReceivedQty||0,
+    inv.grnStatus||'Pending',
+    q(inv.grnRemark||''),
+    inv.issueRaisedDate||'',
+    inv.issueResolvedDate||'',
+    inv.grnDate||'',
+    inv.qcHandoverDate||'',
+  ]);
+  const csv=[header,...rows].map(row=>row.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='STO_Status_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  toast('STO Status exported — '+stoData.length+' entries','ok');
+}
+
+// ── /STO STATUS PAGE ──────────────────────────────────────────────────────────
+
+
+
+
+// ── STO GRN DASHBOARD ──────────────────────────────────────────────────────────
+
+function _sgdGetSelectedMonths(){
+  const list=document.getElementById('sgdMonthList');
+  if(!list)return[];
+  return[...list.querySelectorAll('input[data-month]:checked')].map(cb=>cb.dataset.month);
+}
+function _sgdUpdateMonthLabel(){
+  const sel=_sgdGetSelectedMonths();
+  const lbl=document.getElementById('sgdMonthLabel');
+  if(!lbl)return;
+  const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  if(!sel.length){lbl.textContent='All months';}
+  else if(sel.length===1){const[y,m]=sel[0].split('-');lbl.textContent=MONTH_NAMES[parseInt(m)-1]+' '+y;}
+  else{lbl.textContent=sel.length+' months selected';}
+}
+function _sgdMonthChanged(){_sgdUpdateMonthLabel();renderSTOGRNDash();}
+function toggleSgdMonthDropdown(e){
+  e.stopPropagation();
+  const dd=document.getElementById('sgdMonthDropdown');
+  if(!dd)return;
+  const isOpen=dd.style.display!=='none';
+  document.querySelectorAll('.gd-custom-dd').forEach(el=>{el.style.display='none';});
+  dd.style.display=isOpen?'none':'block';
+  if(!isOpen){
+    const wrap=document.getElementById('sgdMonthWrap');
+    if(wrap){
+      const rect=wrap.getBoundingClientRect();
+      const spaceBelow=window.innerHeight-rect.bottom;
+      dd.style.top=spaceBelow<250?'auto':'calc(100% + 4px)';
+      dd.style.bottom=spaceBelow<250?'calc(100% + 4px)':'auto';
+    }
+  }
+}
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('sgdMonthWrap');
+  const dd=document.getElementById('sgdMonthDropdown');
+  if(dd&&wrap&&!wrap.contains(e.target))dd.style.display='none';
+});
+function sgdMonthSelectAll(rerender){
+  const list=document.getElementById('sgdMonthList');
+  if(!list)return;
+  list.querySelectorAll('input[data-month]').forEach(cb=>{cb.checked=true;});
+  _sgdUpdateMonthLabel();
+  if(rerender!==false)renderSTOGRNDash();
+}
+function sgdMonthClearAll(rerender){
+  const list=document.getElementById('sgdMonthList');
+  if(!list)return;
+  list.querySelectorAll('input[data-month]').forEach(cb=>{cb.checked=false;});
+  _sgdUpdateMonthLabel();
+  if(rerender!==false)renderSTOGRNDash();
+}
+function clearSTOGRNFilters(){
+  document.getElementById('sgdDateFrom').value='';
+  document.getElementById('sgdDateTo').value='';
+  sgdMonthClearAll(false);
+  document.getElementById('sgdFilterUnder').value='';
+  document.getElementById('sgdFilterIssue').value='';
+  document.getElementById('sgdFilterPend').value='';
+  renderSTOGRNDash();
+}
+
+function _sgdPopulateDateDropdowns(){
+  const fromSel=document.getElementById('sgdDateFrom');
+  const toSel=document.getElementById('sgdDateTo');
+  if(!fromSel||!toSel)return;
+  const curFrom=fromSel.value;
+  const curTo=toSel.value;
+  const dates=[...new Set(stoData.map(i=>i.date||'').filter(Boolean))].sort((a,b)=>{
+    const da=_gdParseDate(a),db=_gdParseDate(b);
+    if(da&&db)return da-db;return a.localeCompare(b);
+  });
+  const blankOpt='<option value="">All dates</option>';
+  const opts=dates.map(d=>`<option value="${d}">${d}</option>`).join('');
+  fromSel.innerHTML=blankOpt+opts;
+  toSel.innerHTML=blankOpt+opts;
+  if(curFrom)fromSel.value=curFrom;
+  if(curTo)toSel.value=curTo;
+  // Populate month multi-select
+  const monthList=document.getElementById('sgdMonthList');
+  if(monthList){
+    const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const monthSet=new Set();
+    stoData.forEach(i=>{
+      const d=_gdParseDate(i.date||'');
+      if(d){const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;monthSet.add(key);}
+    });
+    const sortedMonths=[...monthSet].sort();
+    const prevChecked=new Set(_sgdGetSelectedMonths());
+    monthList.innerHTML=sortedMonths.map(k=>{
+      const[y,m]=k.split('-');
+      const label=MONTH_NAMES[parseInt(m)-1]+' '+y;
+      return`<label style="display:flex;align-items:center;gap:8px;padding:6px 12px;cursor:pointer;font-size:11px;color:var(--ink2);transition:background .1s" onmouseover="this.style.background='#f5f7ff'" onmouseout="this.style.background=''">`+
+        `<input type="checkbox" data-month="${k}" style="accent-color:var(--accent);width:13px;height:13px;cursor:pointer" onchange="_sgdMonthChanged()">`+
+        `<span style="font-family:var(--font-mono);font-weight:600">${label}</span></label>`;
+    }).join('');
+    if(prevChecked.size>0){
+      monthList.querySelectorAll('input[data-month]').forEach(cb=>{
+        if(prevChecked.has(cb.dataset.month))cb.checked=true;
+      });
+    }
+    _sgdUpdateMonthLabel();
+  }
+}
+
+function renderSTOGRNDash(){
+  _sgdPopulateDateDropdowns();
+  const body=document.getElementById('sgdBody');
+  if(!body)return;
+  if(!stoData.length){
+    body.innerHTML='<tr><td colspan="16" class="empty-cell">Fetch STO register from Google Sheet to see STO GRN dashboard</td></tr>';
+    document.getElementById('sgdKpiStrip').innerHTML='';
+    document.getElementById('sgd-tbl-count').textContent='';
+    return;
+  }
+  const fromVal=(document.getElementById('sgdDateFrom').value||'').trim();
+  const toVal  =(document.getElementById('sgdDateTo').value||'').trim();
+  const selectedMonths=_sgdGetSelectedMonths();
+  const filterUnder=(document.getElementById('sgdFilterUnder').value||'');
+  const filterIssue=(document.getElementById('sgdFilterIssue').value||'');
+  const filterPend =(document.getElementById('sgdFilterPend').value||'');
+
+  // Group stoData by date
+  const byDate={};
+  stoData.forEach(sto=>{
+    const d=sto.date||'—';
+    if(!_gdDateMatchFilter(d,fromVal,toVal))return;
+    if(selectedMonths.length>0){const pd=_gdParseDate(d);if(pd){const key=`${pd.getFullYear()}-${String(pd.getMonth()+1).padStart(2,'0')}`;if(!selectedMonths.includes(key))return;}}
+    if(!byDate[d])byDate[d]=[];
+    byDate[d].push(sto);
+  });
+
+  // Sort dates
+  let sortedDates=Object.keys(byDate).sort((a,b)=>{
+    const da=_gdParseDate(a),db=_gdParseDate(b);
+    if(da&&db)return da-db;return a.localeCompare(b);
+  });
+
+  // Compute row stats for status filters
+  const _computeRowStats=stoList=>{
+    const gs=s=>(s||'').toLowerCase();
+    const trueUnder=stoList.filter(s=>!gs(s.grnStatus).includes('done')&&!(s.grnRemark&&s.grnRemark.trim()&&!gs(s.grnRemark).includes('grn done')));
+    const issueList=stoList.filter(s=>!gs(s.grnStatus).includes('done')&&s.grnRemark&&s.grnRemark.trim()&&!gs(s.grnRemark).includes('grn done'));
+    const pendList =stoList.filter(s=>!gs(s.grnStatus).includes('done'));
+    return{underCount:trueUnder.length,issueCount:issueList.length,pendCount:pendList.length};
+  };
+  sortedDates=sortedDates.filter(date=>{
+    if(!filterUnder&&!filterIssue&&!filterPend)return true;
+    const stats=_computeRowStats(byDate[date]);
+    if(filterUnder==='yes'&&stats.underCount===0)return false;
+    if(filterUnder==='no'&&stats.underCount>0)return false;
+    if(filterIssue==='yes'&&stats.issueCount===0)return false;
+    if(filterIssue==='no'&&stats.issueCount>0)return false;
+    if(filterPend==='yes'&&stats.pendCount===0)return false;
+    if(filterPend==='no'&&stats.pendCount>0)return false;
+    return true;
+  });
+
+  if(!sortedDates.length){
+    body.innerHTML='<tr><td colspan="16" class="empty-cell">No STO entries match the selected filters</td></tr>';
+    document.getElementById('sgdKpiStrip').innerHTML='';
+    document.getElementById('sgd-tbl-count').textContent='0 dates';
+    return;
+  }
+
+  // Grand KPI accumulators
+  let kpi={totalSTO:0,totalShipQty:0,doneSTOs:0,doneGRNQty:0,underSTOs:0,underShipQty:0,issueSTOs:0,issueShipQty:0,pendSTOs:0,pendShipQty:0,hdoneInb:0,hdoneQty:0,hpendSTOs:0,hpendQty:0};
+
+  const rows=sortedDates.map((date,idx)=>{
+    const stoList=byDate[date];
+    const gs=s=>(s||'').toLowerCase();
+
+    // Transfer (all STOs for this date)
+    const tSTOs=stoList.length;
+    const tShipQty=stoList.reduce((s,r)=>s+(r.shipQty||0),0);
+
+    // GRN Done
+    const doneList=stoList.filter(r=>gs(r.grnStatus).includes('done'));
+    const dSTOs=doneList.length;
+    const dGRNQty=doneList.reduce((s,r)=>s+(r.grnQty||0),0);
+
+    // Under Process (not done, no issue remark)
+    const trueUnder=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+    const uSTOs=trueUnder.length;
+    const uShipQty=trueUnder.reduce((s,r)=>s+(r.shipQty||0),0);
+
+    // Pending with Issue (not done AND has a remark that's not "GRN Done")
+    const issueList=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done'));
+    const iSTOs=issueList.length;
+    const iShipQty=issueList.reduce((s,r)=>s+(r.shipQty||0),0);
+
+    // Total Pendency (all not Done)
+    const pendList=stoList.filter(r=>!gs(r.grnStatus).includes('done'));
+    const pSTOs=pendList.length;
+    const pShipQty=pendList.reduce((s,r)=>s+(r.shipQty||0),0);
+
+    // Handover Done (has qcHandoverDate)
+    const hdoneList=stoList.filter(r=>r.qcHandoverDate&&r.qcHandoverDate.trim());
+    const hdoneInb=hdoneList.length;
+    const hdoneQty=hdoneList.reduce((s,r)=>s+(r.grnQty||r.shipQty||0),0);
+
+    // Handover Pending (GRN Done AND no qcHandoverDate AND no issue remark)
+    const hpendList=stoList.filter(r=>gs(r.grnStatus).includes('done')&&(!r.qcHandoverDate||!r.qcHandoverDate.trim())&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+    const hpendSTOs=hpendList.length;
+    const hpendQty=hpendList.reduce((s,r)=>s+(r.grnQty||0),0);
+
+    // Accumulate KPIs
+    kpi.totalSTO+=tSTOs;kpi.totalShipQty+=tShipQty;
+    kpi.doneSTOs+=dSTOs;kpi.doneGRNQty+=dGRNQty;
+    kpi.underSTOs+=uSTOs;kpi.underShipQty+=uShipQty;
+    kpi.issueSTOs+=iSTOs;kpi.issueShipQty+=iShipQty;
+    kpi.pendSTOs+=pSTOs;kpi.pendShipQty+=pShipQty;
+    kpi.hdoneInb+=hdoneInb;kpi.hdoneQty+=hdoneQty;
+    kpi.hpendSTOs+=hpendSTOs;kpi.hpendQty+=hpendQty;
+
+    const n=v=>v===0?'<span style="color:var(--ink3)">-</span>':v.toLocaleString();
+    return`<tr style="border-bottom:1px solid #d0d7f0">
+      <td class="ps-fr ps-fr-num ps-row-num">${idx+1}</td>
+      <td class="ps-fr ps-fr-date td-ts" style="font-weight:700;color:var(--ink)">${date}</td>
+      <td class="ps-num-cell gd-col-unload-cell">${n(tSTOs)}</td>
+      <td class="ps-num-cell gd-col-unload-cell">${n(tShipQty)}</td>
+      <td class="ps-num-cell gd-col-grn-cell">${n(dSTOs)}</td>
+      <td class="ps-num-cell gd-col-grn-cell">${n(dGRNQty)}</td>
+      <td class="ps-num-cell gd-col-under-cell">${n(uSTOs)}</td>
+      <td class="ps-num-cell gd-col-under-cell">${n(uShipQty)}</td>
+      <td class="ps-num-cell gd-col-issue-cell">${n(iSTOs)}</td>
+      <td class="ps-num-cell gd-col-issue-cell">${n(iShipQty)}</td>
+      <td class="ps-num-cell gd-col-pend-cell">${n(pSTOs)}</td>
+      <td class="ps-num-cell gd-col-pend-cell">${n(pShipQty)}</td>
+      <td class="ps-num-cell gd-col-hdone-cell" style="background:#f0fdf4;color:#065f46;font-weight:700">${n(hdoneInb)}</td>
+      <td class="ps-num-cell gd-col-hdone-cell" style="background:#f0fdf4;color:#065f46;font-weight:700">${n(hdoneQty)}</td>
+      <td class="ps-num-cell gd-col-hpend-cell" style="background:#fdf2f8;color:#831843;font-weight:700">${n(hpendSTOs)}</td>
+      <td class="ps-num-cell gd-col-hpend-cell" style="background:#fdf2f8;color:#831843;font-weight:700">${n(hpendQty)}</td>
+    </tr>`;
+  });
+
+  // Grand totals row
+  const tn=v=>v===0?'-':v.toLocaleString();
+  rows.push(`<tr class="gd-total-row">
+    <td class="ps-fr ps-fr-num" style="text-align:center;font-weight:800;font-size:10px;letter-spacing:.5px">—</td>
+    <td class="ps-fr ps-fr-date" style="font-weight:800;color:#1e3a8a;font-size:11px;letter-spacing:.3px">GRAND TOTAL</td>
+    <td class="ps-num-cell gd-col-unload-cell">${tn(kpi.totalSTO)}</td>
+    <td class="ps-num-cell gd-col-unload-cell">${tn(kpi.totalShipQty)}</td>
+    <td class="ps-num-cell gd-col-grn-cell">${tn(kpi.doneSTOs)}</td>
+    <td class="ps-num-cell gd-col-grn-cell">${tn(kpi.doneGRNQty)}</td>
+    <td class="ps-num-cell gd-col-under-cell">${tn(kpi.underSTOs)}</td>
+    <td class="ps-num-cell gd-col-under-cell">${tn(kpi.underShipQty)}</td>
+    <td class="ps-num-cell gd-col-issue-cell">${tn(kpi.issueSTOs)}</td>
+    <td class="ps-num-cell gd-col-issue-cell">${tn(kpi.issueShipQty)}</td>
+    <td class="ps-num-cell gd-col-pend-cell">${tn(kpi.pendSTOs)}</td>
+    <td class="ps-num-cell gd-col-pend-cell">${tn(kpi.pendShipQty)}</td>
+    <td class="ps-num-cell gd-col-hdone-cell" style="background:#dcfce7;color:#065f46;font-weight:800">${tn(kpi.hdoneInb)}</td>
+    <td class="ps-num-cell gd-col-hdone-cell" style="background:#dcfce7;color:#065f46;font-weight:800">${tn(kpi.hdoneQty)}</td>
+    <td class="ps-num-cell gd-col-hpend-cell" style="background:#fce7f3;color:#831843;font-weight:800">${tn(kpi.hpendSTOs)}</td>
+    <td class="ps-num-cell gd-col-hpend-cell" style="background:#fce7f3;color:#831843;font-weight:800">${tn(kpi.hpendQty)}</td>
+  </tr>`);
+
+  body.innerHTML=rows.join('');
+  document.getElementById('sgd-tbl-count').textContent=sortedDates.length+' date'+(sortedDates.length!==1?'s':'');
+
+  // Active filter badge
+  (function(){
+    const activeBadge=document.getElementById('sgd-active-filters');
+    if(!activeBadge)return;
+    const activeFilters=[];
+    if(selectedMonths.length>0){const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const labels=selectedMonths.map(k=>{const[y,m]=k.split('-');return mn[parseInt(m)-1]+' '+y;});activeFilters.push('Month: '+labels.join(', '));}
+    if(filterUnder==='yes')activeFilters.push('⏳ Has Under Process');
+    else if(filterUnder==='no')activeFilters.push('⏳ No Under Process');
+    if(filterIssue==='yes')activeFilters.push('⚠️ Has Issue');
+    else if(filterIssue==='no')activeFilters.push('⚠️ No Issue');
+    if(filterPend==='yes')activeFilters.push('📋 Has Pendancy');
+    else if(filterPend==='no')activeFilters.push('📋 Cleared');
+    if(activeFilters.length){activeBadge.textContent='🔍 '+activeFilters.join(' · ')+' · ✕ Clear';activeBadge.style.display='inline-flex';}
+    else{activeBadge.style.display='none';}
+  })();
+
+  // ── KPI Cards ──
+  const _now=new Date();
+  const _pad=n=>String(n).padStart(2,'0');
+  const todayDMY=`${_pad(_now.getDate())}/${_pad(_now.getMonth()+1)}/${_now.getFullYear()}`;
+
+  // Today's STO details
+  const todaySTO=stoData.filter(s=>s.date===todayDMY);
+  const tidSTOs=todaySTO.length;
+  const tidShipQty=todaySTO.reduce((s,r)=>s+(r.shipQty||0),0);
+
+  // Today's GRN (by grnDate)
+  const todayGRN=stoData.filter(s=>s.grnDate&&s.grnDate===todayDMY);
+  const tgSTOs=todayGRN.length;
+  const tgQty=todayGRN.reduce((s,r)=>s+(r.grnQty||0),0);
+
+  const tatTt=kpi.aboveTAT+kpi.withinTAT;
+  const tAbovePctKpi=tatTt>0?((kpi.aboveTAT/tatTt)*100).toFixed(1)+'%':'0.0%';
+  const tWithinPctKpi=tatTt>0?((kpi.withinTAT/tatTt)*100).toFixed(1)+'%':'0.0%';
+  const _kn=v=>v===0?'—':v.toLocaleString();
+
+  const kpiCard=(theme,icon,title,rows3)=>{
+    const rowsHtml=rows3.map(r=>`
+      <div class="gd-kpi-row">
+        <div class="gd-kpi-row-left">
+          <span class="gd-kpi-row-icon">${r.icon}</span>
+          <span class="gd-kpi-row-label">${r.label}</span>
+        </div>
+        <span class="gd-kpi-row-val${r.cls?' '+r.cls:''}">${r.val}</span>
+      </div>`).join('');
+    return`<div class="gd-kpi-card ${theme}">
+      <div class="gd-kpi-hdr">
+        <div class="gd-kpi-icon">${icon}</div>
+        <div class="gd-kpi-title">${title}</div>
+        <div class="gd-kpi-date">${todayDMY}</div>
+      </div>
+      <div class="gd-kpi-body">${rowsHtml}</div>
+    </div>`;
+  };
+
+  const handoverCard=`<div class="gd-kpi-card gd-kpi-tat">
+    <div class="gd-kpi-hdr">
+      <div class="gd-kpi-icon">🤝</div>
+      <div class="gd-kpi-title">Handover Status</div>
+      <div class="gd-kpi-date">${todayDMY}</div>
+    </div>
+    <div class="gd-kpi-body">
+      <div class="gd-kpi-row">
+        <div class="gd-kpi-row-left"><span class="gd-kpi-row-icon">✅</span>
+          <div><div class="gd-kpi-row-label">Handover Done</div><div class="gd-kpi-row-sub" style="color:#059669">${_kn(kpi.hdoneInb)} Inb · ${_kn(kpi.hdoneQty)} Qty</div></div>
+        </div>
+        <span class="gd-kpi-row-val" style="color:#059669">${_kn(kpi.hdoneInb)}</span>
+      </div>
+      <div class="gd-kpi-row">
+        <div class="gd-kpi-row-left"><span class="gd-kpi-row-icon">📬</span>
+          <div><div class="gd-kpi-row-label">Handover Pending</div><div class="gd-kpi-row-sub" style="color:#be185d">${_kn(kpi.hpendSTOs)} STOs · ${_kn(kpi.hpendQty)} Qty</div></div>
+        </div>
+        <span class="gd-kpi-row-val" style="color:#be185d">${_kn(kpi.hpendSTOs)}</span>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('sgdKpiStrip').innerHTML=`
+  <div class="gd-kpi-grid">
+    ${kpiCard('gd-kpi-sto-today','📦',"Today's STO Details",[
+      {icon:'🔄',label:'No. of STOs',    val:_kn(tidSTOs)},
+      {icon:'📊',label:'Total Ship Qty', val:_kn(tidShipQty)}])}
+    ${kpiCard('gd-kpi-grn','✅',"Today's GRN",[
+      {icon:'🔄',label:'No. of STOs',    val:_kn(tgSTOs)},
+      {icon:'📦',label:'Total GRN Qty',  val:_kn(tgQty)}])}
+    ${kpiCard('gd-kpi-under','⏳',"Under Process",[
+      {icon:'🔄',label:'No. of STOs',    val:_kn(kpi.underSTOs)},
+      {icon:'📊',label:'Total Ship Qty', val:_kn(kpi.underShipQty)}])}
+    ${kpiCard('gd-kpi-issue','⚠️',"GRN Pending w/ Issue",[
+      {icon:'⚠️',label:'No. of STOs',    val:_kn(kpi.issueSTOs)},
+      {icon:'📊',label:'Total Ship Qty', val:_kn(kpi.issueShipQty)}])}
+    ${handoverCard}
+  </div>`;
+}
+
+function exportSTOGRNDash(){
+  if(!stoData.length){toast('No STO data to export','warn');return;}
+  const fromVal=(document.getElementById('sgdDateFrom').value||'').trim();
+  const toVal  =(document.getElementById('sgdDateTo').value||'').trim();
+  const header=['Date','Total STOs','Total Ship Qty','Done STOs','Done GRN Qty','Under STOs','Under Ship Qty','Issue STOs','Issue Ship Qty','Pend STOs','Pend Ship Qty','Handover Done (No. of Inb.)','Handover Done (Total Qty)','Handover Pending (No. of STOs)','Handover Pending (Total Qty)'];
+  const byDate={};
+  stoData.forEach(sto=>{
+    const d=sto.date||'—';
+    if(!_gdDateMatchFilter(d,fromVal,toVal))return;
+    if(!byDate[d])byDate[d]=[];
+    byDate[d].push(sto);
+  });
+  const sortedDates=Object.keys(byDate).sort((a,b)=>{const da=_gdParseDate(a),db=_gdParseDate(b);if(da&&db)return da-db;return a.localeCompare(b);});
+  const _stoTAT=sto=>{const gd=_gdParseDate(sto.grnDate);const qd=_gdParseDate(sto.qcHandoverDate);if(!gd||!qd)return'pending';return Math.abs(Math.round((qd-gd)/(1000*60*60*24)))<=1?'within':'above';};
+  const gs=s=>(s||'').toLowerCase();
+  const csvRows=sortedDates.map(date=>{
+    const stoList=byDate[date];
+    const tSTOs=stoList.length,tShipQty=stoList.reduce((s,r)=>s+(r.shipQty||0),0);
+    const doneList=stoList.filter(r=>gs(r.grnStatus).includes('done'));
+    const dSTOs=doneList.length,dGRNQty=doneList.reduce((s,r)=>s+(r.grnQty||0),0);
+    const trueUnder=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+    const uSTOs=trueUnder.length,uShipQty=trueUnder.reduce((s,r)=>s+(r.shipQty||0),0);
+    const issueList=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done'));
+    const iSTOs=issueList.length,iShipQty=issueList.reduce((s,r)=>s+(r.shipQty||0),0);
+    const pendList=stoList.filter(r=>!gs(r.grnStatus).includes('done'));
+    const pSTOs=pendList.length,pShipQty=pendList.reduce((s,r)=>s+(r.shipQty||0),0);
+    const hdoneL=stoList.filter(r=>r.qcHandoverDate&&r.qcHandoverDate.trim());
+    const hdoneInb=hdoneL.length,hdoneQty=hdoneL.reduce((s,r)=>s+(r.grnQty||r.shipQty||0),0);
+    const hpendL=stoList.filter(r=>gs(r.grnStatus).includes('done')&&(!r.qcHandoverDate||!r.qcHandoverDate.trim())&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+    const hpendSTOs=hpendL.length,hpendQty=hpendL.reduce((s,r)=>s+(r.grnQty||0),0);
+    return[date,tSTOs,tShipQty,dSTOs,dGRNQty,uSTOs,uShipQty,iSTOs,iShipQty,pSTOs,pShipQty,hdoneInb,hdoneQty,hpendSTOs,hpendQty];
+  });
+  const csv=[header,...csvRows].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='STO_GRN_Dashboard_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+  toast('STO GRN Dashboard exported — '+sortedDates.length+' dates','ok');
+}
+
+function exportSTOGRNDashExcel(){
+  if(!stoData.length){toast('No STO data to export','warn');return;}
+  function _doExcel(){
+    const fromVal=(document.getElementById('sgdDateFrom').value||'').trim();
+    const toVal  =(document.getElementById('sgdDateTo').value||'').trim();
+    const byDate={};
+    stoData.forEach(sto=>{
+      const d=sto.date||'—';
+      if(!_gdDateMatchFilter(d,fromVal,toVal))return;
+      if(!byDate[d])byDate[d]=[];
+      byDate[d].push(sto);
+    });
+    const sortedDates=Object.keys(byDate).sort((a,b)=>{const da=_gdParseDate(a),db=_gdParseDate(b);if(da&&db)return da-db;return a.localeCompare(b);});
+    if(!sortedDates.length){toast('No dates to export','warn');return;}
+    const gs=s=>(s||'').toLowerCase();
+    const kpi={totalSTO:0,totalShipQty:0,doneSTOs:0,doneGRNQty:0,underSTOs:0,underShipQty:0,issueSTOs:0,issueShipQty:0,pendSTOs:0,pendShipQty:0,hdoneInb:0,hdoneQty:0,hpendSTOs:0,hpendQty:0};
+    const dataRows=sortedDates.map(date=>{
+      const stoList=byDate[date];
+      const tSTOs=stoList.length,tShipQty=stoList.reduce((s,r)=>s+(r.shipQty||0),0);
+      const doneList=stoList.filter(r=>gs(r.grnStatus).includes('done'));
+      const dSTOs=doneList.length,dGRNQty=doneList.reduce((s,r)=>s+(r.grnQty||0),0);
+      const trueUnder=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+      const uSTOs=trueUnder.length,uShipQty=trueUnder.reduce((s,r)=>s+(r.shipQty||0),0);
+      const issueList=stoList.filter(r=>!gs(r.grnStatus).includes('done')&&r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done'));
+      const iSTOs=issueList.length,iShipQty=issueList.reduce((s,r)=>s+(r.shipQty||0),0);
+      const pendList=stoList.filter(r=>!gs(r.grnStatus).includes('done'));
+      const pSTOs=pendList.length,pShipQty=pendList.reduce((s,r)=>s+(r.shipQty||0),0);
+      const hdoneL=stoList.filter(r=>r.qcHandoverDate&&r.qcHandoverDate.trim());
+      const hdoneInb=hdoneL.length,hdoneQty=hdoneL.reduce((s,r)=>s+(r.grnQty||r.shipQty||0),0);
+      const hpendL=stoList.filter(r=>gs(r.grnStatus).includes('done')&&(!r.qcHandoverDate||!r.qcHandoverDate.trim())&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+      const hpendSTOs=hpendL.length,hpendQty=hpendL.reduce((s,r)=>s+(r.grnQty||0),0);
+      kpi.totalSTO+=tSTOs;kpi.totalShipQty+=tShipQty;kpi.doneSTOs+=dSTOs;kpi.doneGRNQty+=dGRNQty;
+      kpi.underSTOs+=uSTOs;kpi.underShipQty+=uShipQty;kpi.issueSTOs+=iSTOs;kpi.issueShipQty+=iShipQty;
+      kpi.pendSTOs+=pSTOs;kpi.pendShipQty+=pShipQty;kpi.hdoneInb+=hdoneInb;kpi.hdoneQty+=hdoneQty;
+      kpi.hpendSTOs+=hpendSTOs;kpi.hpendQty+=hpendQty;
+      return{date,tSTOs,tShipQty,dSTOs,dGRNQty,uSTOs,uShipQty,iSTOs,iShipQty,pSTOs,pShipQty,hdoneInb,hdoneQty,hpendSTOs,hpendQty};
+    });
+
+    const wb=XLSX.utils.book_new();
+    const ws={};
+    const C={
+      titleBg:'FF7C3AED',titleFg:'FFFFFFFF',
+      subBg:'FF7C3AED',subFg:'FFEDE9FE',
+      grpBlueBg:'FFBFDBFE',grpBlueFg:'FF1E3A8A',
+      grpGreenBg:'FFA7F3D0',grpGreenFg:'FF065F46',
+      grpYellowBg:'FFFDE68A',grpYellowFg:'FF92400E',
+      grpRedBg:'FFFECACA',grpRedFg:'FF991B1B',
+      grpOrangeBg:'FFFED7AA',grpOrangeFg:'FF7C2D12',
+      grpPurpleBg:'FFDDD6FE',grpPurpleFg:'FF4C1D95',
+      subHdrBlueBg:'FFDBEAFE',subHdrBlueFg:'FF2563EB',
+      subHdrGreenBg:'FFD1FAE5',subHdrGreenFg:'FF065F46',
+      subHdrYellowBg:'FFFEF3C7',subHdrYellowFg:'FF92400E',
+      subHdrRedBg:'FFFEE2E2',subHdrRedFg:'FF991B1B',
+      subHdrOrangeBg:'FFFFEDD5',subHdrOrangeFg:'FF7C2D12',
+      subHdrPurpleBg:'FFEDE9FE',subHdrPurpleFg:'FF4C1D95',
+      frozenBg:'FFF0F3FF',altBg:'FFFAFBFF',
+      totalBg:'FFBBF7D0',totalFg:'FF065F46',
+      ink:'FF0D1240',blue:'FF2563EB',green:'FF065F46',
+      yellow:'FF92400E',red:'FF991B1B',orange:'FF7C2D12',purple:'FF4C1D95',
+      white:'FFFFFFFF',
+    };
+    const fill=(argb,type='solid')=>({patternType:type,fgColor:{argb}});
+    const font=(argb,bold=false,sz=10)=>({name:'Arial',sz,bold,color:{argb}});
+    const aln=(h,v='center',wrap=true)=>({horizontal:h,vertical:v,wrapText:wrap});
+    const bdr=(style='thin',argb='FFB0BCE8')=>{const s={style,color:{argb}};return{top:s,bottom:s,left:s,right:s};};
+    function sc(r,c,v,style={}){const addr=XLSX.utils.encode_cell({r,c});ws[addr]={v,t:typeof v==='number'?'n':'s',...(style?{s:style}:{})}}
+    function merge(rs,cs,re,ce){if(!ws['!merges'])ws['!merges']=[];ws['!merges'].push({s:{r:rs,c:cs},e:{r:re,c:ce}});}
+    const NCOLS=16;
+    // Title
+    merge(0,0,0,NCOLS-1);
+    sc(0,0,'📦 Date-wise STO GRN Dashboard',{font:font(C.titleFg,true,14),fill:fill(C.titleBg),alignment:aln('center'),border:bdr()});
+    for(let c=1;c<NCOLS;c++)sc(0,c,'',{fill:fill(C.titleBg),border:bdr()});
+    merge(1,0,1,NCOLS-1);
+    sc(1,0,'STO Transfer · GRN Accomplishment · Handover Analysis',{font:{...font(C.subFg,false,10),italic:true},fill:fill(C.subBg),alignment:aln('center'),border:bdr()});
+    for(let c=1;c<NCOLS;c++)sc(1,c,'',{fill:fill(C.subBg),border:bdr()});
+    for(let c=0;c<NCOLS;c++)sc(2,c,'',{fill:fill(C.white),border:bdr('hair','FFD0D7F0')});
+    // Group headers row
+    const grpDefs=[
+      {cs:0,ce:0,label:'',bg:C.white,fg:C.white},{cs:1,ce:1,label:'',bg:C.white,fg:C.white},
+      {cs:2,ce:3,label:'STO Transfer Details',bg:C.grpBlueBg,fg:C.grpBlueFg},
+      {cs:4,ce:5,label:'Accomplished GRN Details',bg:C.grpGreenBg,fg:C.grpGreenFg},
+      {cs:6,ce:7,label:'Under Process',bg:C.grpYellowBg,fg:C.grpYellowFg},
+      {cs:8,ce:9,label:'GRN Pending with Issue',bg:C.grpRedBg,fg:C.grpRedFg},
+      {cs:10,ce:11,label:'Total Pendency',bg:C.grpOrangeBg,fg:C.grpOrangeFg},
+      {cs:12,ce:13,label:'Handover Done',bg:C.grpGreenBg,fg:C.grpGreenFg},
+      {cs:14,ce:15,label:'Handover Pending',bg:C.grpRedBg,fg:C.grpRedFg},
+    ];
+    grpDefs.forEach(g=>{
+      if(g.cs!==g.ce)merge(3,g.cs,3,g.ce);
+      sc(3,g.cs,g.label,{font:font(g.fg,true,10),fill:fill(g.bg),alignment:aln('center'),border:bdr()});
+      for(let c=g.cs+1;c<=g.ce;c++)sc(3,c,'',{fill:fill(g.bg),border:bdr()});
+    });
+    // Sub-headers
+    const subHdrs=[
+      {c:0,label:'#',bg:C.frozenBg,fg:C.grpBlueFg},{c:1,label:'STO Date',bg:C.frozenBg,fg:C.grpBlueFg},
+      {c:2,label:'No. of STOs',bg:C.subHdrBlueBg,fg:C.subHdrBlueFg},{c:3,label:'Total Ship Qty',bg:C.subHdrBlueBg,fg:C.subHdrBlueFg},
+      {c:4,label:'No. of STOs',bg:C.subHdrGreenBg,fg:C.subHdrGreenFg},{c:5,label:'Total GRN Qty',bg:C.subHdrGreenBg,fg:C.subHdrGreenFg},
+      {c:6,label:'No. of STOs',bg:C.subHdrYellowBg,fg:C.subHdrYellowFg},{c:7,label:'Total Ship Qty',bg:C.subHdrYellowBg,fg:C.subHdrYellowFg},
+      {c:8,label:'No. of STOs',bg:C.subHdrRedBg,fg:C.subHdrRedFg},{c:9,label:'Total Ship Qty',bg:C.subHdrRedBg,fg:C.subHdrRedFg},
+      {c:10,label:'No. of STOs',bg:C.subHdrOrangeBg,fg:C.subHdrOrangeFg},{c:11,label:'Total Ship Qty',bg:C.subHdrOrangeBg,fg:C.subHdrOrangeFg},
+      {c:12,label:'No. of Inb.',bg:C.subHdrGreenBg,fg:C.subHdrGreenFg},{c:13,label:'Total Qty',bg:C.subHdrGreenBg,fg:C.subHdrGreenFg},
+      {c:14,label:'No. of STOs',bg:C.subHdrRedBg,fg:C.subHdrRedFg},{c:15,label:'Total Qty',bg:C.subHdrRedBg,fg:C.subHdrRedFg},
+    ];
+    subHdrs.forEach(h=>{sc(4,h.c,h.label,{font:font(h.fg,true,9),fill:fill(h.bg),alignment:aln('center'),border:bdr()});});
+    const colFgMap={2:C.blue,3:C.blue,4:C.green,5:C.green,6:C.yellow,7:C.yellow,8:C.red,9:C.red,10:C.orange,11:C.orange,12:C.green,13:C.green,14:C.red,15:C.red};
+    const colBgMap=(alt)=>({
+      0:C.frozenBg,1:C.frozenBg,
+      2:alt?C.subHdrBlueBg:'FFEBF4FF',3:alt?C.subHdrBlueBg:'FFEBF4FF',
+      4:alt?C.subHdrGreenBg:'FFEBFFF6',5:alt?C.subHdrGreenBg:'FFEBFFF6',
+      6:alt?C.subHdrYellowBg:'FFFFFFF2',7:alt?C.subHdrYellowBg:'FFFFFFF2',
+      8:alt?C.subHdrRedBg:'FFFFF7F7',9:alt?C.subHdrRedBg:'FFFFF7F7',
+      10:alt?C.subHdrOrangeBg:'FFFFFAF2',11:alt?C.subHdrOrangeBg:'FFFFFAF2',
+      12:alt?C.subHdrGreenBg:'FFEBFFF6',13:alt?C.subHdrGreenBg:'FFEBFFF6',
+      14:alt?C.subHdrRedBg:'FFFFF7F7',15:alt?C.subHdrRedBg:'FFFFF7F7',
+    });
+    const PCT_FMT='0.00"%"';const NUM_FMT='#,##0';
+    dataRows.forEach((row,i)=>{
+      const r=5+i;const alt=i%2===1;const bgMap=colBgMap(alt);
+      const vals=[i+1,row.date,row.tSTOs,row.tShipQty,row.dSTOs,row.dGRNQty,row.uSTOs,row.uShipQty,row.iSTOs,row.iShipQty,row.pSTOs,row.pShipQty,row.hdoneInb,row.hdoneQty,row.hpendSTOs,row.hpendQty];
+      vals.forEach((v,ci)=>{
+        const fg=colFgMap[ci]||C.ink;const bold=ci<2;const halign=ci>=2?'right':ci===0?'center':'left';
+        const fmt=ci>=2?NUM_FMT:undefined;
+        const cellStyle={font:font(fg,bold,10),fill:fill(bgMap[ci]||C.white),alignment:aln(halign,undefined,false),border:bdr()};
+        if(fmt)cellStyle.numFmt=fmt;
+        sc(r,ci,v,cellStyle);
+      });
+    });
+    const totalR=5+dataRows.length;
+    const totalVals=['','TOTAL',kpi.totalSTO,kpi.totalShipQty,kpi.doneSTOs,kpi.doneGRNQty,kpi.underSTOs,kpi.underShipQty,kpi.issueSTOs,kpi.issueShipQty,kpi.pendSTOs,kpi.pendShipQty,kpi.hdoneInb,kpi.hdoneQty,kpi.hpendSTOs,kpi.hpendQty];
+    const totalBgByCol={0:'FFE8EDFF',1:'FFE8F5E9',2:'FFD0E8FF',3:'FFD0E8FF',4:'FFBBFFD9',5:'FFBBFFD9',6:'FFFFF0A0',7:'FFFFF0A0',8:'FFFFD0D0',9:'FFFFD0D0',10:'FFFFCF8A',11:'FFFFCF8A',12:'FFBBFFD9',13:'FFBBFFD9',14:'FFFFD0D0',15:'FFFFD0D0'};
+    totalVals.forEach((v,ci)=>{
+      const fg=ci===0?C.white:ci===1?C.grpBlueFg:(colFgMap[ci]||C.ink);
+      const bg=ci===0?C.titleBg:(totalBgByCol[ci]||C.totalBg);
+      const halign=ci<=1?'center':'right';
+      const fmt=ci>=2?NUM_FMT:undefined;
+      const cellStyle={font:font(fg,true,10),fill:fill(bg),alignment:aln(halign,undefined,false),border:bdr('medium','FF7C9EE0')};
+      if(fmt)cellStyle.numFmt=fmt;
+      sc(totalR,ci,v,cellStyle);
+    });
+    ws['!ref']=XLSX.utils.encode_range({s:{r:0,c:0},e:{r:totalR,c:NCOLS-1}});
+    ws['!cols']=[{wch:5},{wch:14},{wch:11},{wch:13},{wch:11},{wch:13},{wch:11},{wch:13},{wch:11},{wch:13},{wch:11},{wch:13},{wch:11},{wch:11},{wch:12},{wch:12}];
+    ws['!rows']=[];ws['!rows'][0]={hpx:32};ws['!rows'][1]={hpx:20};ws['!rows'][2]={hpx:6};ws['!rows'][3]={hpx:24};ws['!rows'][4]={hpx:40};
+    dataRows.forEach((_,i)=>{ws['!rows'][5+i]={hpx:20};});ws['!rows'][totalR]={hpx:22};
+    ws['!freeze']={xSplit:2,ySplit:5,topLeftCell:'C6',activePane:'bottomRight',state:'frozen'};
+    ws['!pageSetup']={orientation:'landscape',fitToPage:true,fitToWidth:1,fitToHeight:0};
+    XLSX.utils.book_append_sheet(wb,ws,'STO GRN Dashboard');
+    const fname='STO_GRN_Dashboard_'+new Date().toISOString().slice(0,10)+'.xlsx';
+    XLSX.writeFile(wb,fname,{bookType:'xlsx',type:'binary',cellStyles:true});
+    toast('📊 Excel exported — '+sortedDates.length+' date'+(sortedDates.length!==1?'s':'')+' · '+fname,'ok');
+  }
+  if(typeof XLSX!=='undefined'&&XLSX.writeFile){_doExcel();}
+  else{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=()=>_doExcel();s.onerror=()=>toast('Could not load Excel library','err');document.head.appendChild(s);}
+}
+
+// ── /STO GRN DASHBOARD ─────────────────────────────────────────────────────────
+
 // ── GRN DASHBOARD ─────────────────────────────────────────────────────────────
 // ── GRN Dashboard: Month multi-select helpers ──
 function _gdGetSelectedMonths(){
@@ -7938,6 +9478,1074 @@ function exportGRNDashExcel(){
 
 // ── /GRN DASHBOARD ────────────────────────────────────────────────────────────
 
+function exportCombinedDashImage(){
+  const hasGRN=inwardData.length>0;
+  const hasSTO=stoData.length>0;
+  if(!hasGRN&&!hasSTO){toast('No data to export — fetch STO sheet and upload inward register first','warn');return;}
+
+  const _now=new Date();const _p=n=>String(n).padStart(2,'0');
+  const generatedOn=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
+  const _todayKey=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()}`;
+  const n=v=>v===0?'—':v.toLocaleString();
+
+  // ══════════════════════════════════════════
+  // ── STO GRN DATA ──
+  // ══════════════════════════════════════════
+  let stoSummary=[],stoT={totalSTO:0,totalShipQty:0,doneSTOs:0,doneGRNQty:0,underSTOs:0,underShipQty:0,issueSTOs:0,issueShipQty:0,pendSTOs:0,pendShipQty:0,above:0,within:0};
+  let stoSortedDates=[];
+  if(hasSTO){
+    const byDate={};
+    stoData.forEach(s=>{const d=s.date||'—';if(!byDate[d])byDate[d]=[];byDate[d].push(s);});
+    stoSortedDates=Object.keys(byDate).sort((a,b)=>{const da=_gdParseDate(a),db=_gdParseDate(b);if(da&&db)return da-db;return a.localeCompare(b);});
+    const _stoTAT=s=>{const gd=_gdParseDate(s.grnDate);const qd=_gdParseDate(s.qcHandoverDate);if(!gd||!qd)return'pending';return Math.abs(Math.round((qd-gd)/(1000*60*60*24)))<=1?'within':'above';};
+    const gs=s=>(s||'').toLowerCase();
+    stoSummary=stoSortedDates.map(date=>{
+      const sl=byDate[date];
+      const tSTOs=sl.length,tShipQty=sl.reduce((s,r)=>s+(r.shipQty||0),0);
+      const doneList=sl.filter(r=>gs(r.grnStatus).includes('done'));
+      const dSTOs=doneList.length,dGRNQty=doneList.reduce((s,r)=>s+(r.grnQty||0),0);
+      const trueUnder=sl.filter(r=>!gs(r.grnStatus).includes('done')&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+      const uSTOs=trueUnder.length,uShipQty=trueUnder.reduce((s,r)=>s+(r.shipQty||0),0);
+      const issueList=sl.filter(r=>!gs(r.grnStatus).includes('done')&&r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done'));
+      const iSTOs=issueList.length,iShipQty=issueList.reduce((s,r)=>s+(r.shipQty||0),0);
+      const pendList=sl.filter(r=>!gs(r.grnStatus).includes('done'));
+      const pSTOs=pendList.length,pShipQty=pendList.reduce((s,r)=>s+(r.shipQty||0),0);
+      const tatList=sl.filter(r=>_gdParseDate(r.grnDate)&&_gdParseDate(r.qcHandoverDate));
+      const above=tatList.filter(r=>_stoTAT(r)==='above').reduce((s,r)=>s+(r.shipQty||0),0);
+      const within=tatList.filter(r=>_stoTAT(r)==='within').reduce((s,r)=>s+(r.shipQty||0),0);
+      stoT.totalSTO+=tSTOs;stoT.totalShipQty+=tShipQty;stoT.doneSTOs+=dSTOs;stoT.doneGRNQty+=dGRNQty;
+      stoT.underSTOs+=uSTOs;stoT.underShipQty+=uShipQty;stoT.issueSTOs+=iSTOs;stoT.issueShipQty+=iShipQty;
+      stoT.pendSTOs+=pSTOs;stoT.pendShipQty+=pShipQty;stoT.above+=above;stoT.within+=within;
+      const t2=above+within;
+      const wPct=t2>0?((within/t2)*100).toFixed(1)+'%':'—';
+      const aPct=t2>0?((above/t2)*100).toFixed(1)+'%':'—';
+      const dPct=tSTOs>0?((dSTOs/tSTOs)*100).toFixed(0)+'%':'—';
+      return{date,tSTOs,tShipQty,dSTOs,dGRNQty,uSTOs,uShipQty,iSTOs,iShipQty,pSTOs,pShipQty,above,within,wPct,aPct,dPct};
+    });
+  }
+  const stoGrnPct=stoT.totalSTO>0?((stoT.doneSTOs/stoT.totalSTO)*100).toFixed(1):'0.0';
+  const stoTt=stoT.above+stoT.within;
+  const stoAbovePct=stoTt>0?((stoT.above/stoTt)*100).toFixed(1):'0.0';
+  const stoWithinPct=stoTt>0?((stoT.within/stoTt)*100).toFixed(1):'0.0';
+  // Today STO KPIs
+  const _todaySTO=stoData.filter(s=>s.date===_todayKey);
+  const _stidSTOs=_todaySTO.length,_stidShipQty=_todaySTO.reduce((s,r)=>s+(r.shipQty||0),0);
+  const _stodayGRN=stoData.filter(s=>s.grnDate&&s.grnDate===_todayKey);
+  const _stgSTOs=_stodayGRN.length,_stgQty=_stodayGRN.reduce((s,r)=>s+(r.grnQty||0),0);
+
+  // ══════════════════════════════════════════
+  // ── INWARD GRN DATA ──
+  // ══════════════════════════════════════════
+  let grnSummary=[],T={uInv:0,uBoxes:0,uQty:0,dInv:0,dQty:0,upInv:0,upQty:0,iInv:0,iQty:0,above:0,within:0,bc:0};
+  let grnSortedDates=[];
+  if(hasGRN){
+    const byDate={};
+    inwardData.forEach(inv=>{const d=inv.date||'—';if(!byDate[d])byDate[d]=[];byDate[d].push(inv);});
+    grnSortedDates=Object.keys(byDate).sort((a,b)=>{const da=_gdParseDate(a),db=_gdParseDate(b);if(da&&db)return da-db;return a.localeCompare(b);});
+    const DAILY_CAP=30000;
+    grnSummary=grnSortedDates.map(date=>{
+      const il=byDate[date];
+      const uInv=il.length,uBoxes=il.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0),uQty=il.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+      const doneList=il.filter(i=>i.grnStatus==='Done');
+      const dInv=doneList.length,dQty=doneList.reduce((s,i)=>s+(parseInt(i.grnQty)||parseInt(i.totalInvQty)||0),0);
+      const underList=il.filter(i=>i.grnStatus!=='Done'&&!(i.grnRemark&&i.grnRemark.trim()&&!(i.grnRemark||'').toLowerCase().includes('grn done')));
+      const upInv=underList.length,upQty=underList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+      const issueList=il.filter(i=>i.grnStatus!=='Done'&&i.grnRemark&&i.grnRemark.trim()&&!(i.grnRemark||'').toLowerCase().includes('grn done'));
+      const iInv=issueList.length,iQty=issueList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+      let capRem=DAILY_CAP,bcQty=0;const wc={};
+      il.forEach(inv=>{const q=parseInt(inv.totalInvQty)||0;if(capRem<=0){bcQty+=q;}else if(q<=capRem){wc[inv.id]=q;capRem-=q;}else{wc[inv.id]=capRem;bcQty+=q-capRem;capRem=0;}});
+      const tatList=il.filter(i=>_gdParseDate(i.grnDate)&&_gdParseDate(i.issueResolvedDate));
+      const rawAbove=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+      const rawWithin=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+      let above,within;
+      if(uQty>=DAILY_CAP){if(rawWithin>=DAILY_CAP){within=DAILY_CAP;above=0;}else{within=rawWithin;above=Math.min(rawAbove,DAILY_CAP-rawWithin);}}
+      else{above=rawAbove;within=rawWithin;}
+      T.uInv+=uInv;T.uBoxes+=uBoxes;T.uQty+=uQty;T.dInv+=dInv;T.dQty+=dQty;T.upInv+=upInv;T.upQty+=upQty;T.iInv+=iInv;T.iQty+=iQty;T.above+=above;T.within+=within;T.bc+=bcQty;
+      const t2=above+within;
+      return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty,wPct:t2>0?((within/t2)*100).toFixed(1)+'%':'—',aPct:t2>0?((above/t2)*100).toFixed(1)+'%':'—',dPct:uInv>0?((dInv/uInv)*100).toFixed(0)+'%':'—'};
+    });
+  }
+  const grnPct=T.uInv>0?((T.dInv/T.uInv)*100).toFixed(1):'0.0';
+  const grnTt=T.above+T.within;
+  const gAbovePct=grnTt>0?((T.above/grnTt)*100).toFixed(1):'0.0';
+  const gWithinPct=grnTt>0?((T.within/grnTt)*100).toFixed(1):'0.0';
+  const _todayInward=inwardData.filter(i=>i.date===_todayKey);
+  const _tidInv=_todayInward.length,_tidBoxes=_todayInward.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0),_tidQty=_todayInward.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+  const _todayGRN2=inwardData.filter(i=>i.grnDate&&i.grnDate===_todayKey);
+  const _tgInv=_todayGRN2.length,_tgBoxes=_todayGRN2.reduce((s,i)=>s+(parseInt(i.noOfCartons)||0),0),_tgQty=_todayGRN2.reduce((s,i)=>s+(parseInt(i.grnQty)||parseInt(i.totalInvQty)||0),0);
+
+  // ══════════════════════════════════════════
+  // ── TABLE HTML BUILDERS ──
+  // ══════════════════════════════════════════
+  const stoTableRows=stoSummary.map((r,i)=>`<tr class="${i%2===0?'':'alt'}">
+    <td class="tc">${i+1}</td><td class="tl">${r.date}</td>
+    <td class="tr">${r.tSTOs}</td><td class="tr num">${n(r.tShipQty)}</td>
+    <td class="tr num grn">${n(r.dGRNQty)}</td>
+    <td class="tr ${r.uSTOs>0?'ylw':''}">${n(r.uShipQty)}</td>
+    <td class="tr ${r.iSTOs>0?'red':''}">${n(r.iShipQty)}</td>
+    <td class="tr grn">${n(r.within)}</td><td class="tc grn">${r.wPct}</td>
+    <td class="tr red">${n(r.above)}</td><td class="tc red">${r.aPct}</td>
+  </tr>`).join('');
+
+  const grnTableRows=grnSummary.map((r,i)=>`<tr class="${i%2===0?'':'alt'}">
+    <td class="tc">${i+1}</td><td class="tl">${r.date}</td>
+    <td class="tr">${r.uInv}</td><td class="tr">${n(r.uBoxes)}</td><td class="tr num">${n(r.uQty)}</td>
+    <td class="tr num grn">${n(r.dQty)}</td>
+    <td class="tr ${r.upInv>0?'ylw':''}">${n(r.upQty)}</td>
+    <td class="tr ${r.iInv>0?'red':''}">${n(r.iQty)}</td>
+    <td class="tr ${r.bc>0?'pur':''}">${n(r.bc)}</td>
+    <td class="tr grn">${n(r.within)}</td><td class="tc grn">${r.wPct}</td>
+    <td class="tr red">${n(r.above)}</td><td class="tc red">${r.aPct}</td>
+  </tr>`).join('');
+
+  // ══════════════════════════════════════════
+  // ── HTML REPORT ──
+  // ══════════════════════════════════════════
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Combined STO + GRN Status Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--blue:#3b82f6;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--purple:#a855f7;--teal:#14b8a6;--pink:#ec4899;--ink:#0f172a}
+  body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 40%,#0f172a 100%);color:#e2e8f0;padding:28px;min-height:100vh}
+  .page{max-width:1280px;margin:0 auto}
+
+  /* ── MASTER HEADER ── */
+  .report-header{background:linear-gradient(135deg,rgba(190,24,93,.18),rgba(124,58,237,.18));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px 28px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12)}
+  .logo-3d{width:52px;height:52px;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 0 #9d174d,0 8px 20px rgba(190,24,93,.5);transform:perspective(100px) rotateX(8deg)}
+  .logo-wrap{display:flex;align-items:center;gap:16px}
+  .hdr-title{font-size:24px;font-weight:900;color:#fff;letter-spacing:-.5px}
+  .hdr-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;font-weight:500;letter-spacing:.5px}
+  .hdr-meta{text-align:right}
+  .hdr-date{font-size:11px;color:rgba(255,255,255,.5);font-weight:500}
+  .hdr-range{font-size:13px;font-weight:700;color:#f9a8d4;margin-top:4px;background:rgba(249,168,212,.1);border:1px solid rgba(249,168,212,.3);border-radius:8px;padding:3px 12px;display:inline-block}
+  .hdr-badge{display:inline-flex;align-items:center;gap:6px;margin-top:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;color:#4ade80;letter-spacing:.5px}
+  .hdr-badge-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+  /* ── DIVIDER BETWEEN SECTIONS ── */
+  .section-divider{height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);margin:28px 0}
+
+  /* ── SECTION BLOCK HEADER ── */
+  .block-header{border-radius:16px;padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.12)}
+  .block-header-sto{background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(190,24,93,.25));border:1px solid rgba(190,24,93,.25)}
+  .block-header-grn{background:linear-gradient(135deg,rgba(37,99,235,.35),rgba(5,150,105,.25));border:1px solid rgba(37,99,235,.25)}
+  .block-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:rgba(255,255,255,.15);box-shadow:0 2px 6px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.25)}
+  .block-title{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.3px}
+  .block-sub{font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;font-weight:500;letter-spacing:.4px}
+  .block-badge{font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px}
+  .block-badge-sto{background:rgba(190,24,93,.2);border:1px solid rgba(190,24,93,.4);color:#f9a8d4}
+  .block-badge-grn{background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.4);color:#4ade80}
+
+  /* ── KPI GRID (top summary cards) ── */
+  .kpi-grid{display:grid;gap:12px;margin-bottom:18px}
+  .kpi-grid-5{grid-template-columns:repeat(5,1fr)}
+  .kpi-grid-4{grid-template-columns:repeat(4,1fr)}
+  .kpi{border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;transition:transform .2s}
+  .kpi:hover{transform:translateY(-3px)}
+  .kpi-inner{position:relative;z-index:1}
+  .kpi::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.18) 0%,transparent 60%);pointer-events:none}
+  .kpi-lbl{font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .kpi-val{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+  .kpi-sub{font-size:10px;opacity:.65;margin-top:5px;line-height:1.4}
+  .kpi-icon{position:absolute;right:12px;top:12px;font-size:26px;opacity:.2}
+  .kpi-bar{position:absolute;bottom:0;left:0;height:3px;border-radius:0 0 16px 16px}
+  .kpi-shadow{position:absolute;bottom:-6px;left:6px;right:-6px;height:100%;border-radius:16px;z-index:-1;filter:blur(2px);opacity:.5}
+  .kpi-pink{background:linear-gradient(135deg,#be185d,#9d174d);box-shadow:0 4px 0 #831843,0 8px 24px rgba(190,24,93,.5)}
+  .kpi-pink .kpi-shadow{background:#831843}.kpi-pink .kpi-bar{background:linear-gradient(90deg,#f472b6,#fbcfe8)}
+  .kpi-blue{background:linear-gradient(135deg,#2563eb,#1e40af);box-shadow:0 4px 0 #1e3a8a,0 8px 24px rgba(37,99,235,.5)}
+  .kpi-blue .kpi-shadow{background:#1e3a8a}.kpi-blue .kpi-bar{background:linear-gradient(90deg,#60a5fa,#93c5fd)}
+  .kpi-green{background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 4px 0 #14532d,0 8px 24px rgba(22,163,74,.5)}
+  .kpi-green .kpi-shadow{background:#14532d}.kpi-green .kpi-bar{background:linear-gradient(90deg,#4ade80,#86efac)}
+  .kpi-yellow{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 0 #92400e,0 8px 24px rgba(217,119,6,.5)}
+  .kpi-yellow .kpi-shadow{background:#92400e}.kpi-yellow .kpi-bar{background:linear-gradient(90deg,#fbbf24,#fde68a)}
+  .kpi-red{background:linear-gradient(135deg,#dc2626,#b91c1c);box-shadow:0 4px 0 #7f1d1d,0 8px 24px rgba(220,38,38,.5)}
+  .kpi-red .kpi-shadow{background:#7f1d1d}.kpi-red .kpi-bar{background:linear-gradient(90deg,#f87171,#fca5a5)}
+  .kpi-purple{background:linear-gradient(135deg,#7c3aed,#6d28d9);box-shadow:0 4px 0 #4c1d95,0 8px 24px rgba(124,58,237,.5)}
+  .kpi-purple .kpi-shadow{background:#4c1d95}.kpi-purple .kpi-bar{background:linear-gradient(90deg,#c084fc,#e9d5ff)}
+  .kpi-teal{background:linear-gradient(135deg,#0d9488,#0f766e);box-shadow:0 4px 0 #134e4a,0 8px 24px rgba(13,148,136,.5)}
+  .kpi-teal .kpi-shadow{background:#134e4a}.kpi-teal .kpi-bar{background:linear-gradient(90deg,#2dd4bf,#99f6e4)}
+
+  /* ── TODAY CARDS ── */
+  .today-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .tkpi-card{border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 0 rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+  .tkpi-hdr{display:flex;align-items:center;gap:10px;padding:13px 16px}
+  .tkpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:rgba(255,255,255,.22);box-shadow:0 2px 6px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35)}
+  .tkpi-title{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fff;flex:1;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .tkpi-date{font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.7);flex-shrink:0}
+  .tkpi-body{background:#fff;border-radius:0 0 16px 16px;flex:1;display:flex;flex-direction:column}
+  .tkpi-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px}
+  .tkpi-row+.tkpi-row{border-top:1px solid rgba(0,0,20,.07)}
+  .tkpi-row-left{display:flex;align-items:center;gap:8px}
+  .tkpi-row-icon{font-size:15px;flex-shrink:0}
+  .tkpi-row-label{font-size:12px;font-weight:600;color:#374151}
+  .tkpi-row-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;flex-shrink:0}
+  .tkpi-val-pink{color:#be185d}.tkpi-val-blue{color:#1d4ed8}.tkpi-val-green{color:#065f46}
+  .tkpi-sto .tkpi-hdr{background:linear-gradient(135deg,#be185d,#db2777,#f472b6)}
+  .tkpi-stogrn .tkpi-hdr{background:linear-gradient(135deg,#7c3aed,#9333ea,#c084fc)}
+  .tkpi-inward .tkpi-hdr{background:linear-gradient(135deg,#1d4ed8,#3b82f6,#60a5fa)}
+  .tkpi-grn .tkpi-hdr{background:linear-gradient(135deg,#065f46,#059669,#34d399)}
+
+  /* ── CHARTS ── */
+  .charts-row{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:14px;margin-bottom:18px}
+  .charts-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .chart-box{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;box-shadow:0 4px 0 rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden}
+  .chart-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0}
+  .chart-box-blue::before{background:linear-gradient(90deg,#3b82f6,#7c3aed)}
+  .chart-box-green::before{background:linear-gradient(90deg,#22c55e,#14b8a6)}
+  .chart-box-orange::before{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+  .chart-box-pink::before{background:linear-gradient(90deg,#ec4899,#7c3aed)}
+  .chart-box-purple::before{background:linear-gradient(90deg,#7c3aed,#3b82f6)}
+  .chart-title{font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .chart-title-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .dot-blue{background:#3b82f6;box-shadow:0 0 8px #3b82f6}.dot-green{background:#22c55e;box-shadow:0 0 8px #22c55e}.dot-orange{background:#f59e0b;box-shadow:0 0 8px #f59e0b}.dot-pink{background:#ec4899;box-shadow:0 0 8px #ec4899}.dot-purple{background:#7c3aed;box-shadow:0 0 8px #7c3aed}
+  .chart-subtitle{font-size:9px;color:rgba(255,255,255,.35);font-weight:500;margin-left:auto;font-family:'JetBrains Mono',monospace}
+  canvas{width:100%!important}
+
+  /* ── TABLE ── */
+  .section-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;padding-left:4px;display:flex;align-items:center;gap:8px}
+  .section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+  .tbl-wrap{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.4);margin-bottom:18px}
+  .tbl-hdr{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
+  .tbl-hdr-sto{background:linear-gradient(135deg,rgba(190,24,93,.25),rgba(124,58,237,.2))}
+  .tbl-hdr-grn{background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(5,150,105,.2))}
+  .tbl-hdr-lbl{color:#fff;font-size:13px;font-weight:800;letter-spacing:.3px}
+  .tbl-cnt{font-size:10px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.07);padding:3px 10px;border-radius:20px}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  thead tr:first-child th{background:rgba(30,58,138,.6);color:rgba(255,255,255,.9);padding:9px 7px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.06);white-space:nowrap}
+  thead tr:last-child th{background:rgba(30,41,59,.8);color:rgba(148,163,184,.9);padding:6px 7px;font-size:9px;font-weight:600;border-right:1px solid rgba(255,255,255,.05);white-space:nowrap}
+  tbody tr:hover td{background:rgba(255,255,255,.05)}
+  tbody tr.alt td{background:rgba(255,255,255,.02)}
+  tbody tr td{padding:7px 7px;border-bottom:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.03);color:rgba(203,213,225,.85);vertical-align:middle}
+  tfoot td{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(124,58,237,.1));font-weight:800;font-size:11px;padding:9px 7px;border-top:2px solid rgba(59,130,246,.4);color:#e2e8f0}
+  .tr{text-align:right}.tl{text-align:left}.tc{text-align:center}
+  .num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:10.5px}
+  .grn{color:#4ade80;font-weight:700}.ylw{color:#fbbf24;font-weight:700}.red{color:#f87171;font-weight:700}.pur{color:#c084fc;font-weight:700}
+  td.grn{color:#4ade80}td.ylw{color:#fbbf24}td.red{color:#f87171}td.pur{color:#c084fc}
+
+  /* ── FOOTER ── */
+  .report-footer{margin-top:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-weight:500;letter-spacing:.5px}
+</style></head><body>
+<div class="page">
+
+  <!-- ══ MASTER HEADER ══ -->
+  <div class="report-header">
+    <div class="logo-wrap">
+      <div class="logo-3d">🏭</div>
+      <div>
+        <div class="hdr-title">Combined STO + GRN Status Report</div>
+        <div class="hdr-sub">Stock Transfer Orders · Vehicle Inward · GRN Accomplishment · TAT Analysis</div>
+      </div>
+    </div>
+    <div class="hdr-meta">
+      <div class="hdr-date">Generated: ${generatedOn}</div>
+      <div class="hdr-range">📅 ${_todayKey}</div>
+      <div class="hdr-badge"><span class="hdr-badge-dot"></span>STO ${stoGrnPct}% GRN Done · Inward ${grnPct}% GRN Done</div>
+    </div>
+  </div>
+
+  ${hasSTO?`
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ══ SECTION 1: STO GRN DASHBOARD ══ -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="block-header block-header-sto">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="block-icon">📦</div>
+      <div>
+        <div class="block-title">STO GRN Dashboard</div>
+        <div class="block-sub">Stock Transfer Orders · Date-wise Transfer &amp; GRN Accomplishment</div>
+      </div>
+    </div>
+    <div>
+      <span class="block-badge block-badge-sto">${stoSortedDates.length} DATES · ${stoT.totalSTO} STOs</span>
+    </div>
+  </div>
+
+  <!-- STO KPI CARDS -->
+  <div class="section-label">📊 STO Key Performance Indicators</div>
+  <div class="kpi-grid kpi-grid-5" style="margin-bottom:18px">
+    <div class="kpi kpi-pink"><div class="kpi-shadow"></div><div class="kpi-icon">📦</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Total STOs</div><div class="kpi-val">${stoT.totalSTO}</div><div class="kpi-sub">${n(stoT.totalShipQty)} ship qty</div></div></div>
+    <div class="kpi kpi-green"><div class="kpi-shadow"></div><div class="kpi-icon">✅</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">GRN Done</div><div class="kpi-val">${stoT.doneSTOs}</div><div class="kpi-sub">${n(stoT.doneGRNQty)} units rcvd<br>${stoGrnPct}% done</div></div></div>
+    <div class="kpi kpi-yellow"><div class="kpi-shadow"></div><div class="kpi-icon">⏳</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Under Process</div><div class="kpi-val">${stoT.underSTOs}</div><div class="kpi-sub">${n(stoT.underShipQty)} ship qty<br>pending</div></div></div>
+    <div class="kpi kpi-red"><div class="kpi-shadow"></div><div class="kpi-icon">⚠️</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">With Issue</div><div class="kpi-val">${stoT.issueSTOs}</div><div class="kpi-sub">${n(stoT.issueShipQty)} ship qty<br>affected</div></div></div>
+    <div class="kpi kpi-purple"><div class="kpi-shadow"></div><div class="kpi-icon">⏱️</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Within TAT</div><div class="kpi-val">${stoWithinPct}%</div><div class="kpi-sub">${n(stoT.within)} units<br>on-time</div></div></div>
+  </div>
+
+  <!-- STO TODAY CARDS -->
+  <div class="section-label">📅 STO Today's Summary — ${_todayKey}</div>
+  <div class="today-grid">
+    <div class="tkpi-card tkpi-sto">
+      <div class="tkpi-hdr"><div class="tkpi-icon">📦</div><div class="tkpi-title">Today's STO Details</div><div class="tkpi-date">${_todayKey}</div></div>
+      <div class="tkpi-body">
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">🔄</span><span class="tkpi-row-label">No. of STOs</span></div><span class="tkpi-row-val tkpi-val-pink">${n(_stidSTOs)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📊</span><span class="tkpi-row-label">Total Ship Qty</span></div><span class="tkpi-row-val tkpi-val-pink">${n(_stidShipQty)}</span></div>
+      </div>
+    </div>
+    <div class="tkpi-card tkpi-stogrn">
+      <div class="tkpi-hdr"><div class="tkpi-icon">✅</div><div class="tkpi-title">Today's STO GRN</div><div class="tkpi-date">${_todayKey}</div></div>
+      <div class="tkpi-body">
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">🔄</span><span class="tkpi-row-label">No. of STOs GRN'd</span></div><span class="tkpi-row-val tkpi-val-pink">${n(_stgSTOs)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📦</span><span class="tkpi-row-label">Total GRN Qty</span></div><span class="tkpi-row-val tkpi-val-pink">${n(_stgQty)}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STO CHARTS -->
+  <div class="section-label">📈 STO Chart Analytics</div>
+  <div class="charts-row-2">
+    <div class="chart-box chart-box-pink">
+      <div class="chart-title"><span class="chart-title-dot dot-pink"></span>STO GRN Status Trend<span class="chart-subtitle">${stoSortedDates.length} DAYS</span></div>
+      <canvas id="sc1" height="200"></canvas>
+    </div>
+    <div class="chart-box chart-box-purple">
+      <div class="chart-title"><span class="chart-title-dot dot-purple"></span>STO Status Mix<span class="chart-subtitle">STO SPLIT</span></div>
+      <canvas id="sc2" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- STO TABLE -->
+  <div class="section-label">📋 STO Date-wise Breakdown</div>
+  <div class="tbl-wrap">
+    <div class="tbl-hdr tbl-hdr-sto">
+      <span class="tbl-hdr-lbl">📦 Date-wise STO GRN Status</span>
+      <span class="tbl-cnt">${stoSortedDates.length} DATES</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="tc" rowspan="2">#</th><th class="tl" rowspan="2">Date</th>
+          <th colspan="2" style="text-align:center;background:rgba(124,58,237,.5)">STO Transfer</th>
+          <th colspan="1" style="text-align:center;background:rgba(21,128,61,.6)">GRN Qty</th>
+          <th colspan="1" style="text-align:center;background:rgba(180,83,9,.6)">Under Process</th>
+          <th colspan="1" style="text-align:center;background:rgba(185,28,28,.6)">With Issue</th>
+          <th colspan="2" style="text-align:center;background:rgba(21,128,61,.6)">Within TAT</th>
+          <th colspan="2" style="text-align:center;background:rgba(185,28,28,.6)">Above TAT</th>
+        </tr>
+        <tr>
+          <th class="tc">STOs</th><th class="tr">Ship Qty</th>
+          <th class="tr">GRN Qty</th>
+          <th class="tr">Ship Qty</th>
+          <th class="tr">Ship Qty</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+        </tr>
+      </thead>
+      <tbody>${stoTableRows}</tbody>
+      <tfoot><tr>
+        <td colspan="2" class="tl">TOTAL (${stoSortedDates.length} dates)</td>
+        <td class="tr">${stoT.totalSTO}</td><td class="tr num">${n(stoT.totalShipQty)}</td>
+        <td class="tr grn num">${n(stoT.doneGRNQty)}</td>
+        <td class="tr ylw num">${n(stoT.underShipQty)}</td>
+        <td class="tr red num">${n(stoT.issueShipQty)}</td>
+        <td class="tr grn num">${n(stoT.within)}</td><td class="tc grn">${stoWithinPct}%</td>
+        <td class="tr red num">${n(stoT.above)}</td><td class="tc red">${stoAbovePct}%</td>
+      </tr></tfoot>
+    </table>
+  </div>
+  `:'<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px;font-weight:700;letter-spacing:1px">NO STO DATA — Fetch STO Sheet to include STO GRN section</div>'}
+
+  <div class="section-divider"></div>
+
+  ${hasGRN?`
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ══ SECTION 2: INWARD GRN DASHBOARD ══ -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="block-header block-header-grn">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="block-icon">🚛</div>
+      <div>
+        <div class="block-title">Inward GRN Dashboard</div>
+        <div class="block-sub">Vehicle Inward · GRN Accomplishment · TAT Analysis</div>
+      </div>
+    </div>
+    <div>
+      <span class="block-badge block-badge-grn">${grnSortedDates.length} DATES · ${T.uInv} INVOICES</span>
+    </div>
+  </div>
+
+  <!-- GRN KPI CARDS -->
+  <div class="section-label">📊 Inward GRN Key Performance Indicators</div>
+  <div class="kpi-grid kpi-grid-5" style="margin-bottom:18px">
+    <div class="kpi kpi-blue"><div class="kpi-shadow"></div><div class="kpi-icon">📦</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Total Invoices</div><div class="kpi-val">${T.uInv}</div><div class="kpi-sub">${n(T.uBoxes)} boxes<br>${n(T.uQty)} units</div></div></div>
+    <div class="kpi kpi-green"><div class="kpi-shadow"></div><div class="kpi-icon">✅</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">GRN Done</div><div class="kpi-val">${T.dInv}</div><div class="kpi-sub">${n(T.dQty)} units rcvd<br>${grnPct}% done</div></div></div>
+    <div class="kpi kpi-yellow"><div class="kpi-shadow"></div><div class="kpi-icon">⏳</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Under Process</div><div class="kpi-val">${T.upInv}</div><div class="kpi-sub">${n(T.upQty)} units<br>pending</div></div></div>
+    <div class="kpi kpi-red"><div class="kpi-shadow"></div><div class="kpi-icon">⚠️</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Pending Issue</div><div class="kpi-val">${T.iInv}</div><div class="kpi-sub">${n(T.iQty)} units<br>affected</div></div></div>
+    <div class="kpi kpi-teal"><div class="kpi-shadow"></div><div class="kpi-icon">⚡</div><div class="kpi-bar"></div>
+      <div class="kpi-inner"><div class="kpi-lbl">Within TAT</div><div class="kpi-val">${gWithinPct}%</div><div class="kpi-sub">${n(T.within)} units<br>on-time</div></div></div>
+  </div>
+
+  <!-- GRN TODAY CARDS -->
+  <div class="section-label">📅 Inward Today's Summary — ${_todayKey}</div>
+  <div class="today-grid">
+    <div class="tkpi-card tkpi-inward">
+      <div class="tkpi-hdr"><div class="tkpi-icon">🚛</div><div class="tkpi-title">Today's Inward Details</div><div class="tkpi-date">${_todayKey}</div></div>
+      <div class="tkpi-body">
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📋</span><span class="tkpi-row-label">No. of Invoices</span></div><span class="tkpi-row-val tkpi-val-blue">${n(_tidInv)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">🗃️</span><span class="tkpi-row-label">Total Boxes</span></div><span class="tkpi-row-val tkpi-val-blue">${n(_tidBoxes)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📊</span><span class="tkpi-row-label">Total Inv. Qty</span></div><span class="tkpi-row-val tkpi-val-blue">${n(_tidQty)}</span></div>
+      </div>
+    </div>
+    <div class="tkpi-card tkpi-grn">
+      <div class="tkpi-hdr"><div class="tkpi-icon">✅</div><div class="tkpi-title">Today's GRN Qty</div><div class="tkpi-date">${_todayKey}</div></div>
+      <div class="tkpi-body">
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📋</span><span class="tkpi-row-label">No. of Invoices</span></div><span class="tkpi-row-val tkpi-val-green">${n(_tgInv)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">🗃️</span><span class="tkpi-row-label">Total Boxes</span></div><span class="tkpi-row-val tkpi-val-green">${n(_tgBoxes)}</span></div>
+        <div class="tkpi-row"><div class="tkpi-row-left"><span class="tkpi-row-icon">📦</span><span class="tkpi-row-label">Total GRN Qty</span></div><span class="tkpi-row-val tkpi-val-green">${n(_tgQty)}</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRN CHARTS -->
+  <div class="section-label">📈 Inward GRN Chart Analytics</div>
+  <div class="charts-row">
+    <div class="chart-box chart-box-blue">
+      <div class="chart-title"><span class="chart-title-dot dot-blue"></span>Daily GRN Quantity Trend<span class="chart-subtitle">${grnSortedDates.length} DAYS</span></div>
+      <canvas id="gc1" height="190"></canvas>
+    </div>
+    <div class="chart-box chart-box-green">
+      <div class="chart-title"><span class="chart-title-dot dot-green"></span>GRN Status Mix<span class="chart-subtitle">INV SPLIT</span></div>
+      <canvas id="gc2" height="190"></canvas>
+    </div>
+    <div class="chart-box chart-box-orange">
+      <div class="chart-title"><span class="chart-title-dot dot-orange"></span>TAT Breakdown<span class="chart-subtitle">PER DATE</span></div>
+      <canvas id="gc3" height="190"></canvas>
+    </div>
+  </div>
+
+  <!-- GRN TABLE -->
+  <div class="section-label">📋 Inward GRN Date-wise Breakdown</div>
+  <div class="tbl-wrap">
+    <div class="tbl-hdr tbl-hdr-grn">
+      <span class="tbl-hdr-lbl">🚛 Date-wise Inward GRN Status</span>
+      <span class="tbl-cnt">${grnSortedDates.length} DATES</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="tc" rowspan="2">#</th><th class="tl" rowspan="2">Date</th>
+          <th colspan="3" style="text-align:center;background:rgba(30,64,175,.6)">Vehicle Unloading</th>
+          <th colspan="1" style="text-align:center;background:rgba(21,128,61,.6)">GRN Qty</th>
+          <th colspan="1" style="text-align:center;background:rgba(180,83,9,.6)">Under Process</th>
+          <th colspan="1" style="text-align:center;background:rgba(185,28,28,.6)">Pending Issue</th>
+          <th colspan="1" style="text-align:center;background:rgba(109,40,217,.6)">Beyond Cap</th>
+          <th colspan="2" style="text-align:center;background:rgba(21,128,61,.6)">Within TAT</th>
+          <th colspan="2" style="text-align:center;background:rgba(185,28,28,.6)">Above TAT</th>
+        </tr>
+        <tr>
+          <th class="tc">Inv</th><th class="tr">Boxes</th><th class="tr">Inv Qty</th>
+          <th class="tr">GRN Qty</th><th class="tr">Qty</th><th class="tr">Qty</th><th class="tr">Qty</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+        </tr>
+      </thead>
+      <tbody>${grnTableRows}</tbody>
+      <tfoot><tr>
+        <td colspan="2" class="tl">TOTAL (${grnSortedDates.length} dates)</td>
+        <td class="tr">${T.uInv}</td><td class="tr num">${n(T.uBoxes)}</td><td class="tr num">${n(T.uQty)}</td>
+        <td class="tr grn num">${n(T.dQty)}</td>
+        <td class="tr ylw num">${n(T.upQty)}</td>
+        <td class="tr red num">${n(T.iQty)}</td>
+        <td class="tr pur num">${n(T.bc)}</td>
+        <td class="tr grn num">${n(T.within)}</td><td class="tc grn">${gWithinPct}%</td>
+        <td class="tr red num">${n(T.above)}</td><td class="tc red">${gAbovePct}%</td>
+      </tr></tfoot>
+    </table>
+  </div>
+  `:'<div style="text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px;font-weight:700;letter-spacing:1px">NO INWARD DATA — Upload inward register to include GRN section</div>'}
+
+  <div class="report-footer">GRN·WMS Apparel — Combined STO + GRN Report · Auto-generated · ${generatedOn} · For internal use only</div>
+</div>
+
+<script>
+// ═══ SHARED 3D BAR PLUGIN ═══
+const plugin3DBar={id:'bar3D',afterDatasetsDraw(chart){const ctx=chart.ctx;chart.data.datasets.forEach((ds,di)=>{const meta=chart.getDatasetMeta(di);if(meta.hidden||meta.type!=='bar')return;meta.data.forEach((bar,idx)=>{if(!bar)return;const props=bar.getProps(['x','y','width','base'],true);const{x,y,width,base}=props;if(!width)return;const bH=Math.abs(base-y);if(bH<2)return;const rawColor=Array.isArray(ds.backgroundColor)?ds.backgroundColor[idx]:ds.backgroundColor;const parseRgba=c=>{if(!c)return{r:99,g:102,b:241,a:.85};const m=c.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)(?:,\\s*([\\d.]+))?\\)/);return m?{r:+m[1],g:+m[2],b:+m[3],a:m[4]!==undefined?+m[4]:.85}:{r:99,g:102,b:241,a:.85};};const{r,g,b,a}=parseRgba(rawColor);const depth=Math.max(5,Math.abs(width)*0.18);const dY=depth*0.5;ctx.save();const tG=ctx.createLinearGradient(x-width/2,y,x+width/2+depth,y-dY);tG.addColorStop(0,\`rgba(\${Math.min(r+60,255)},\${Math.min(g+60,255)},\${Math.min(b+60,255)},\${Math.min(a+0.15,1)})\`);tG.addColorStop(1,\`rgba(\${Math.min(r+30,255)},\${Math.min(g+30,255)},\${Math.min(b+30,255)},\${Math.min(a+0.05,1)})\`);ctx.beginPath();ctx.moveTo(x-width/2,y);ctx.lineTo(x-width/2+depth,y-dY);ctx.lineTo(x+width/2+depth,y-dY);ctx.lineTo(x+width/2,y);ctx.closePath();ctx.fillStyle=tG;ctx.fill();ctx.restore();ctx.save();const rG=ctx.createLinearGradient(x+width/2,y,x+width/2+depth,y-dY);rG.addColorStop(0,\`rgba(\${Math.max(r-40,0)},\${Math.max(g-40,0)},\${Math.max(b-40,0)},\${Math.min(a+0.1,1)})\`);rG.addColorStop(1,\`rgba(\${Math.max(r-70,0)},\${Math.max(g-70,0)},\${Math.max(b-70,0)},\${a})\`);ctx.beginPath();ctx.moveTo(x+width/2,y);ctx.lineTo(x+width/2+depth,y-dY);ctx.lineTo(x+width/2+depth,base-dY);ctx.lineTo(x+width/2,base);ctx.closePath();ctx.fillStyle=rG;ctx.fill();ctx.restore();});});},};
+Chart.register(plugin3DBar);
+const gridLines={color:'rgba(148,163,184,.08)',lineWidth:1};
+const legendOpts={position:'bottom',labels:{font:{size:10,weight:'600'},boxWidth:10,padding:14,usePointStyle:true,color:'rgba(203,213,225,.8)'}};
+const tooltipOpts={backgroundColor:'rgba(15,23,42,.95)',titleFont:{size:11,weight:'800'},bodyFont:{size:11},padding:12,cornerRadius:10,borderColor:'rgba(99,102,241,.4)',borderWidth:1,titleColor:'#e2e8f0',bodyColor:'#94a3b8'};
+const scaleTicksColor='rgba(148,163,184,.6)';
+const xScale={grid:{...gridLines},ticks:{font:{size:9},maxRotation:45,color:scaleTicksColor},border:{color:'rgba(148,163,184,.15)'}};
+const yScale={grid:{...gridLines},ticks:{font:{size:9},color:scaleTicksColor},border:{color:'rgba(148,163,184,.15)'}};
+
+${hasSTO?`
+// ═══ STO CHART 1 — Stacked Bar: STO Status Trend ═══
+const stoLabels=${JSON.stringify(stoSortedDates)};
+const stoDoneShipQty=${JSON.stringify(stoSummary.map(r=>r.dGRNQty))};
+const stoUnderShipQty=${JSON.stringify(stoSummary.map(r=>r.uShipQty))};
+const stoIssShipQty=${JSON.stringify(stoSummary.map(r=>r.iShipQty))};
+new Chart(document.getElementById('sc1'),{type:'bar',data:{labels:stoLabels,datasets:[{label:'GRN Done',data:stoDoneShipQty,backgroundColor:'rgba(34,197,94,.85)',borderColor:'rgba(74,222,128,.4)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false,stack:'s'},{label:'Under Process',data:stoUnderShipQty,backgroundColor:'rgba(245,158,11,.82)',borderColor:'rgba(251,191,36,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'},{label:'With Issue',data:stoIssShipQty,backgroundColor:'rgba(236,72,153,.82)',borderColor:'rgba(249,168,212,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:legendOpts,tooltip:{...tooltipOpts,mode:'index'},bar3D:{}},scales:{x:{...xScale},y:{stacked:true,...yScale}}}});
+
+// ═══ STO CHART 2 — Doughnut: STO Status Mix ═══
+const stoTotal=${stoT.totalSTO};
+const stoDonePct=stoTotal>0?(${stoT.doneSTOs}/stoTotal*100).toFixed(0):0;
+const stoGlowPlugin={id:'stoGlow',beforeDraw(chart){const{ctx}=chart;ctx.save();const cx=chart.chartArea.left+(chart.chartArea.width/2);const cy=chart.chartArea.top+(chart.chartArea.height/2);const outerR=Math.min(chart.chartArea.width,chart.chartArea.height)/2;const glow=ctx.createRadialGradient(cx,cy,outerR*0.5,cx,cy,outerR*1.1);glow.addColorStop(0,'rgba(236,72,153,0)');glow.addColorStop(0.7,'rgba(236,72,153,.04)');glow.addColorStop(1,'rgba(236,72,153,.12)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,outerR*1.15,0,Math.PI*2);ctx.fill();ctx.restore();},afterDraw(chart){const{ctx,chartArea:{width,height,left,top}}=chart;const cx=left+width/2,cy=top+height/2;ctx.save();ctx.font='700 24px JetBrains Mono,monospace';ctx.fillStyle='#f1f5f9';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(stoTotal,cx,cy-11);ctx.font='600 8px Inter,sans-serif';ctx.fillStyle='rgba(148,163,184,.7)';ctx.fillText('TOTAL STO',cx,cy+8);ctx.font='700 10px Inter,sans-serif';ctx.fillStyle='#4ade80';ctx.fillText(stoDonePct+'% DONE',cx,cy+22);ctx.restore();}};
+new Chart(document.getElementById('sc2'),{type:'doughnut',plugins:[stoGlowPlugin],data:{labels:['GRN Done','Under Process','With Issue'],datasets:[{data:[${stoT.doneSTOs},${stoT.underSTOs},${stoT.issueSTOs}],backgroundColor:['rgba(34,197,94,.9)','rgba(245,158,11,.9)','rgba(236,72,153,.9)'],borderWidth:4,borderColor:'rgba(15,23,42,.8)',hoverOffset:12}]},options:{responsive:true,cutout:'60%',animation:{animateRotate:true,duration:1400,easing:'easeOutBack'},plugins:{legend:legendOpts,tooltip:tooltipOpts,stoGlow:{}}}});
+`:''}
+
+${hasGRN?`
+// ═══ GRN CHART 1 — Stacked Bar: GRN Status Trend ═══
+const grnLabels=${JSON.stringify(grnSortedDates)};
+const grnDoneQty=${JSON.stringify(grnSummary.map(r=>r.dQty))};
+const grnUpQty=${JSON.stringify(grnSummary.map(r=>r.upQty))};
+const grnIssQty=${JSON.stringify(grnSummary.map(r=>r.iQty))};
+const grnWithinArr=${JSON.stringify(grnSummary.map(r=>r.within))};
+const grnAboveArr=${JSON.stringify(grnSummary.map(r=>r.above))};
+new Chart(document.getElementById('gc1'),{type:'bar',data:{labels:grnLabels,datasets:[{label:'GRN Done',data:grnDoneQty,backgroundColor:'rgba(34,197,94,.85)',borderColor:'rgba(74,222,128,.4)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false,stack:'s'},{label:'Under Process',data:grnUpQty,backgroundColor:'rgba(245,158,11,.82)',borderColor:'rgba(251,191,36,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'},{label:'Pending Issue',data:grnIssQty,backgroundColor:'rgba(239,68,68,.82)',borderColor:'rgba(248,113,113,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:legendOpts,tooltip:{...tooltipOpts,mode:'index'},bar3D:{}},scales:{x:{...xScale},y:{stacked:true,...yScale}}}});
+
+// ═══ GRN CHART 2 — Doughnut: GRN Status Mix ═══
+const grnTotal=${T.dInv}+${T.upInv}+${T.iInv};
+const grnDonePct=grnTotal>0?(${T.dInv}/grnTotal*100).toFixed(0):0;
+const grnGlowPlugin={id:'grnGlow',beforeDraw(chart){const{ctx}=chart;ctx.save();const cx=chart.chartArea.left+(chart.chartArea.width/2);const cy=chart.chartArea.top+(chart.chartArea.height/2);const outerR=Math.min(chart.chartArea.width,chart.chartArea.height)/2;const glow=ctx.createRadialGradient(cx,cy,outerR*0.5,cx,cy,outerR*1.1);glow.addColorStop(0,'rgba(34,197,94,0)');glow.addColorStop(0.7,'rgba(34,197,94,.04)');glow.addColorStop(1,'rgba(34,197,94,.12)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,outerR*1.15,0,Math.PI*2);ctx.fill();ctx.restore();},afterDraw(chart){const{ctx,chartArea:{width,height,left,top}}=chart;const cx=left+width/2,cy=top+height/2;ctx.save();ctx.font='700 24px JetBrains Mono,monospace';ctx.fillStyle='#f1f5f9';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(grnTotal,cx,cy-11);ctx.font='600 8px Inter,sans-serif';ctx.fillStyle='rgba(148,163,184,.7)';ctx.fillText('TOTAL INV',cx,cy+8);ctx.font='700 10px Inter,sans-serif';ctx.fillStyle='#4ade80';ctx.fillText(grnDonePct+'% DONE',cx,cy+22);ctx.restore();}};
+new Chart(document.getElementById('gc2'),{type:'doughnut',plugins:[grnGlowPlugin],data:{labels:['GRN Done','Under Process','Pending Issue'],datasets:[{data:[${T.dInv},${T.upInv},${T.iInv}],backgroundColor:['rgba(34,197,94,.9)','rgba(245,158,11,.9)','rgba(239,68,68,.9)'],borderWidth:4,borderColor:'rgba(15,23,42,.8)',hoverOffset:12}]},options:{responsive:true,cutout:'60%',animation:{animateRotate:true,duration:1400,easing:'easeOutBack'},plugins:{legend:legendOpts,tooltip:tooltipOpts,grnGlow:{}}}});
+
+// ═══ GRN CHART 3 — Grouped Bar: TAT ═══
+new Chart(document.getElementById('gc3'),{type:'bar',data:{labels:grnLabels,datasets:[{label:'Within TAT',data:grnWithinArr,backgroundColor:'rgba(34,197,94,.85)',borderColor:'rgba(74,222,128,.4)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false},{label:'Above TAT',data:grnAboveArr,backgroundColor:'rgba(239,68,68,.82)',borderColor:'rgba(248,113,113,.3)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false}]},options:{responsive:true,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:legendOpts,tooltip:tooltipOpts,bar3D:{}},scales:{x:{...xScale},y:{...yScale}}}});
+`:''}
+<\/script>
+</body></html>`;
+
+  // ── JPEG export via hidden iframe + html2canvas ──
+  function _doJpeg(reportHtml){
+    const ts=new Date();const _p2=n=>String(n).padStart(2,'0');
+    const fname='Combined_Report_'+_p2(ts.getDate())+_p2(ts.getMonth()+1)+ts.getFullYear()+'_'+_p2(ts.getHours())+_p2(ts.getMinutes())+'.jpg';
+    const iframe=document.createElement('iframe');
+    iframe.style.cssText='position:fixed;left:-9999px;top:0;width:1400px;height:900px;border:none;z-index:-1;visibility:hidden';
+    document.body.appendChild(iframe);
+    const iDoc=iframe.contentDocument||iframe.contentWindow.document;
+    iDoc.open();iDoc.write(reportHtml);iDoc.close();
+    const doCapture=()=>{
+      const body=iframe.contentDocument.body;
+      const h=Math.max(body.scrollHeight,body.offsetHeight,900);
+      iframe.style.height=h+'px';
+      window.html2canvas(body,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#0f172a',width:1400,windowWidth:1400,logging:false})
+        .then(canvas=>{
+          document.body.removeChild(iframe);
+          canvas.toBlob(blob=>{
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement('a');a.href=url;a.download=fname;
+            document.body.appendChild(a);a.click();document.body.removeChild(a);
+            setTimeout(()=>URL.revokeObjectURL(url),5000);
+            toast('Combined report saved as '+fname,'ok');
+          },'image/jpeg',0.95);
+        }).catch(err=>{document.body.removeChild(iframe);toast('JPEG export failed: '+err.message,'err');});
+    };
+    setTimeout(doCapture,2400);
+    toast('⏳ Generating Combined JPEG report…','info');
+  }
+  if(typeof window.html2canvas==='function'){_doJpeg(html);}
+  else{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=()=>_doJpeg(html);
+    s.onerror=()=>toast('Could not load html2canvas — check internet connection','err');
+    document.head.appendChild(s);
+  }
+}
+
+function exportSTODashImage(){
+  if(!stoData.length){toast('No STO data to export','warn');return;}
+  const fromVal=(document.getElementById('sgdDateFrom').value||'').trim();
+  const toVal  =(document.getElementById('sgdDateTo').value||'').trim();
+
+  // ── Build per-date summary ──
+  const byDate={};
+  stoData.forEach(s=>{
+    const d=s.date||'—';
+    if(!_gdDateMatchFilter(d,fromVal,toVal))return;
+    if(!byDate[d])byDate[d]=[];
+    byDate[d].push(s);
+  });
+  const sortedDates=Object.keys(byDate).sort((a,b)=>{const da=_gdParseDate(a),db=_gdParseDate(b);if(da&&db)return da-db;return a.localeCompare(b);});
+  if(!sortedDates.length){toast('No STO data in selected range','warn');return;}
+
+  const gs=s=>(s||'').toLowerCase();
+  const _stoTAT=s=>{const gd=_gdParseDate(s.grnDate);const qd=_gdParseDate(s.qcHandoverDate);if(!gd||!qd)return'pending';return Math.abs(Math.round((qd-gd)/(1000*60*60*24)))<=1?'within':'above';};
+
+  const summary=sortedDates.map(date=>{
+    const sl=byDate[date];
+    const tSTOs=sl.length;
+    const tShipQty=sl.reduce((s,r)=>s+(r.shipQty||0),0);
+    const doneList=sl.filter(r=>gs(r.grnStatus).includes('done'));
+    const dSTOs=doneList.length;
+    const dGRNQty=doneList.reduce((s,r)=>s+(r.grnQty||0),0);
+    const trueUnder=sl.filter(r=>!gs(r.grnStatus).includes('done')&&!(r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done')));
+    const uSTOs=trueUnder.length;
+    const uShipQty=trueUnder.reduce((s,r)=>s+(r.shipQty||0),0);
+    const issueList=sl.filter(r=>!gs(r.grnStatus).includes('done')&&r.grnRemark&&r.grnRemark.trim()&&!gs(r.grnRemark).includes('grn done'));
+    const iSTOs=issueList.length;
+    const iShipQty=issueList.reduce((s,r)=>s+(r.shipQty||0),0);
+    const pendList=sl.filter(r=>!gs(r.grnStatus).includes('done'));
+    const pSTOs=pendList.length;
+    const pShipQty=pendList.reduce((s,r)=>s+(r.shipQty||0),0);
+    const tatList=sl.filter(r=>_gdParseDate(r.grnDate)&&_gdParseDate(r.qcHandoverDate));
+    const above=tatList.filter(r=>_stoTAT(r)==='above').reduce((s,r)=>s+(r.shipQty||0),0);
+    const within=tatList.filter(r=>_stoTAT(r)==='within').reduce((s,r)=>s+(r.shipQty||0),0);
+    const t2=above+within;
+    return{date,tSTOs,tShipQty,dSTOs,dGRNQty,uSTOs,uShipQty,iSTOs,iShipQty,pSTOs,pShipQty,above,within,
+      wPct:t2>0?((within/t2)*100).toFixed(1)+'%':'—',
+      aPct:t2>0?((above/t2)*100).toFixed(1)+'%':'—',
+      dPct:tSTOs>0?((dSTOs/tSTOs)*100).toFixed(0)+'%':'—'};
+  });
+
+  // ── Grand totals ──
+  const T={tSTOs:0,tShipQty:0,dSTOs:0,dGRNQty:0,uSTOs:0,uShipQty:0,iSTOs:0,iShipQty:0,pSTOs:0,pShipQty:0,above:0,within:0};
+  summary.forEach(r=>{T.tSTOs+=r.tSTOs;T.tShipQty+=r.tShipQty;T.dSTOs+=r.dSTOs;T.dGRNQty+=r.dGRNQty;T.uSTOs+=r.uSTOs;T.uShipQty+=r.uShipQty;T.iSTOs+=r.iSTOs;T.iShipQty+=r.iShipQty;T.pSTOs+=r.pSTOs;T.pShipQty+=r.pShipQty;T.above+=r.above;T.within+=r.within;});
+  const tt=T.above+T.within;
+  const abovePct=tt>0?((T.above/tt)*100).toFixed(1):'0.0';
+  const withinPct=tt>0?((T.within/tt)*100).toFixed(1):'0.0';
+  const stoGrnPct=T.tSTOs>0?((T.dSTOs/T.tSTOs)*100).toFixed(1):'0.0';
+
+  const _now=new Date();const _p=n=>String(n).padStart(2,'0');
+  const generatedOn=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()} ${_p(_now.getHours())}:${_p(_now.getMinutes())}`;
+  const dateRange=fromVal&&toVal?`${fromVal} – ${toVal}`:fromVal?`From ${fromVal}`:toVal?`Till ${toVal}`:'All Dates';
+  const n=v=>v===0?'—':v.toLocaleString();
+
+  // ── Today's STO & GRN KPIs ──
+  const _todayKey=`${_p(_now.getDate())}/${_p(_now.getMonth()+1)}/${_now.getFullYear()}`;
+  const _todaySTO=stoData.filter(s=>s.date===_todayKey);
+  const _tidSTOs=_todaySTO.length;
+  const _tidShipQty=_todaySTO.reduce((s,r)=>s+(r.shipQty||0),0);
+  const _todayGRN=stoData.filter(s=>s.grnDate&&s.grnDate===_todayKey);
+  const _tgSTOs=_todayGRN.length;
+  const _tgQty=_todayGRN.reduce((s,r)=>s+(r.grnQty||0),0);
+
+  // ── Table rows ──
+  const tableRows=summary.map((r,i)=>`<tr class="${i%2===0?'':'alt'}">
+    <td class="tc">${i+1}</td><td class="tl">${r.date}</td>
+    <td class="tr">${r.tSTOs}</td><td class="tr num">${n(r.tShipQty)}</td>
+    <td class="tr num grn">${n(r.dGRNQty)}</td>
+    <td class="tr ${r.uSTOs>0?'ylw':''}">${n(r.uShipQty)}</td>
+    <td class="tr ${r.iSTOs>0?'red':''}">${n(r.iShipQty)}</td>
+    <td class="tr ${r.pSTOs>0?'pur':''}">${n(r.pShipQty)}</td>
+    <td class="tr grn">${n(r.within)}</td><td class="tc grn">${r.wPct}</td>
+    <td class="tr red">${n(r.above)}</td><td class="tc red">${r.aPct}</td>
+  </tr>`).join('');
+
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>STO GRN Status Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#1a0533 0%,#2d0f5e 40%,#1a0533 100%);color:#e2e8f0;padding:28px;min-height:100vh}
+  .page{max-width:1280px;margin:0 auto}
+
+  /* ── HEADER ── */
+  .report-header{background:linear-gradient(135deg,rgba(190,24,93,.2),rgba(109,40,217,.2));backdrop-filter:blur(20px);border:1px solid rgba(249,168,212,.15);border-radius:20px;padding:24px 28px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
+  .logo-wrap{display:flex;align-items:center;gap:16px}
+  .logo-3d{width:52px;height:52px;background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 0 #831843,0 8px 20px rgba(190,24,93,.5);transform:perspective(100px) rotateX(8deg);position:relative}
+  .logo-3d::after{content:'';position:absolute;bottom:-4px;left:4px;right:-4px;height:100%;background:linear-gradient(135deg,#831843,#4c1d95);border-radius:14px;z-index:-1}
+  .hdr-title{font-size:24px;font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1}
+  .hdr-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;font-weight:500;letter-spacing:.5px}
+  .hdr-meta{text-align:right}
+  .hdr-date{font-size:11px;color:rgba(255,255,255,.5);font-weight:500}
+  .hdr-range{font-size:13px;font-weight:700;color:#f9a8d4;margin-top:4px;background:rgba(249,168,212,.1);border:1px solid rgba(249,168,212,.3);border-radius:8px;padding:3px 12px;display:inline-block}
+  .hdr-badge{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:700;color:#4ade80;letter-spacing:.5px}
+  .hdr-badge-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+  /* ── KPI GRID ── */
+  .kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px}
+  .kpi{border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;cursor:default;transition:transform .2s}
+  .kpi:hover{transform:translateY(-3px)}
+  .kpi-inner{position:relative;z-index:1}
+  .kpi::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,.18) 0%,transparent 60%);pointer-events:none}
+  .kpi-lbl{font-size:9px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .kpi-val{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+  .kpi-sub{font-size:10px;opacity:.65;margin-top:5px;line-height:1.4}
+  .kpi-icon{position:absolute;right:12px;top:12px;font-size:28px;opacity:.2}
+  .kpi-bar{position:absolute;bottom:0;left:0;height:3px;border-radius:0 0 16px 16px}
+  .kpi-shadow{position:absolute;bottom:-6px;left:6px;right:-6px;height:100%;border-radius:16px;z-index:-1;filter:blur(2px);opacity:.5}
+
+  .kpi-pink{background:linear-gradient(135deg,#be185d,#9d174d);box-shadow:0 4px 0 #831843,0 8px 24px rgba(190,24,93,.5)}
+  .kpi-pink .kpi-shadow{background:#831843}.kpi-pink .kpi-bar{background:linear-gradient(90deg,#f472b6,#fbcfe8)}
+  .kpi-green{background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 4px 0 #14532d,0 8px 24px rgba(22,163,74,.5)}
+  .kpi-green .kpi-shadow{background:#14532d}.kpi-green .kpi-bar{background:linear-gradient(90deg,#4ade80,#86efac)}
+  .kpi-yellow{background:linear-gradient(135deg,#d97706,#b45309);box-shadow:0 4px 0 #92400e,0 8px 24px rgba(217,119,6,.5)}
+  .kpi-yellow .kpi-shadow{background:#92400e}.kpi-yellow .kpi-bar{background:linear-gradient(90deg,#fbbf24,#fde68a)}
+  .kpi-red{background:linear-gradient(135deg,#dc2626,#b91c1c);box-shadow:0 4px 0 #7f1d1d,0 8px 24px rgba(220,38,38,.5)}
+  .kpi-red .kpi-shadow{background:#7f1d1d}.kpi-red .kpi-bar{background:linear-gradient(90deg,#f87171,#fca5a5)}
+  .kpi-purple{background:linear-gradient(135deg,#7c3aed,#6d28d9);box-shadow:0 4px 0 #4c1d95,0 8px 24px rgba(124,58,237,.5)}
+  .kpi-purple .kpi-shadow{background:#4c1d95}.kpi-purple .kpi-bar{background:linear-gradient(90deg,#c084fc,#e9d5ff)}
+  .kpi-teal{background:linear-gradient(135deg,#0d9488,#0f766e);box-shadow:0 4px 0 #134e4a,0 8px 24px rgba(13,148,136,.5)}
+  .kpi-teal .kpi-shadow{background:#134e4a}.kpi-teal .kpi-bar{background:linear-gradient(90deg,#2dd4bf,#99f6e4)}
+
+  /* ── SECTION LABEL ── */
+  .section-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;padding-left:4px;display:flex;align-items:center;gap:8px}
+  .section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+
+  /* ── CHARTS ROW ── */
+  .charts-row{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:14px;margin-bottom:20px}
+  .chart-box{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:20px;box-shadow:0 4px 0 rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden}
+  .chart-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0}
+  .chart-box-pink::before{background:linear-gradient(90deg,#ec4899,#7c3aed)}
+  .chart-box-purple::before{background:linear-gradient(90deg,#7c3aed,#ec4899)}
+  .chart-box-orange::before{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+  .chart-title{font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .chart-title-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .dot-pink{background:#ec4899;box-shadow:0 0 8px #ec4899}
+  .dot-purple{background:#7c3aed;box-shadow:0 0 8px #7c3aed}
+  .dot-orange{background:#f59e0b;box-shadow:0 0 8px #f59e0b}
+  .chart-subtitle{font-size:9px;color:rgba(255,255,255,.35);font-weight:500;margin-left:auto;font-family:'JetBrains Mono',monospace}
+  canvas{width:100%!important}
+
+  /* ── TODAY KPI CARDS ── */
+  .today-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+  .tkpi-card{border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 0 rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.15)}
+  .tkpi-hdr{display:flex;align-items:center;gap:10px;padding:13px 16px}
+  .tkpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:rgba(255,255,255,.22);box-shadow:0 2px 6px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.35)}
+  .tkpi-title{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fff;flex:1;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .tkpi-date{font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.7);flex-shrink:0}
+  .tkpi-body{background:#fff;border-radius:0 0 16px 16px;flex:1;display:flex;flex-direction:column}
+  .tkpi-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;gap:8px}
+  .tkpi-row+.tkpi-row{border-top:1px solid rgba(0,0,20,.07)}
+  .tkpi-row-left{display:flex;align-items:center;gap:8px}
+  .tkpi-row-icon{font-size:15px;flex-shrink:0}
+  .tkpi-row-label{font-size:12px;font-weight:600;color:#374151}
+  .tkpi-row-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;flex-shrink:0}
+  .tkpi-val-pink{color:#be185d}.tkpi-val-purple{color:#6d28d9}
+  .tkpi-sto .tkpi-hdr{background:linear-gradient(135deg,#be185d,#db2777,#f472b6)}
+  .tkpi-stogrn .tkpi-hdr{background:linear-gradient(135deg,#7c3aed,#9333ea,#c084fc)}
+
+  /* ── TABLE ── */
+  .tbl-wrap{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;box-shadow:0 4px 0 rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.4)}
+  .tbl-hdr{background:linear-gradient(135deg,rgba(190,24,93,.25),rgba(109,40,217,.2));padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
+  .tbl-hdr-lbl{color:#fff;font-size:13px;font-weight:800;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+  .tbl-cnt{font-size:10px;color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,.07);padding:3px 10px;border-radius:20px}
+  table{width:100%;border-collapse:collapse;font-size:11px}
+  thead tr:first-child th{background:rgba(109,40,217,.5);color:rgba(255,255,255,.9);padding:9px 7px;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-right:1px solid rgba(255,255,255,.06);white-space:nowrap}
+  thead tr:last-child th{background:rgba(30,20,50,.8);color:rgba(196,181,253,.9);padding:6px 7px;font-size:9px;font-weight:600;border-right:1px solid rgba(255,255,255,.05);white-space:nowrap}
+  tbody tr:hover td{background:rgba(255,255,255,.05)}
+  tbody tr.alt td{background:rgba(255,255,255,.02)}
+  tbody tr td{padding:7px 7px;border-bottom:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.03);color:rgba(203,213,225,.85);vertical-align:middle}
+  tfoot td{background:linear-gradient(135deg,rgba(190,24,93,.2),rgba(109,40,217,.15));font-weight:800;font-size:11px;padding:9px 7px;border-top:2px solid rgba(190,24,93,.4);color:#e2e8f0}
+  .tr{text-align:right}.tl{text-align:left}.tc{text-align:center}
+  .num{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:10.5px}
+  .grn{color:#4ade80;font-weight:700}.ylw{color:#fbbf24;font-weight:700}.red{color:#f87171;font-weight:700}.pur{color:#c084fc;font-weight:700}
+  td.grn{color:#4ade80}td.ylw{color:#fbbf24}td.red{color:#f87171}td.pur{color:#c084fc}
+
+  /* ── FOOTER ── */
+  .report-footer{margin-top:16px;text-align:center;font-size:10px;color:rgba(255,255,255,.2);font-weight:500;letter-spacing:.5px}
+</style></head><body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="report-header">
+    <div class="logo-wrap">
+      <div class="logo-3d">📦</div>
+      <div>
+        <div class="hdr-title">STO GRN Status Dashboard</div>
+        <div class="hdr-sub">Date-wise Stock Transfer Orders · GRN Accomplishment · TAT Analysis</div>
+      </div>
+    </div>
+    <div class="hdr-meta">
+      <div class="hdr-date">Generated: ${generatedOn}</div>
+      <div class="hdr-range">📅 ${dateRange}</div>
+      <div class="hdr-badge"><span class="hdr-badge-dot"></span>STO GRN ${stoGrnPct}% Accomplished</div>
+    </div>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="section-label">📊 Key Performance Indicators</div>
+  <div class="kpi-grid">
+    <div class="kpi kpi-pink">
+      <div class="kpi-shadow"></div><div class="kpi-icon">📦</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">Total STOs</div>
+        <div class="kpi-val">${T.tSTOs}</div>
+        <div class="kpi-sub">${n(T.tShipQty)} ship qty</div>
+      </div>
+    </div>
+    <div class="kpi kpi-green">
+      <div class="kpi-shadow"></div><div class="kpi-icon">✅</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">GRN Done</div>
+        <div class="kpi-val">${T.dSTOs}</div>
+        <div class="kpi-sub">${n(T.dGRNQty)} units rcvd</div>
+      </div>
+    </div>
+    <div class="kpi kpi-yellow">
+      <div class="kpi-shadow"></div><div class="kpi-icon">⏳</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">Under Process</div>
+        <div class="kpi-val">${T.uSTOs}</div>
+        <div class="kpi-sub">${n(T.uShipQty)} ship qty<br>pending</div>
+      </div>
+    </div>
+    <div class="kpi kpi-red">
+      <div class="kpi-shadow"></div><div class="kpi-icon">⚠️</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">With Issue</div>
+        <div class="kpi-val">${T.iSTOs}</div>
+        <div class="kpi-sub">${n(T.iShipQty)} ship qty<br>affected</div>
+      </div>
+    </div>
+    <div class="kpi kpi-teal">
+      <div class="kpi-shadow"></div><div class="kpi-icon">⚡</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">Within TAT</div>
+        <div class="kpi-val">${withinPct}%</div>
+        <div class="kpi-sub">${n(T.within)} ship qty<br>on-time</div>
+      </div>
+    </div>
+    <div class="kpi kpi-purple">
+      <div class="kpi-shadow"></div><div class="kpi-icon">🕒</div><div class="kpi-bar"></div>
+      <div class="kpi-inner">
+        <div class="kpi-lbl">Above TAT</div>
+        <div class="kpi-val">${abovePct}%</div>
+        <div class="kpi-sub">${n(T.above)} ship qty<br>delayed</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODAY'S KPI CARDS -->
+  <div class="section-label">📅 Today's Summary — ${_todayKey}</div>
+  <div class="today-kpi-grid">
+    <div class="tkpi-card tkpi-sto">
+      <div class="tkpi-hdr">
+        <div class="tkpi-icon">📦</div>
+        <div class="tkpi-title">Today's STO Details</div>
+        <div class="tkpi-date">${_todayKey}</div>
+      </div>
+      <div class="tkpi-body">
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">🔄</span><span class="tkpi-row-label">No. of STOs</span></div>
+          <span class="tkpi-row-val tkpi-val-pink">${n(_tidSTOs)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📊</span><span class="tkpi-row-label">Total Ship Qty</span></div>
+          <span class="tkpi-row-val tkpi-val-pink">${n(_tidShipQty)}</span>
+        </div>
+      </div>
+    </div>
+    <div class="tkpi-card tkpi-stogrn">
+      <div class="tkpi-hdr">
+        <div class="tkpi-icon">✅</div>
+        <div class="tkpi-title">Today's GRN</div>
+        <div class="tkpi-date">${_todayKey}</div>
+      </div>
+      <div class="tkpi-body">
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">🔄</span><span class="tkpi-row-label">No. of STOs GRN'd</span></div>
+          <span class="tkpi-row-val tkpi-val-purple">${n(_tgSTOs)}</span>
+        </div>
+        <div class="tkpi-row">
+          <div class="tkpi-row-left"><span class="tkpi-row-icon">📦</span><span class="tkpi-row-label">Total GRN Qty</span></div>
+          <span class="tkpi-row-val tkpi-val-purple">${n(_tgQty)}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW -->
+  <div class="section-label">📈 3D Chart Analytics</div>
+  <div class="charts-row">
+    <div class="chart-box chart-box-pink">
+      <div class="chart-title">
+        <span class="chart-title-dot dot-pink"></span>
+        Daily STO GRN Trend
+        <span class="chart-subtitle">${sortedDates.length} DAYS</span>
+      </div>
+      <canvas id="c1" height="190"></canvas>
+    </div>
+    <div class="chart-box chart-box-purple">
+      <div class="chart-title">
+        <span class="chart-title-dot dot-purple"></span>
+        STO Status Mix
+        <span class="chart-subtitle">STO SPLIT</span>
+      </div>
+      <canvas id="c2" height="190"></canvas>
+    </div>
+    <div class="chart-box chart-box-orange">
+      <div class="chart-title">
+        <span class="chart-title-dot dot-orange"></span>
+        TAT Breakdown
+        <span class="chart-subtitle">PER DATE</span>
+      </div>
+      <canvas id="c3" height="190"></canvas>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-label">📋 Date-wise Detailed Breakdown</div>
+  <div class="tbl-wrap">
+    <div class="tbl-hdr">
+      <span class="tbl-hdr-lbl">📦 Date-wise STO GRN Status — Detailed</span>
+      <span class="tbl-cnt">${sortedDates.length} DATES</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="tc" rowspan="2">#</th>
+          <th class="tl" rowspan="2">Date</th>
+          <th colspan="2" style="text-align:center;background:rgba(190,24,93,.5)">STO Transfer</th>
+          <th colspan="1" style="text-align:center;background:rgba(21,128,61,.6)">GRN Qty</th>
+          <th colspan="1" style="text-align:center;background:rgba(180,83,9,.6)">Under Process</th>
+          <th colspan="1" style="text-align:center;background:rgba(185,28,28,.6)">With Issue</th>
+          <th colspan="1" style="text-align:center;background:rgba(109,40,217,.6)">Pendency</th>
+          <th colspan="2" style="text-align:center;background:rgba(21,128,61,.6)">Within TAT</th>
+          <th colspan="2" style="text-align:center;background:rgba(185,28,28,.6)">Above TAT</th>
+        </tr>
+        <tr>
+          <th class="tc">STOs</th><th class="tr">Ship Qty</th>
+          <th class="tr">GRN Qty</th>
+          <th class="tr">Ship Qty</th>
+          <th class="tr">Ship Qty</th>
+          <th class="tr">Ship Qty</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+          <th class="tr">Qty</th><th class="tc">%</th>
+        </tr>
+      </thead>
+      <tbody>${tableRows}</tbody>
+      <tfoot><tr>
+        <td colspan="2" class="tl">TOTAL (${sortedDates.length} dates)</td>
+        <td class="tr">${T.tSTOs}</td><td class="tr num">${n(T.tShipQty)}</td>
+        <td class="tr grn num">${n(T.dGRNQty)}</td>
+        <td class="tr ylw num">${n(T.uShipQty)}</td>
+        <td class="tr red num">${n(T.iShipQty)}</td>
+        <td class="tr pur num">${n(T.pShipQty)}</td>
+        <td class="tr grn num">${n(T.within)}</td><td class="tc grn">${withinPct}%</td>
+        <td class="tr red num">${n(T.above)}</td><td class="tc red">${abovePct}%</td>
+      </tr></tfoot>
+    </table>
+  </div>
+
+  <div class="report-footer">GRN·WMS Apparel — STO GRN Dashboard Report · Auto-generated · ${generatedOn} · For internal use only</div>
+</div>
+
+<script>
+const labels=${JSON.stringify(sortedDates)};
+const doneQty=${JSON.stringify(summary.map(r=>r.dGRNQty))};
+const upQty=${JSON.stringify(summary.map(r=>r.uShipQty))};
+const issQty=${JSON.stringify(summary.map(r=>r.iShipQty))};
+const withinArr=${JSON.stringify(summary.map(r=>r.within))};
+const aboveArr=${JSON.stringify(summary.map(r=>r.above))};
+
+// ═══ PREMIUM 3D BAR PLUGIN ═══
+const plugin3DBar={
+  id:'bar3D',
+  afterDatasetsDraw(chart){
+    const ctx=chart.ctx;
+    chart.data.datasets.forEach((ds,di)=>{
+      const meta=chart.getDatasetMeta(di);
+      if(meta.hidden||meta.type!=='bar')return;
+      meta.data.forEach((bar,idx)=>{
+        if(!bar)return;
+        const props=bar.getProps(['x','y','width','base'],true);
+        const{x,y,width,base}=props;
+        if(!width)return;
+        const bH=Math.abs(base-y);if(bH<2)return;
+        const rawColor=Array.isArray(ds.backgroundColor)?ds.backgroundColor[idx]:ds.backgroundColor;
+        const parseRgba=c=>{if(!c)return{r:124,g:58,b:237,a:.85};const m=c.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)(?:,\\s*([\\d.]+))?\\)/);return m?{r:+m[1],g:+m[2],b:+m[3],a:m[4]!==undefined?+m[4]:.85}:{r:124,g:58,b:237,a:.85};};
+        const{r,g,b,a}=parseRgba(rawColor);
+        const depth=Math.max(5,Math.abs(width)*0.18);const dY=depth*0.5;
+        ctx.save();
+        const tG=ctx.createLinearGradient(x-width/2,y,x+width/2+depth,y-dY);
+        tG.addColorStop(0,\`rgba(\${Math.min(r+60,255)},\${Math.min(g+60,255)},\${Math.min(b+60,255)},\${Math.min(a+0.15,1)})\`);
+        tG.addColorStop(1,\`rgba(\${Math.min(r+30,255)},\${Math.min(g+30,255)},\${Math.min(b+30,255)},\${Math.min(a+0.05,1)})\`);
+        ctx.beginPath();ctx.moveTo(x-width/2,y);ctx.lineTo(x-width/2+depth,y-dY);ctx.lineTo(x+width/2+depth,y-dY);ctx.lineTo(x+width/2,y);ctx.closePath();ctx.fillStyle=tG;ctx.fill();ctx.restore();
+        ctx.save();
+        const rG=ctx.createLinearGradient(x+width/2,y,x+width/2+depth,y-dY);
+        rG.addColorStop(0,\`rgba(\${Math.max(r-40,0)},\${Math.max(g-40,0)},\${Math.max(b-40,0)},\${Math.min(a+0.1,1)})\`);
+        rG.addColorStop(1,\`rgba(\${Math.max(r-70,0)},\${Math.max(g-70,0)},\${Math.max(b-70,0)},\${a})\`);
+        ctx.beginPath();ctx.moveTo(x+width/2,y);ctx.lineTo(x+width/2+depth,y-dY);ctx.lineTo(x+width/2+depth,base-dY);ctx.lineTo(x+width/2,base);ctx.closePath();ctx.fillStyle=rG;ctx.fill();ctx.restore();
+      });
+    });
+  }
+};
+Chart.register(plugin3DBar);
+
+const gridLines={color:'rgba(148,163,184,.08)',lineWidth:1};
+const legendOpts={position:'bottom',labels:{font:{size:10,weight:'600'},boxWidth:10,padding:14,usePointStyle:true,color:'rgba(203,213,225,.8)'}};
+const tooltipOpts={backgroundColor:'rgba(26,5,51,.95)',titleFont:{size:11,weight:'800'},bodyFont:{size:11},padding:12,cornerRadius:10,borderColor:'rgba(190,24,93,.4)',borderWidth:1,titleColor:'#e2e8f0',bodyColor:'#94a3b8'};
+const scaleTicksColor='rgba(148,163,184,.6)';
+const xScale={grid:{...gridLines},ticks:{font:{size:9},maxRotation:45,color:scaleTicksColor},border:{color:'rgba(148,163,184,.15)'}};
+const yScale={grid:{...gridLines},ticks:{font:{size:9},color:scaleTicksColor},border:{color:'rgba(148,163,184,.15)'}};
+
+// ═══ CHART 1 — 3D Stacked Bar: STO GRN Status Trend ═══
+new Chart(document.getElementById('c1'),{
+  type:'bar',
+  data:{labels,datasets:[
+    {label:'GRN Done',data:doneQty,backgroundColor:'rgba(34,197,94,.85)',borderColor:'rgba(74,222,128,.4)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false,stack:'s'},
+    {label:'Under Process',data:upQty,backgroundColor:'rgba(245,158,11,.82)',borderColor:'rgba(251,191,36,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'},
+    {label:'With Issue',data:issQty,backgroundColor:'rgba(236,72,153,.82)',borderColor:'rgba(249,168,212,.3)',borderWidth:1,borderRadius:0,borderSkipped:false,stack:'s'}
+  ]},
+  options:{responsive:true,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:legendOpts,tooltip:{...tooltipOpts,mode:'index'},bar3D:{}},scales:{x:{...xScale},y:{stacked:true,...yScale}}}
+});
+
+// ═══ CHART 2 — 3D Doughnut: STO Status Mix ═══
+const stoTotal=${T.dSTOs}+${T.uSTOs}+${T.iSTOs};
+const stoDonePct=stoTotal>0?(${T.dSTOs}/stoTotal*100).toFixed(0):0;
+const glowPlugin={
+  id:'stoGlow',
+  beforeDraw(chart){const{ctx}=chart;ctx.save();const cx=chart.chartArea.left+(chart.chartArea.width/2);const cy=chart.chartArea.top+(chart.chartArea.height/2);const outerR=Math.min(chart.chartArea.width,chart.chartArea.height)/2;const glow=ctx.createRadialGradient(cx,cy,outerR*0.5,cx,cy,outerR*1.1);glow.addColorStop(0,'rgba(236,72,153,0)');glow.addColorStop(0.7,'rgba(236,72,153,.04)');glow.addColorStop(1,'rgba(236,72,153,.14)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,outerR*1.15,0,Math.PI*2);ctx.fill();ctx.restore();},
+  afterDraw(chart){const{ctx,chartArea:{width,height,left,top}}=chart;const cx=left+width/2,cy=top+height/2;ctx.save();ctx.font='700 24px JetBrains Mono,monospace';ctx.fillStyle='#f1f5f9';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(stoTotal,cx,cy-11);ctx.font='600 8px Inter,sans-serif';ctx.fillStyle='rgba(196,181,253,.8)';ctx.fillText('TOTAL STO',cx,cy+8);ctx.font='700 10px Inter,sans-serif';ctx.fillStyle='#4ade80';ctx.fillText(stoDonePct+'% DONE',cx,cy+22);ctx.restore();}
+};
+new Chart(document.getElementById('c2'),{
+  type:'doughnut',plugins:[glowPlugin],
+  data:{labels:['GRN Done','Under Process','With Issue'],datasets:[{data:[${T.dSTOs},${T.uSTOs},${T.iSTOs}],backgroundColor:['rgba(34,197,94,.9)','rgba(245,158,11,.9)','rgba(236,72,153,.9)'],borderWidth:4,borderColor:'rgba(26,5,51,.8)',hoverOffset:12}]},
+  options:{responsive:true,cutout:'60%',animation:{animateRotate:true,duration:1400,easing:'easeOutBack'},plugins:{legend:legendOpts,tooltip:tooltipOpts,stoGlow:{}}}
+});
+
+// ═══ CHART 3 — 3D Grouped Bar: Within TAT vs Above TAT ═══
+new Chart(document.getElementById('c3'),{
+  type:'bar',
+  data:{labels,datasets:[
+    {label:'Within TAT',data:withinArr,backgroundColor:'rgba(34,197,94,.85)',borderColor:'rgba(74,222,128,.4)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false},
+    {label:'Above TAT',data:aboveArr,backgroundColor:'rgba(236,72,153,.82)',borderColor:'rgba(249,168,212,.3)',borderWidth:1,borderRadius:{topLeft:3,topRight:3},borderSkipped:false}
+  ]},
+  options:{responsive:true,animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:legendOpts,tooltip:tooltipOpts,bar3D:{}},scales:{x:{...xScale},y:{...yScale}}}
+});
+<\/script>
+</body></html>`;
+
+  function _doJpegExport(reportHtml){
+    const _now2=new Date();const _p2=n=>String(n).padStart(2,'0');
+    const fname='STO_GRN_Report_'+_p2(_now2.getDate())+_p2(_now2.getMonth()+1)+_now2.getFullYear()+'_'+_p2(_now2.getHours())+_p2(_now2.getMinutes())+'.jpg';
+    const iframe=document.createElement('iframe');
+    iframe.style.cssText='position:fixed;left:-9999px;top:0;width:1400px;height:900px;border:none;z-index:-1;visibility:hidden';
+    document.body.appendChild(iframe);
+    const iDoc=iframe.contentDocument||iframe.contentWindow.document;
+    iDoc.open();iDoc.write(reportHtml);iDoc.close();
+    const doCapture=()=>{
+      const body=iframe.contentDocument.body;
+      const h=Math.max(body.scrollHeight,body.offsetHeight,900);
+      iframe.style.height=h+'px';
+      window.html2canvas(body,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#1a0533',width:1400,windowWidth:1400,logging:false})
+        .then(canvas=>{
+          document.body.removeChild(iframe);
+          canvas.toBlob(blob=>{
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement('a');a.href=url;a.download=fname;
+            document.body.appendChild(a);a.click();document.body.removeChild(a);
+            setTimeout(()=>URL.revokeObjectURL(url),5000);
+            toast('STO report saved as '+fname,'ok');
+          },'image/jpeg',0.95);
+        }).catch(err=>{document.body.removeChild(iframe);toast('JPEG export failed: '+err.message,'err');});
+    };
+    setTimeout(doCapture,2200);
+    toast('⏳ Generating STO JPEG report…','info');
+  }
+  if(typeof window.html2canvas==='function'){_doJpegExport(html);}
+  else{
+    const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    s.onload=()=>_doJpegExport(html);
+    s.onerror=()=>toast('Could not load html2canvas — check internet connection','err');
+    document.head.appendChild(s);
+  }
+}
+
 function exportGRNDashImage(){
   if(!inwardData.length){toast('No data to export','warn');return;}
   const fromVal=(document.getElementById('gdDateFrom').value||'').trim();
@@ -8750,7 +11358,7 @@ function initUI(){
     renderInwardPreview();
     refreshInvNoDropdown(undefined);
   }
-  populateTableSelect();updateHeaderStats();updateQueueBadge();restoreGSheetPrefs();
+  populateTableSelect();updateHeaderStats();updateQueueBadge();restoreGSheetPrefs();restoreGSheet2Prefs();restoreGSheetStoPrefs();
 
   if(fbConfig){
     // ── AUTO-CONNECT: reconnect Firebase immediately on page open ──
@@ -8768,16 +11376,21 @@ function initUI(){
         if(writeQueue.length>0)flushQueue();
         // After Firebase data is fresh, auto-fetch Google Sheet (if URL saved)
         _autoFetchGSheet();
+        _autoFetchGSheet2Async();
+        _autoFetchGSheetStoAsync();
       }else{
         setBanner('offline','📴 Firebase offline — using cached data');
         // Still try Google Sheet even if Firebase is unreachable
         _autoFetchGSheet();
+        _autoFetchGSheet2Async();
+        _autoFetchGSheetStoAsync();
       }
     },800);
   }else{
     setBanner('setup','💾 Local storage active · Connect Firebase for live sync → ');
     // Auto-fetch Google Sheet even without Firebase
     setTimeout(_autoFetchGSheet, 800);
+    setTimeout(_autoFetchGSheet2Async, 1200);
   }
 
   setInterval(()=>{if(fbConfig&&isOnline&&writeQueue.length>0)flushQueue();},30000);
