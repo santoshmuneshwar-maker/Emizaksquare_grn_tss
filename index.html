@@ -3024,7 +3024,10 @@ async function pullFromFirebase(fullPull=false){
 
  if(fbInwardMeta&&fbInwardMeta.ts)lastKnownInwardMetaTs=fbInwardMeta.ts;
  if(fbPOMeta&&fbPOMeta.ts)lastKnownPoMetaTs=fbPOMeta.ts;
- if(!LS.load('po_cleared',false)&&!window._poUploadPending){
+ const _poLocalTs=LS.load('po_local_ts',0);
+ const _fbPoTs=fbPOMeta&&fbPOMeta.ts?fbPOMeta.ts:0;
+ const _localNewer=_poLocalTs>0&&_poLocalTs>_fbPoTs;
+ if(!LS.load('po_cleared',false)&&!window._poUploadPending&&!_localNewer){
  if(Array.isArray(fbPO)&&fbPO.length){poData=fbPO;LS.save('po',poData);initPOUI();}
  else if(fbPO&&typeof fbPO==='object'&&!Array.isArray(fbPO)){const arr=Object.values(fbPO).filter(Boolean);if(arr.length){poData=arr;LS.save('po',poData);initPOUI();}}
  }
@@ -3168,7 +3171,9 @@ async function checkInwardMeta(){
  setTimeout(()=>setBanner('connected','✅ Firebase live · '+scannedAll.length+' scans'),4000);
  }
  }else if(meta.status==='set'){
- if(!isAdminOrigin){
+ const _poLocalTs2=LS.load('po_local_ts',0);
+ const _isOwnUpload=_poLocalTs2>0&&Math.abs(meta.ts-_poLocalTs2)<5000;
+ if(!isAdminOrigin&&!_isOwnUpload){
  const fbInward=await fbGet('inward');
  if(Array.isArray(fbInward)&&fbInward.length){
  inwardData=fbInward;
@@ -3789,7 +3794,8 @@ function confirmUpload(){
  const{type,data,fname}=pendingUpload;
  if(type==='po'){
  poData=data;LS.save('po',poData);LS.save('po_fname',fname);
- LS.remove('po_cleared'); // allow Firebase pull to sync this again
+ LS.remove('po_cleared');
+ const _poUploadTs=Date.now();LS.save('po_local_ts',_poUploadTs);
  document.getElementById('po-name').textContent=fname;
  document.getElementById('po-cnt').textContent=poData.length+' records · '+[...new Set(poData.map(r=>r.poNo))].length+' POs';
  document.getElementById('po-ok').classList.add('show');
@@ -4026,6 +4032,8 @@ function onGSheetSheetInput(){
  const sh=(document.getElementById('gsheet-inward-sheet').value||'').trim();
  const hint=document.getElementById('gs-sheet-hint');
  const hintName=document.getElementById('gs-sheet-hint-name');
+ // Save to localStorage so hash poll and auto-sync always use the correct sheet name
+ if(sh){LS.save('gsheet_inward_sheet',sh);}else{LS.remove('gsheet_inward_sheet');}
 
  const tagContainer=document.getElementById('gs-sheet-tags');
  if(tagContainer){
@@ -4345,8 +4353,8 @@ function processGSheetInwardRows(rows,silent){
  if(!newRow.poNo&&!newRow.invNo)return newRow;
  const existing=inwardData.find(e=>_key(e)===_key(newRow));
  if(!existing)return newRow;
- // Always take GRN fields from the sheet (newRow) as-is; only preserve id from existing
- return{...newRow,grnStatus:newRow.grnStatus||existing.grnStatus||'Pending',grnRemark:newRow.grnRemark||existing.grnRemark||'',issueResolvedDate:newRow.issueResolvedDate||existing.issueResolvedDate||'',grnDate:newRow.grnDate||existing.grnDate||'',grnQty:newRow.grnQty||existing.grnQty||'',tat:newRow.tat||existing.tat||'',id:existing.id||newRow.id};
+ // GRN fields always come from the sheet (source of truth); only id is preserved from existing
+ return{...newRow,grnStatus:newRow.grnStatus||'Pending',grnRemark:newRow.grnRemark||'',issueResolvedDate:newRow.issueResolvedDate||'',grnDate:newRow.grnDate||'',grnQty:newRow.grnQty||'',tat:newRow.tat||'',id:existing.id||newRow.id};
  });
  inwardData=[...kept,...merged];
  LS.save('inward',inwardData);
@@ -11290,31 +11298,7 @@ async function _autoFetchGSheetAsync(){
 }
 
 function _autoFetchGSheet(){
- const url=LS.load('gsheet_inward_url','');
- if(!url)return;
- (async()=>{
- try{
- const sep=url.includes('?')?'&':'?';
- const resp=await fetch(url+sep+'_cb='+Date.now(),{cache:'no-cache'});
- if(!resp.ok)return;
- const json=await resp.json();
- const rows=Array.isArray(json)?json:(Array.isArray(json.data)?json.data:null);
- if(!rows||!rows.length)return;
-
- processGSheetInwardRows(rows,true);
-
- if(currentUser){
- const prev=document.getElementById('live-banner')&&document.getElementById('live-banner').textContent;
- setBanner('connected','✅ Sheet synced · '+rows.length+' rows · '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}));
-
- setTimeout(()=>{
- if(fbConfig&&currentUser){
- setBanner('connected',currentUser.type==='admin'?'✅ Firebase live · '+scannedAll.length+' records':'✅ Firebase live · Table '+String(currentUser.table).padStart(2,'0'));
- }
- },4000);
- }
- }catch(e){}
- })();
+ _autoFetchGSheetAsync();
 }
 loadAll();initUI();
 
