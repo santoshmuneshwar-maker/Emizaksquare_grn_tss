@@ -9236,11 +9236,9 @@ function renderGRNDash(){
  // tatList: all invoices — _gdTAT() handles pending/within/above based on grnStatus + date diff
  const tatList=invList;
 
- const withinRaw=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
- const aboveRaw=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
- // Business rule: if Total Invoice Qty >= 30000 AND Within TAT Qty >= 30000, Above TAT = 0
- const within=withinRaw;
- const above=(uQty>=30000&&withinRaw>=30000)?0:aboveRaw;
+ const within=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+ // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
+ const above=Math.max(0,(uQty<=30000?uQty:30000)-within-pQty);
  const tatTotal=above+within;
  const abovePct=tatTotal>0?((above/tatTotal)*100).toFixed(2)+'%':'0.00%';
  const withinPct=tatTotal>0?((within/tatTotal)*100).toFixed(2)+'%':'0.00%';
@@ -9467,10 +9465,9 @@ function exportGRNDash(){
  const beyond=beyondQty;
  // tatList: _gdTAT() classifies by grnStatus + GRN Date vs Issue Resolved Date diff
  const tatList=invList.filter(i=>(wcQty[i.id]||0)>0);
- const aboveRaw=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(wcQty[i.id]||0),0);
  const within=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(wcQty[i.id]||0),0);
- // Business rule: if Total Invoice Qty >= 30000 AND Within TAT Qty >= 30000, Above TAT = 0
- const above=(uQty>=30000&&within>=30000)?0:aboveRaw;
+ // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
+ const above=Math.max(0,(uQty<=30000?uQty:30000)-within-pQty);
  const t=above+within;
  return[date,uInv,uBoxes,uQty,dInv,dBoxes,dQty,upInv,upBoxes,upQty,iInv,iBoxes,iQty,pInv,pBoxes,pQty,beyond,above,within,t>0?((above/t)*100).toFixed(2)+'%':'0.00%',t>0?((within/t)*100).toFixed(2)+'%':'0.00%'];
  });
@@ -9526,10 +9523,9 @@ function exportGRNDashExcel(){
  const beyond=beyondQty;
  // tatList: _gdTAT() classifies by grnStatus + GRN Date vs Issue Resolved Date diff
  const tatList=invList.filter(i=>(wcQty[i.id]||0)>0);
- const aboveRaw=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(wcQty[i.id]||0),0);
  const within=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(wcQty[i.id]||0),0);
- // Business rule: if Total Invoice Qty >= 30000 AND Within TAT Qty >= 30000, Above TAT = 0
- const above=(uQty>=30000&&within>=30000)?0:aboveRaw;
+ // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
+ const above=Math.max(0,(uQty<=30000?uQty:30000)-within-pQty);
  const t=above+within;
  const abovePct=t>0?(above/t)*100:0;
  const withinPct=t>0?(within/t)*100:0;
@@ -9856,11 +9852,10 @@ function exportCombinedDashImage(){
  il.forEach(inv=>{const q=parseInt(inv.totalInvQty)||0;if(capRem<=0){bcQty+=q;}else if(q<=capRem){wc[inv.id]=q;capRem-=q;}else{wc[inv.id]=capRem;bcQty+=q-capRem;capRem=0;}});
  // tatList: _gdTAT() classifies by grnStatus + GRN Date vs Issue Resolved Date diff
  const tatList=il;
- const rawAbove=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  const rawWithin=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
- let above,within;
- if(uQty>=DAILY_CAP){if(rawWithin>=DAILY_CAP){within=DAILY_CAP;above=0;}else{within=rawWithin;above=Math.min(rawAbove,DAILY_CAP-rawWithin);}}
- else{above=rawAbove;within=rawWithin;}
+ // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
+ const within=rawWithin;
+ const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within);
  T.uInv+=uInv;T.uBoxes+=uBoxes;T.uQty+=uQty;T.dInv+=dInv;T.dQty+=dQty;T.upInv+=upInv;T.upQty+=upQty;T.iInv+=iInv;T.iQty+=iQty;T.above+=above;T.within+=within;T.bc+=bcQty;
  const t2=above+within;
  return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty,wPct:t2>0?((within/t2)*100).toFixed(1)+'%':'—',aPct:t2>0?((above/t2)*100).toFixed(1)+'%':'—',dPct:uInv>0?((dInv/uInv)*100).toFixed(0)+'%':'—'};
@@ -10858,13 +10853,10 @@ function exportGRNDashImage(){
 
  // tatList: _gdTAT() classifies by grnStatus + GRN Date vs Issue Resolved Date diff
  const tatList=invList;
- const rawAboveJ=tatList.filter(i=>_gdTAT(i)==='above').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  const rawWithinJ=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
- let above,within;
- if(uQty>=DAILY_CAP){
- if(rawWithinJ>=DAILY_CAP){within=DAILY_CAP;above=0;}
- else{within=rawWithinJ;above=Math.min(rawAboveJ,DAILY_CAP-rawWithinJ);}
- }else{above=rawAboveJ;within=rawWithinJ;}
+ // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
+ const within=rawWithinJ;
+ const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within);
  return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty};
  });
 
