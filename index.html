@@ -1055,6 +1055,364 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
 .gd-kpi-sto-today .gd-kpi-hdr{background:linear-gradient(135deg,#be185d,#db2777,#f472b6);}
 .gd-kpi-sto-today::before{background:linear-gradient(135deg,#9d174d,#be185d);}
 .gd-kpi-sto-today .gd-kpi-row-val{color:#be185d;}
+
+/* ═══════════════════════════════════════════════════════
+   COMPACT UI REDESIGN — space-efficient, data-dense
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Root tweaks: tighter base size ── */
+:root {
+  --r: 8px;
+  --sh: 0 1px 2px rgba(0,0,40,.05), 0 2px 8px rgba(37,99,235,.06);
+  --sh2: 0 4px 20px rgba(37,99,235,.12), 0 1px 4px rgba(0,0,0,.05);
+}
+body { font-size: 12px; }
+
+/* ── Rainbow hero bar: slimmer ── */
+.page-hero { height: 3px; }
+
+/* ── Live banner: tighter ── */
+.live-banner {
+  height: 24px;
+  font-size: 9.5px;
+  letter-spacing: .5px;
+  padding: 0 12px;
+  justify-content: flex-start;
+  gap: 8px;
+}
+#bannerBtn { padding: 2px 8px !important; font-size: 9px !important; }
+
+/* ── Header: compact single row ── */
+.hdr {
+  height: 42px;
+  top: 27px;
+  padding: 0 12px;
+  gap: 8px;
+}
+.brand { font-size: 14px; letter-spacing: 1.5px; }
+.brand-sub { font-size: 8px; letter-spacing: 1.5px; }
+.brand-sep { height: 16px; margin: 0 2px; }
+
+/* ── Nav tabs: slimmer pills ── */
+.hdr-tabs { padding: 2px; gap: 1px; margin-left: 4px; }
+.htab {
+  padding: 4px 9px;
+  font-size: 10px;
+  letter-spacing: .2px;
+  border-radius: 6px;
+}
+
+/* ── Header right stats: tighter ── */
+.hdr-stat {
+  padding: 3px 8px;
+  font-size: 10px;
+  gap: 4px;
+  border-radius: 6px;
+}
+.hdr-stat-val { font-size: 11px; }
+.live-pill { padding: 3px 9px; font-size: 9px; gap: 4px; border-radius: 16px; }
+.live-dot { width: 6px; height: 6px; }
+.user-badge { padding: 3px 8px; font-size: 10px; gap: 4px; border-radius: 6px; }
+.logout-btn { padding: 3px 9px; font-size: 9px; border-radius: 6px; }
+.shift-badge { padding: 2px 8px; font-size: 9px; }
+
+/* ── Page container: less top padding ── */
+.page { padding: 10px 14px; }
+.pg-hd { margin-bottom: 10px; gap: 6px; }
+.pg-title { font-size: 16px; font-weight: 800; }
+.pg-sub { font-size: 9px; margin-top: 1px; }
+
+/* ── Cards: tighter ── */
+.card { border-radius: var(--r); }
+.card-hd {
+  padding: 9px 12px;
+  border-radius: var(--r) var(--r) 0 0;
+}
+.card-hd::before { width: 2px; height: 14px; margin-right: 6px; }
+.card-title { font-size: 12px; }
+.card-body { padding: 12px; }
+
+/* ── Buttons: tighter sizing ── */
+.btn { padding: 5px 12px; font-size: 11px; gap: 4px; border-radius: 6px; }
+.btn-sm { padding: 4px 10px; font-size: 10px; }
+.btn-xs { padding: 2px 7px; font-size: 9px; }
+
+/* ── Tables: denser rows ── */
+th { padding: 7px 10px; font-size: 8.5px; letter-spacing: 1px; }
+td { padding: 6px 10px; font-size: 11px; }
+.empty-cell { padding: 20px !important; font-size: 11px !important; }
+
+/* ── KPI cards: compact ── */
+.kpi-card { padding: 11px 13px; border-radius: var(--r); }
+.kpi-num { font-size: 24px; margin-bottom: 2px; }
+.kpi-lbl { font-size: 9px; letter-spacing: 1px; }
+.kpi-sub { font-size: 10px; margin-top: 2px; }
+.dash-grid { gap: 8px; margin-bottom: 10px; min-width: 0; }
+.kpi-card::before { height: 3px; }
+.dash-row { gap: 10px; margin-bottom: 10px; }
+.dash-3col { gap: 10px; margin-bottom: 10px; }
+.gd-kpi-grid { gap: 10px; margin-bottom: 4px; }
+.gd-kpi-card { border-radius: 12px; }
+.gd-kpi-hdr { padding: 9px 12px 7px; border-radius: 12px 12px 0 0; }
+
+/* ── Table KPI grid: tighter ── */
+.tbl-kpi-grid { gap: 6px; }
+.tkpi { padding: 8px 10px; border-radius: var(--r); }
+.tkpi-key { font-size: 10px; }
+.tkpi-val { font-size: 10px; }
+
+/* ── Scan layout: tighter panels ── */
+.scan-layout { gap: 10px; grid-template-columns: 260px 1fr; }
+.setup-panel { top: 90px; }
+.scan-box { padding: 12px; }
+.match-panel { padding: 12px; margin-top: 8px; }
+
+/* ── Field inputs ── */
+.field-group { margin-bottom: 8px; }
+.field-label { font-size: 9px; letter-spacing: 1px; margin-bottom: 4px; }
+.field-input, .field-select { padding: 7px 10px; font-size: 11px; border-radius: 7px; }
+.field-hint { font-size: 9px; margin-top: 3px; }
+.divider { margin: 8px 0; }
+
+/* ── Section padding tightener ── */
+.sp-section { font-size: 8.5px; letter-spacing: 1.5px; margin-bottom: 5px; }
+
+/* ── PO / PS sheet tables ── */
+.ps-sheet-wrap {
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--sh);
+}
+.ps-sheet-toolbar {
+  padding: 8px 12px;
+  min-height: 36px;
+}
+.ps-sheet-title { font-size: 11px; }
+.ps-sheet-count { font-size: 9px; }
+.ps-sheet-scroll { max-height: calc(100vh - 200px); }
+.ps-sheet-table th { padding: 6px 9px; font-size: 8px; letter-spacing: .8px; }
+.ps-sheet-table td { padding: 5px 9px; font-size: 10.5px; }
+
+/* ── Filter bars: inline compact ── */
+#psKpiStrip, #stoKpiStrip, #sgdKpiStrip, #gdKpiStrip {
+  margin-bottom: 10px;
+}
+
+/* ── Upload zones: smaller ── */
+.upload-zone { padding: 16px 12px; border-radius: var(--r); }
+.uz-icon { font-size: 22px; margin-bottom: 5px; }
+.uz-hint { font-size: 10px; line-height: 1.5; }
+.upload-ok { padding: 8px 12px; margin-top: 8px; }
+.uo-name { font-size: 11px; }
+.uo-count { font-size: 9px; }
+
+/* ── Preview wrap ── */
+.preview-wrap { margin-top: 8px; }
+.pw-hd { padding: 7px 12px; }
+.pw-title { font-size: 11px; }
+.pw-count { font-size: 9px; }
+.tscroll { max-height: 200px; }
+
+/* ── Modals: tighter ── */
+.modal { padding: 20px; border-radius: 12px; }
+.modal-icon { font-size: 28px; margin-bottom: 7px; }
+.modal-title { font-size: 16px; margin-bottom: 3px; }
+.modal-sub { font-size: 10px; margin-bottom: 14px; }
+.modal-actions { margin-top: 14px; gap: 6px; }
+
+/* ── MRP modal ── */
+.mismatch-modal { padding: 20px; border-radius: 12px; }
+.mrp-sku-info { padding: 10px 12px; border-radius: 8px; margin-bottom: 10px; }
+.mrp-big-input { padding: 10px 10px 10px 30px; font-size: 22px; border-radius: 8px; }
+
+/* ── Badges: tighter ── */
+.sz-badge { padding: 1px 6px; font-size: 9px; border-radius: 14px; }
+.po-badge { padding: 2px 7px; font-size: 9px; border-radius: 14px; }
+.tbl-badge { padding: 3px 6px; font-size: 10px; border-radius: 6px; min-width: 44px; }
+.rmk-badge { padding: 2px 6px; font-size: 9px; border-radius: 14px; }
+.fix-badge { padding: 2px 7px; font-size: 8.5px; border-radius: 14px; }
+.po-status { padding: 2px 8px; font-size: 9px; border-radius: 14px; }
+.sync-badge { padding: 1px 7px; font-size: 8.5px; gap: 3px; }
+.lb-dot { width: 6px; height: 6px; }
+
+/* ── Page header sticky at compressed offset ── */
+.pg-hd {
+  position: sticky;
+  top: 69px;
+  z-index: 100;
+  background: var(--bg);
+  padding: 6px 0 8px;
+  margin: -6px 0 10px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Compact filter row ── */
+.compact-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 7px 10px;
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+}
+.compact-filter-row .field-input,
+.compact-filter-row .field-select {
+  padding: 4px 8px;
+  font-size: 10.5px;
+  border-radius: 6px;
+}
+
+/* ── Section divider label ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink3);
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Inline filter strip for PO/STO pages ── */
+#page-postatus > div:nth-child(2),
+#page-stostatus > div:nth-child(2) {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 7px 10px;
+  margin-bottom: 8px;
+  box-shadow: var(--sh);
+  gap: 6px;
+}
+#page-postatus > div:nth-child(2) .field-input,
+#page-postatus > div:nth-child(2) .field-select,
+#page-stostatus > div:nth-child(2) .field-input,
+#page-stostatus > div:nth-child(2) .field-select {
+  padding: 4px 8px !important;
+  font-size: 10.5px !important;
+}
+
+/* ── Dashboard filter rows ── */
+#page-stogrndash .pg-hd > div:last-child,
+#page-grndash .pg-hd > div:last-child {
+  flex-wrap: wrap;
+  gap: 5px;
+}
+#page-stogrndash .pg-hd > div:last-child > div,
+#page-grndash .pg-hd > div:last-child > div {
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+}
+#page-stogrndash .pg-hd > div:last-child select,
+#page-grndash .pg-hd > div:last-child select {
+  font-size: 10px !important;
+  padding: 1px 4px !important;
+  min-width: 70px !important;
+}
+#page-stogrndash .pg-hd > div:last-child span,
+#page-grndash .pg-hd > div:last-child span {
+  font-size: 9px !important;
+  letter-spacing: .3px !important;
+}
+
+/* ── Upload grid: side-by-side on wider screens ── */
+.upload-grid { grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
+
+/* ── Connect/setup page: tighter ── */
+#page-connect .card, #page-setup .card { margin-bottom: 10px; }
+
+/* ── Admin page ── */
+#page-admin .card { margin-bottom: 10px; }
+
+/* ── Scan stats bar: tighter ── */
+#scanStatsBar { gap: 6px; margin-bottom: 8px; }
+
+/* ── Table KPI scan section ── */
+#tblKpiWrap { margin-bottom: 10px; }
+
+/* ── Records page scan table: rowcount badge ── */
+#scannedBody tr td { padding: 5px 10px; }
+
+/* ── Date tabs ── */
+.date-tabs { gap: 4px; margin-bottom: 8px; }
+.dt-tab { padding: 3px 10px; font-size: 10px; border-radius: 16px; }
+
+/* ── Shift mini ── */
+.shift-mini { padding: 10px 12px; border-radius: var(--r); }
+.sm-row { font-size: 10px; }
+.sm-key, .sm-val { font-size: 10px; }
+
+/* ── Scrollbar: slimmer ── */
+.ps-sheet-scroll::-webkit-scrollbar { width: 7px; height: 7px; }
+
+/* ── Login card: tighter ── */
+.login-card { padding: 28px; border-radius: 14px; }
+.login-title { font-size: 18px; margin-bottom: 6px; }
+.login-sub { font-size: 11px; margin-bottom: 18px; }
+.login-tab { padding: 8px; font-size: 11px; }
+
+/* ── GD / SGD tables: smaller fonts ── */
+#gdTable th, #sgdTable th { font-size: 8px !important; padding: 5px 8px !important; letter-spacing: .5px !important; }
+#gdTable td, #sgdTable td { font-size: 10.5px !important; padding: 5px 8px !important; }
+#gdTable thead tr:nth-child(2) th { top: 30px !important; }
+
+/* ── Sticky offset correction ── */
+.setup-panel { top: 82px; }
+@media(max-width:768px) {
+  .pg-hd { top: 55px; }
+  .setup-panel { top: 0; }
+  .ps-sheet-scroll { max-height: calc(100vh - 160px); }
+  .hdr { top: 27px; }
+}
+
+/* ── Zebra stripe enhancement for dense tables ── */
+tbody tr:nth-child(even) { background: #f7f8ff; }
+tbody tr:nth-child(even):hover { background: #f0f3ff; }
+
+/* ── Status color chips: sharp and small ── */
+.po-status-process { padding: 1px 7px; font-size: 8.5px; }
+.po-status-closed { padding: 1px 7px; font-size: 8.5px; }
+
+/* ── Carton-start time: even tighter mono ── */
+td.td-ts { font-size: 9.5px; }
+td.td-ean { font-size: 9.5px; }
+
+/* ── Empty states ── */
+.empty-cell { font-size: 10.5px !important; padding: 18px !important; }
+
+/* ── GD-KPI card body rows ── */
+.gd-kpi-row { padding: 5px 12px; }
+.gd-kpi-row-lbl { font-size: 9px; }
+.gd-kpi-row-val { font-size: 17px; }
+.gd-kpi-row-sub { font-size: 8.5px; }
+.gd-kpi-footer { padding: 7px 12px; font-size: 9px; }
+
+/* ── Suppress excess top margin on first card-body child ── */
+.card-body > *:first-child { margin-top: 0 !important; }
+.card-body > *:last-child { margin-bottom: 0 !important; }
+
+/* ── mm modal: tighter ── */
+.mm-row { padding: 5px 0; font-size: 11px; }
+.mm-key { font-size: 9.5px; }
+.mm-val { font-size: 11px; }
+
+/* ── Overlay z-alignment ── */
+.overlay { backdrop-filter: blur(2px); }
+.mismatch-overlay { backdrop-filter: blur(2px); }
 </style>
 <body>
 <div class="page-hero"></div>
@@ -1279,7 +1637,7 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
     <div><div class="pg-title">Upload Master Data</div><div class="pg-sub">PO details &amp; Day-wise Inward Register</div></div>
     <button class="btn btn-ghost btn-sm" onclick="clearAllStorage()" style="color:var(--red)">🗑 Clear All Data</button>
   </div>
-  <div class="upload-grid">
+  <div class="upload-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
     <div class="card">
       <div class="card-hd"><span class="card-title">📋 Bulk PO Details</span><span style="font-size:9px;color:var(--red);font-weight:700;letter-spacing:1px">REQUIRED</span></div>
       <div class="card-body">
@@ -1306,21 +1664,27 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
     <div class="pw-hd"><span class="pw-title">📋 PO Data Preview</span><span class="pw-count" id="po-pc"></span></div>
     <div class="tscroll"><table><thead><tr><th>PO No.</th><th>EAN/Barcode</th><th>SKU Code</th><th>SKU Description</th><th>Size</th><th>PO Qty</th><th>Product</th></tr></thead><tbody id="po-pb"></tbody></table></div>
   </div>
-  <div class="card" style="margin-top:14px">
+  <div class="card" style="margin-top:10px">
     <div class="card-hd">
       <span class="card-title">📅 Day-wise Inward Register</span>
-      <span style="font-size:9px;color:var(--orange);font-weight:700;letter-spacing:1px;background:var(--orange-d);border:1px solid rgba(255,140,60,.25);padding:2px 8px;border-radius:3px">NEW</span>
+      <span style="font-size:9px;color:var(--orange);font-weight:700;letter-spacing:1px;background:var(--orange-d);border:1px solid rgba(255,140,60,.25);padding:2px 8px;border-radius:3px">REQUIRED</span>
     </div>
     <div class="card-body">
-      <div style="font-size:11px;color:var(--ink3);margin-bottom:10px;line-height:1.7">
+      <div style="font-size:10px;color:var(--ink3);margin-bottom:8px;line-height:1.6">
         Columns: <strong style="color:var(--ink2)">Sr. No. · Vehicle Arrived Date · Vendor Name · PO No. · New PO · Invoice No. · Invoice Date · Invoice Qty · No. of Cartons</strong>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
         <div>
 
-          <div id="gsheet-inward-panel" style="margin-bottom:12px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(5,150,105,.25);border-radius:10px;padding:13px 14px">
+          <details style="margin-bottom:10px">
+            <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:7px;padding:8px 12px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(5,150,105,.25);border-radius:8px;font-size:11px;font-weight:800;color:var(--green);user-select:none">
+              <span>🔗</span> Link Google Sheet
+              <span style="font-size:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:20px;padding:1px 7px;font-weight:700;letter-spacing:.5px">LIVE SYNC</span>
+              <span style="margin-left:auto;font-size:10px;color:var(--ink3);font-weight:400">▸ expand</span>
+            </summary>
+          <div id="gsheet-inward-panel" style="margin-top:6px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(5,150,105,.25);border-radius:8px;padding:12px 13px">
             <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px">
-              <span style="font-size:16px">&#x1F517;</span>
+              <span style="font-size:14px">&#x1F517;</span>
               <span style="font-size:11px;font-weight:800;color:var(--green)">Link Google Sheet</span>
               <span style="font-size:9px;background:#dcfce7;color:#166534;border:1px solid #bbf7d0;border-radius:20px;padding:1px 7px;font-weight:700;letter-spacing:.5px">LIVE SYNC</span>
             </div>
@@ -1462,14 +1826,15 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
               </div>
             </div>
           </div>
+          </details>
 
 
-          <div style="margin-bottom:10px;padding:11px 13px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:var(--r)">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-              <span style="font-size:14px">📗</span>
-              <span style="font-size:11px;font-weight:800;color:var(--teal);letter-spacing:.3px">Second Google Sheet Source</span>
-              <span style="font-size:9px;color:var(--ink3);margin-left:auto">(merges with Sheet 1)</span>
-            </div>
+          <details style="margin-bottom:10px">
+            <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:7px;padding:8px 12px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:8px;font-size:11px;font-weight:800;color:var(--teal);user-select:none">
+              <span>📗</span> Second Google Sheet Source
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-weight:400">(merges with Sheet 1) ▸</span>
+            </summary>
+          <div style="margin-top:6px;padding:11px 13px;background:linear-gradient(135deg,#f0fdf4,#f0fdff);border:1.5px solid rgba(8,145,178,.25);border-radius:var(--r)">
             <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect a second Apps Script Web App URL. Its rows will be merged into the same inward register (duplicate Invoice Nos. are updated, unique ones are added).</div>
             <input class="field-input" id="gsheet2-inward-url" placeholder="https://script.google.com/macros/s/…/exec  (Sheet 2)" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheet2UrlInput()">
             <div style="margin-bottom:6px">
@@ -1490,15 +1855,16 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
             <div id="gsheet2-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
             <div id="gsheet2-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
           </div>
+          </details>
 
 
-          <div style="margin-bottom:10px;padding:11px 13px;background:linear-gradient(135deg,#fdf4ff,#faf0ff);border:1.5px solid rgba(124,58,237,.25);border-radius:var(--r)">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-              <span style="font-size:14px">📒</span>
-              <span style="font-size:11px;font-weight:800;color:var(--purple);letter-spacing:.3px">STO Google Sheet Source</span>
-              <span style="font-size:9px;color:var(--ink3);margin-left:auto">(Stock Transfer Order register)</span>
-            </div>
-            <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect an Apps Script Web App URL for your STO register. STO data powers the <strong>STO Status</strong> tab — showing transfer order progress, scanning status, and GRN details.</div>
+          <details style="margin-bottom:10px">
+            <summary style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:7px;padding:8px 12px;background:linear-gradient(135deg,#fdf4ff,#faf0ff);border:1.5px solid rgba(124,58,237,.25);border-radius:8px;font-size:11px;font-weight:800;color:var(--purple);user-select:none">
+              <span>📒</span> STO Google Sheet Source
+              <span style="font-size:9px;color:var(--ink3);margin-left:auto;font-weight:400">(Stock Transfer Order) ▸</span>
+            </summary>
+          <div style="margin-top:6px;padding:11px 13px;background:linear-gradient(135deg,#fdf4ff,#faf0ff);border:1.5px solid rgba(124,58,237,.25);border-radius:var(--r)">
+            <div style="font-size:10px;color:var(--ink3);margin-bottom:7px;line-height:1.6">Connect an Apps Script Web App URL for your STO register. STO data powers the <strong>STO Status</strong> tab.</div>
             <input class="field-input" id="gsheet-sto-url" placeholder="https://script.google.com/macros/s/…/exec  (STO Sheet)" style="width:100%;font-size:10px;padding:7px 10px;font-family:var(--font-mono);margin-bottom:6px" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="onGSheetStoUrlInput()">
             <div style="margin-bottom:6px">
               <div style="font-size:9px;color:var(--ink3);margin-bottom:4px;font-weight:700">📋 Worksheets/Tabs (comma-separated, blank = active sheet):</div>
@@ -1518,11 +1884,12 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
             <div id="gsheet-sto-status" style="display:none;margin-top:7px;font-size:10px;font-weight:700;padding:5px 10px;border-radius:6px"></div>
             <div id="gsheet-sto-debug" style="display:none;margin-top:7px;background:#0d1117;border-radius:8px;padding:9px 12px;font-size:10px;color:#7ee787;font-family:monospace;line-height:1.6;word-break:break-all"></div>
           </div>
+          </details>
 
 
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
             <div style="flex:1;height:1px;background:var(--border)"></div>
-            <span style="font-size:10px;color:var(--ink3);font-weight:700;white-space:nowrap">OR UPLOAD FILE</span>
+            <span style="font-size:9px;color:var(--ink3);font-weight:800;white-space:nowrap;letter-spacing:1px">OR UPLOAD FILE</span>
             <div style="flex:1;height:1px;background:var(--border)"></div>
           </div>
 
@@ -1541,18 +1908,18 @@ input[type=checkbox]{accent-color:var(--accent);width:13px;height:13px;cursor:po
             <button class="btn btn-danger btn-xs" onclick="clearInward()">Clear</button>
           </div>
         </div>
-        <div style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:14px">
-          <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink3);margin-bottom:8px">How it works</div>
-          <div style="font-size:11px;color:var(--ink2);line-height:1.9">
+        <div style="background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink3);margin-bottom:6px;font-weight:700">How it works</div>
+          <div style="font-size:10.5px;color:var(--ink2);line-height:1.8">
             📌 Upload the day's inward PO register<br>
             🔗 PO No. links to scan records automatically<br>
-            📋 <strong>Pending Remarks</strong> from this sheet appear in PO Status window<br>
-            ✏️ Remarks added in Records page update the PO Status view<br>
+            📋 <strong>Pending Remarks</strong> appear in PO Status<br>
+            ✏️ Records page remarks update PO Status view<br>
             📊 View combined status in <strong>PO Status</strong> tab
           </div>
         </div>
       </div>
-      <div class="preview-wrap" id="inward-preview" style="display:none;margin-top:12px">
+      <div class="preview-wrap" id="inward-preview" style="display:none;margin-top:8px">
         <div class="pw-hd"><span class="pw-title">📅 Inward Register Preview</span><span class="pw-count" id="inward-pc"></span></div>
         <div class="tscroll"><table><thead><tr><th>Sr. No.</th><th>Vehicle Arrived Date</th><th>Vendor Name</th><th>PO No.</th><th>New PO</th><th>Invoice No.</th><th>Invoice Date</th><th>Invoice Qty</th><th>No. of Cartons</th></tr></thead><tbody id="inward-pb"></tbody></table></div>
       </div>
@@ -2821,23 +3188,31 @@ async function fbGet(path){
 async function fbPut(path,data,retries=3){
  if(!fbConfig)return false;const body=JSON.stringify(data);
  for(let i=0;i<retries;i++){
- try{const r=await fetchWithTimeout(fbUrl(path),{method:'PUT',headers:{'Content-Type':'application/json'},body});if(r.ok){lastSyncTs=new Date();updateSyncUI();return true;}if(r.status===401||r.status===403)break;}catch(e){}
+ try{const r=await fetchWithTimeout(fbUrl(path),{method:'PUT',headers:{'Content-Type':'application/json'},body});if(r.ok){lastSyncTs=new Date();updateSyncUI();return true;}if(r.status===401||r.status===403){_onFbPermissionError();break;}}catch(e){}
  if(i<retries-1)await delay(400*Math.pow(2,i));
  }return false;
 }
 async function fbPatch(path,data,retries=3){
  if(!fbConfig)return false;const body=JSON.stringify(data);
  for(let i=0;i<retries;i++){
- try{const r=await fetchWithTimeout(fbUrl(path),{method:'PATCH',headers:{'Content-Type':'application/json'},body});if(r.ok){lastSyncTs=new Date();updateSyncUI();return true;}if(r.status===401||r.status===403)break;}catch(e){}
+ try{const r=await fetchWithTimeout(fbUrl(path),{method:'PATCH',headers:{'Content-Type':'application/json'},body});if(r.ok){lastSyncTs=new Date();updateSyncUI();return true;}if(r.status===401||r.status===403){_onFbPermissionError();break;}}catch(e){}
  if(i<retries-1)await delay(400*Math.pow(2,i));
  }return false;
 }
 async function fbDelete(path,retries=3){
  if(!fbConfig)return false;
  for(let i=0;i<retries;i++){
- try{const r=await fetchWithTimeout(fbUrl(path),{method:'DELETE'});if(r.ok)return true;}catch(e){}
+ try{const r=await fetchWithTimeout(fbUrl(path),{method:'DELETE'});if(r.ok)return true;if(r.status===401||r.status===403){_onFbPermissionError();break;}}catch(e){}
  if(i<retries-1)await delay(400*Math.pow(2,i));
  }return false;
+}
+// surfaces a clear, actionable error instead of leaving writes stuck in the queue silently forever
+function _onFbPermissionError(){
+ const now=Date.now();
+ if(window._lastPermErrToast&&(now-window._lastPermErrToast)<30000)return; // throttle to avoid spamming
+ window._lastPermErrToast=now;
+ setBanner('offline','🔒 Firebase rejected write (401/403) — check Rules in console');
+ if(typeof toast==='function')toast('Sync blocked: Firebase Rules deny write access. Open console → Realtime Database → Rules and set them as shown in setup.','err');
 }
 
 function queueScanWrite(record){
@@ -2870,21 +3245,52 @@ function _withWriteTimeoutForPath(p,path){
  return _withWriteTimeout(p,large?60000:10000);
 }async function flushQueue(){
  if(!fbConfig||!isOnline||writeQueue.length===0)return;
+ if(window._flushInProgress)return; // re-entrancy guard: avoid overlapping flushes duplicating/dropping writes
+ window._flushInProgress=true;
+ try{
  const toFlush=[...writeQueue];let flushed=0;
+ const BATCH=3; // smaller batches avoid cascading timeouts/aborts on slow 2G/3G
 
- for(let i=0;i<toFlush.length;i+=10){
- const batch=toFlush.slice(i,i+10);
+ for(let i=0;i<toFlush.length;i+=BATCH){
+ const batch=toFlush.slice(i,i+BATCH);
  const results=await Promise.all(batch.map(w=>_withWriteTimeoutForPath(w.method==='delete'?fbDelete(w.path):w.method==='patch'?fbPatch(w.path,w.data):fbPut(w.path,w.data),w.path).catch(()=>false)));
- results.forEach((ok,j)=>{if(ok){writeQueue=writeQueue.filter(x=>x.path!==batch[j].path||x.ts!==batch[j].ts);flushed++;}});
+ results.forEach((ok,j)=>{
+  if(ok){
+   const cur=writeQueue.find(x=>x.path===batch[j].path);
+   if(cur&&cur.ts===batch[j].ts)writeQueue=writeQueue.filter(x=>!(x.path===batch[j].path&&x.ts===batch[j].ts));
+   flushed++;
+  }
+ });
  if(flushed>0)updateQueueBadge();
+ if(i+BATCH<toFlush.length)await delay(150);
  }
  LS.save('writeQueue',writeQueue);updateQueueBadge();
  if(writeQueue.length===0)setBanner('connected','✅ Synced · '+scannedAll.length+' records');
  else setBanner('queued','⏳ '+writeQueue.length+' pending — retrying');
  if(flushed>0)updateSyncUI();
+ }finally{
+ window._flushInProgress=false;
+ }
 }
 window.addEventListener('online',()=>{isOnline=true;if(fbConfig)flushQueue();setBanner('connected','✅ Back online · syncing…');});
 window.addEventListener('offline',()=>{isOnline=false;setBanner('offline','📴 Offline — scans saved locally, auto-sync on reconnect');});
+
+// FIX-3: Flush all pending writes before the page closes.
+// debouncedSaveScanned and LS._throttleTimers delay writes for performance,
+// but if the tab/browser is closed during that window, data is lost.
+// This handler cancels pending timers and writes synchronously.
+window.addEventListener('beforeunload',()=>{
+ // Flush throttled localStorage saves
+ clearTimeout(_lsSaveTimer);
+ Object.keys(LS._throttleTimers).forEach(k=>{
+ clearTimeout(LS._throttleTimers[k]);
+ try{localStorage.setItem('grnwms8_'+k,JSON.stringify(
+ k==='scanned'?scannedAll:k==='po'?poData:k==='inward'?inwardData:k==='sto'?stoData:null
+ ));}catch(e){}
+ });
+ // Persist write queue so pending Firebase writes survive a reload
+ try{localStorage.setItem('grnwms8_writeQueue',JSON.stringify(writeQueue));}catch(e){}
+});
 
 function startSSE(){
  if(!fbConfig)return;stopSSE();
@@ -2897,7 +3303,33 @@ function startSSE(){
  if(sseEl){sseEl.textContent='🔴 live';sseEl.style.color='var(--green)';}
  try{
  const d=JSON.parse(e.data);if(!d)return;
+ const sseEventPath=d.path||'/';
  const obj=d.data;
+
+ // FIX-1: Handle individual record path updates (e.g. path="/r1234abc")
+ // These are fired when a table device PATCHes a single scan record to Firebase.
+ // The original handler only handled root "/" events, so individual scans were invisible
+ // to the admin SSE listener until the next full poll.
+ if(sseEventPath!=='/'&&sseEventPath.length>1){
+ const recordId=sseEventPath.replace(/^\//,'');
+ const pendingIds=new Set(writeQueue.filter(w=>w.path&&w.path.startsWith('scanned/')).map(w=>w.path.replace('scanned/','')));
+ if(obj===null){
+ scannedAll=scannedAll.filter(r=>r.id!==recordId);
+ }else if(obj&&typeof obj==='object'&&obj.id){
+ if(!obj.shift||obj.shift==='—')obj.shift=shiftFromTime(obj.time);
+ const ei=scannedAll.findIndex(r=>r.id===recordId);
+ if(ei>=0){if(!pendingIds.has(recordId))scannedAll[ei]=obj;}
+ else{scannedAll.unshift(obj);scannedAll.sort((a,b)=>(b.ts||0)-(a.ts||0));}
+ }
+ LS.save('scanned',scannedAll);lastSyncTs=new Date();updateSyncUI();updateHeaderStats();
+ debouncedSync('adminRefresh',refreshActiveAdminPage,300);
+ if(obj&&obj.tbl){
+ setBanner('connected','🔴 LIVE · new scan from T'+String(obj.tbl).padStart(2,'0'));
+ setTimeout(()=>setBanner('connected','✅ Firebase live · '+scannedAll.length+' scans'),4000);
+ }
+ return;
+ }
+
  if(obj===null){
 
  const _now=Date.now();const _GRACE=5*60*1000;
@@ -5030,7 +5462,7 @@ function checkCartonDuplicate(val){
 
 function readSzBdInputs(){
  const map={};
- document.querySelectorAll('.sz-bd-input').forEach(inp=>{
+ document.querySelectorAll('#szBdGrid .sz-bd-input').forEach(inp=>{
  const sz=inp.dataset.size;const v=parseInt(inp.value)||0;
  if(sz&&v>0)map[sz]=v;
  });
@@ -5156,13 +5588,15 @@ function buildSizeBreakdownGrid(po, clearValues){
  if(prevInfoBar)prevInfoBar.style.display='none';
  if(copyPrevBtn)copyPrevBtn.style.display='none';
 
+ // Always reset the hidden units field when rendering a fresh grid
+ if(clearValues){const h=document.getElementById('inCUnits');if(h)h.value='';}
  recalcSzBdTotal();
  updateSzBdSessionTotal();
 }
 
 function recalcSzBdTotal(){
  let total=0;
- document.querySelectorAll('.sz-bd-input').forEach(inp=>{
+ document.querySelectorAll('#szBdGrid .sz-bd-input').forEach(inp=>{
  total+=Math.max(0,parseInt(inp.value)||0);
  });
  const totalValEl=document.getElementById('szBdTotalVal');
@@ -5190,7 +5624,7 @@ function updateSzBdSessionTotal(){
  session.cartonLog.forEach(entry=>{prevSum+=(entry.units||0);});
  // Add current grid inputs
  let curSum=0;
- document.querySelectorAll('.sz-bd-input').forEach(inp=>{curSum+=Math.max(0,parseInt(inp.value)||0);});
+ document.querySelectorAll('#szBdGrid .sz-bd-input').forEach(inp=>{curSum+=Math.max(0,parseInt(inp.value)||0);});
  sessionTotalEl.textContent=prevSum+curSum;
  sessionTotalWrap.style.display='inline-flex';
 }
@@ -5199,7 +5633,7 @@ function copyPrevCartonBreakdown(){
  if(!session||!session.cartonLog||!session.cartonLog.length)return;
  const prevEntry=session.cartonLog[session.cartonLog.length-1];
  if(!prevEntry||!prevEntry.sizeBreakdown)return;
- document.querySelectorAll('.sz-bd-input').forEach(inp=>{
+ document.querySelectorAll('#szBdGrid .sz-bd-input').forEach(inp=>{
    const sz=inp.dataset.size;
    if(sz && prevEntry.sizeBreakdown[sz]!==undefined){
      inp.value=prevEntry.sizeBreakdown[sz]>0?prevEntry.sizeBreakdown[sz]:'';
@@ -5219,7 +5653,7 @@ function onSzBdInput(inp){
 function szBdKeyNav(e,inp){
  if(e.key==='Enter'||e.key==='Tab'){
  e.preventDefault();
- const inputs=[...document.querySelectorAll('.sz-bd-input')];
+ const inputs=[...document.querySelectorAll('#szBdGrid .sz-bd-input')];
  const idx=inputs.indexOf(inp);
  const next=inputs[idx+1];
  if(next){next.focus();next.select();}
@@ -5260,7 +5694,9 @@ function startSession(){
  const po=(document.getElementById('selPO').value||'').trim();
  const invNo=(document.getElementById('selInvNo').value||'').trim();
  const carton=document.getElementById('inCarton').value.trim();
- const units=parseInt(document.getElementById('inCUnits').value)||0;
+ // Always recompute units directly from grid inputs — never trust the stale hidden field
+ let units=0;document.querySelectorAll('#szBdGrid .sz-bd-input').forEach(inp=>{units+=Math.max(0,parseInt(inp.value)||0);});
+ if(!units)units=parseInt(document.getElementById('inCUnits').value)||0;
 
  const poInvNos=[...new Set(inwardData.filter(r=>r.poNo===po).map(r=>r.invNo).filter(Boolean))];
  const multiInvoicePO=poInvNos.length>1;
@@ -6276,7 +6712,11 @@ function commitScanRecord(record){
  document.getElementById('bcInput').value='';
  scannedAll.unshift(record);
 
- debouncedSaveScanned();
+ // FIX-2: Save immediately to localStorage on every single scan.
+ // The previous debouncedSaveScanned() had an 800ms delay — if the device
+ // was closed/refreshed before it fired, the scan record was lost from storage.
+ // Bulk flows (doBulkScan) still use debouncedSaveScanned for performance.
+ try{localStorage.setItem('grnwms8_scanned',JSON.stringify(scannedAll));}catch(e){debouncedSaveScanned();}
  if(fbConfig)queueScanWrite(record);
 
  const box=document.getElementById('scanBox');
@@ -7302,9 +7742,12 @@ function exportSelectedPO(){
  poRecs.forEach(r=>{
  const sz=(r.size||'—').trim();
 
- const isWrongBarcode=(r.remark||'').trim()==='Wrong Barcode';
- const eanKey=isWrongBarcode?'__WRONG_BC__':(r.ean||'');
- const key=[r.date,r.poNo,r.tbl,r.carton,eanKey,r.skuCode,r.skuDesc,sz].join('||');
+ const isPOMismatch=r.status==='PO Mismatch';
+ const eanKey=r.ean||'';
+ // PO Mismatch records: key without skuCode/skuDesc so they merge into the same row as matched scans of the same EAN+carton
+ const key=isPOMismatch
+   ?[r.date,r.poNo,r.tbl,r.carton,eanKey,sz].join('||')
+   :[r.date,r.poNo,r.tbl,r.carton,eanKey,r.skuCode,r.skuDesc,sz].join('||');
  if(!aggMap[key]){
  const mrpV=mrpMaster[mrpKey(r.skuDesc)];
  aggMap[key]={
