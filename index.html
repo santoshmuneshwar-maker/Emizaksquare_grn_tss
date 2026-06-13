@@ -1600,6 +1600,12 @@ td.td-ean { font-size: 9.5px; }
 
 
       <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff9e0;border:1.5px solid rgba(217,119,6,.25);border-radius:8px;flex-wrap:wrap;gap:8px">
+        <div><div style="font-size:12px;font-weight:700;color:var(--orange)">🔁 Clear STO Master Data</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">Remove uploaded STO details. Scan records kept.</div></div>
+        <button class="btn btn-warn btn-sm" onclick="clearSTO()">Clear STO</button>
+      </div>
+
+
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:#fff9e0;border:1.5px solid rgba(217,119,6,.25);border-radius:8px;flex-wrap:wrap;gap:8px">
         <div><div style="font-size:12px;font-weight:700;color:var(--orange)">₹ Clear MRP Master</div><div style="font-size:10px;color:var(--ink3);margin-top:2px">Remove all MRP entries. Scan records kept.</div></div>
         <button class="btn btn-warn btn-sm" onclick="clearMRPMasterData()">Clear MRP</button>
       </div>
@@ -1874,6 +1880,7 @@ td.td-ean { font-size: 9.5px; }
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px">
               <button class="btn btn-mrp btn-sm" id="gsheet-sto-fetch-btn" onclick="fetchGSheetSto()" disabled style="flex:1;justify-content:center">⬇ Fetch STO Sheet</button>
               <button class="btn btn-ghost btn-sm" onclick="debugGSheetStoCols()" style="font-size:10px;white-space:nowrap" title="Show raw column names from STO Sheet">🔍 Debug Cols</button>
+              <button class="btn btn-ghost btn-sm" onclick="clearSTOSheetData()" style="font-size:10px;white-space:nowrap;color:var(--red)" title="Clear STO data fetched from Google Sheet">🗑 Clear STO Sheet Data</button>
             </div>
 
             <div id="sto-livesync-strip" style="display:flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2);border-radius:7px;flex-wrap:wrap">
@@ -3176,7 +3183,12 @@ function delay(ms){return new Promise(r=>setTimeout(r,ms));}
 
 function fetchWithTimeout(url,opts={},ms=12000){
 
- if(opts.body&&typeof opts.body==='string'&&opts.body.length>200000)ms=60000;
+ if(opts.body&&typeof opts.body==='string'){
+ const len=opts.body.length;
+ if(len>2000000)ms=180000;
+ else if(len>500000)ms=120000;
+ else if(len>200000)ms=60000;
+ }
  const ctrl=new AbortController();
  const timer=setTimeout(()=>ctrl.abort(),ms);
  return fetch(url,{...opts,signal:ctrl.signal}).finally(()=>clearTimeout(timer));
@@ -3323,7 +3335,7 @@ function startSSE(){
  }
  LS.save('scanned',scannedAll);lastSyncTs=new Date();updateSyncUI();updateHeaderStats();
  debouncedSync('adminRefresh',refreshActiveAdminPage,300);
- if(obj&&obj.tbl){
+ if(obj&&obj.tbl&&obj.tbl!=='undefined'){
  setBanner('connected','🔴 LIVE · new scan from T'+String(obj.tbl).padStart(2,'0'));
  setTimeout(()=>setBanner('connected','✅ Firebase live · '+scannedAll.length+' scans'),4000);
  }
@@ -3368,8 +3380,9 @@ function startSSE(){
  LS.save('scanned',scannedAll);lastSyncTs=new Date();updateSyncUI();updateHeaderStats();
  debouncedSync('adminRefresh',refreshActiveAdminPage,300);
  if(newRecs.length){
- const tbls=[...new Set(newRecs.map(r=>r.tbl))];
- setBanner('connected','🔴 LIVE · '+newRecs.length+' new scan(s) from T'+tbls.map(t=>String(t).padStart(2,'0')).join(', T'));
+ const tbls=[...new Set(newRecs.map(r=>r.tbl).filter(t=>t&&t!=='undefined'))];
+ if(tbls.length)setBanner('connected','🔴 LIVE · '+newRecs.length+' new scan(s) from T'+tbls.map(t=>String(t).padStart(2,'0')).join(', T'));
+ else setBanner('connected','🔴 LIVE · '+newRecs.length+' new scan(s)');
  setTimeout(()=>setBanner('connected','✅ Firebase live · '+scannedAll.length+' scans'),4000);
  }
  }catch(err){}
@@ -3394,7 +3407,11 @@ function _mergeFirebaseScans(fbObj){
 
  const merged={};
 
- Object.entries(fbObj||{}).forEach(([id,val])=>{if(val&&!_deletedScanIds.has(id))merged[id]=val;});
+ Object.entries(fbObj||{}).forEach(([id,val])=>{
+ if(!val||_deletedScanIds.has(id))return;
+ if(!val.id)val.id=id; // ensure record carries its own Firebase key as id
+ merged[id]=val;
+ });
 
  scannedAll.forEach(r=>{
  if(merged[r.id])return; // already in Firebase — skip
@@ -3405,7 +3422,25 @@ function _mergeFirebaseScans(fbObj){
  if(isPending||isRecent||isActiveSession)merged[r.id]=r;
 
  });
- scannedAll=Object.values(merged).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0));
+
+ // Defensive de-dup: collapse exact-duplicate records that ended up under
+ // different Firebase keys/ids but represent the identical scan event
+ // (same table+carton+ean+poNo+exact millisecond timestamp). This guards
+ // against a record being double-counted in dashboard totals/mismatch if a
+ // retried write was ever re-queued under a new id. Legitimate repeat scans
+ // of the same EAN have distinct ts values (Date.now()+i), so they are
+ // unaffected.
+ const seenSig={};
+ Object.values(merged).forEach(r=>{
+ if(!r||!r.id)return;
+ const sig=r.tbl+'|'+r.carton+'|'+r.ean+'|'+r.poNo+'|'+r.ts;
+ const existing=seenSig[sig];
+ if(!existing||r.id<existing.id){seenSig[sig]=r;}
+ });
+ const dedupedMerged={};
+ Object.values(seenSig).forEach(r=>{dedupedMerged[r.id]=r;});
+
+ scannedAll=Object.values(dedupedMerged).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0));
  LS.save('scanned',scannedAll);
 }
 
@@ -3471,7 +3506,73 @@ async function pullFromFirebase(fullPull=false){
  if(Array.isArray(fbSTO)&&fbSTO.length){stoData=fbSTO;LS.save('sto',stoData);}
  else if(fbSTO&&typeof fbSTO==='object'&&!Array.isArray(fbSTO)){const arr=Object.values(fbSTO).filter(Boolean);if(arr.length){stoData=arr;LS.save('sto',stoData);}}
  }
- if(fbMRP&&typeof fbMRP==='object')mrpMaster=fbMRP,LS.save('mrp',mrpMaster);
+ // Sync shared STO Google Sheet config so table devices can fetch STO directly
+ try{
+ const fbStoCfg=await fbGet('gs_sto_cfg');
+ if(fbStoCfg&&fbStoCfg.url){
+ const localTs=LS.load('gs_sto_cfg_ts',0);
+ if(!localTs||fbStoCfg.ts>localTs){
+ LS.save('gsheet_sto_url',fbStoCfg.url);
+ LS.save('gsheet_sto_sheet',fbStoCfg.sheet||'');
+ LS.save('gs_sto_cfg_ts',fbStoCfg.ts||Date.now());
+ const inp=document.getElementById('gsheet-sto-url');if(inp)inp.value=fbStoCfg.url;
+ const btn=document.getElementById('gsheet-sto-fetch-btn');if(btn)btn.disabled=!fbStoCfg.url;
+ const shInp=document.getElementById('gsheet-sto-sheet');if(shInp)shInp.value=fbStoCfg.sheet||'';
+ if(typeof onGSheetStoSheetInput==='function'&&fbStoCfg.sheet){
+ const tagContainer=document.getElementById('sto-sheet-tags');
+ if(tagContainer){
+ const names=fbStoCfg.sheet.split(',').map(x=>x.trim()).filter(Boolean);
+ tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(124,58,237,.09);color:var(--purple);border:1px solid rgba(124,58,237,.25)">📋 ${n}</span>`).join('');
+ }
+ }
+ }
+ }
+ }catch(e){}
+ // Sync shared Inward Google Sheet (Sheet 1) config
+ try{
+ const fbInwCfg=await fbGet('gs_inward_cfg');
+ if(fbInwCfg&&fbInwCfg.url){
+ const localTs=LS.load('gs_inward_cfg_ts',0);
+ if(!localTs||fbInwCfg.ts>localTs){
+ LS.save('gsheet_inward_url',fbInwCfg.url);
+ LS.save('gsheet_inward_sheet',fbInwCfg.sheet||'');
+ LS.save('gs_inward_cfg_ts',fbInwCfg.ts||Date.now());
+ const inp=document.getElementById('gsheet-inward-url');if(inp)inp.value=fbInwCfg.url;
+ const btn=document.getElementById('gsheet-fetch-btn');if(btn)btn.disabled=!fbInwCfg.url;
+ const shInp=document.getElementById('gsheet-inward-sheet');if(shInp)shInp.value=fbInwCfg.sheet||'';
+ const tagContainer=document.getElementById('gs-sheet-tags');
+ if(tagContainer&&fbInwCfg.sheet){
+ const names=fbInwCfg.sheet.split(',').map(x=>x.trim()).filter(Boolean);
+ tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
+ }
+ const hint=document.getElementById('gs-sheet-hint');
+ const hintName=document.getElementById('gs-sheet-hint-name');
+ if(hint&&hintName&&fbInwCfg.sheet){hint.style.display='block';hintName.textContent=fbInwCfg.sheet;}
+ if(fbInwCfg.url&&typeof _startGSheetLiveSync==='function'){_gsLastHash='';_startGSheetLiveSync();}
+ }
+ }
+ }catch(e){}
+ // Sync shared Inward Google Sheet (Sheet 2) config
+ try{
+ const fbInw2Cfg=await fbGet('gs_inward2_cfg');
+ if(fbInw2Cfg&&fbInw2Cfg.url){
+ const localTs=LS.load('gs_inward2_cfg_ts',0);
+ if(!localTs||fbInw2Cfg.ts>localTs){
+ LS.save('gsheet2_inward_url',fbInw2Cfg.url);
+ LS.save('gsheet2_inward_sheet',fbInw2Cfg.sheet||'');
+ LS.save('gs_inward2_cfg_ts',fbInw2Cfg.ts||Date.now());
+ const inp=document.getElementById('gsheet2-inward-url');if(inp)inp.value=fbInw2Cfg.url;
+ const btn=document.getElementById('gsheet2-fetch-btn');if(btn)btn.disabled=!fbInw2Cfg.url;
+ const shInp=document.getElementById('gsheet2-inward-sheet');if(shInp)shInp.value=fbInw2Cfg.sheet||'';
+ const tagContainer=document.getElementById('gs2-sheet-tags');
+ if(tagContainer&&fbInw2Cfg.sheet){
+ const names=fbInw2Cfg.sheet.split(',').map(x=>x.trim()).filter(Boolean);
+ tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
+ }
+ if(fbInw2Cfg.url&&typeof _startGSheet2LiveSync==='function'){_gs2LastHash='';_startGSheet2LiveSync();}
+ }
+ }
+ }catch(e){}
  if(fbPINs&&typeof fbPINs==='object')tablePINs=fbPINs,LS.save('tablePINs',tablePINs);
  if(fbCreds&&fbCreds.u){adminCredentials={username:fbCreds.u,password:fbCreds.p};LS.save('adminCreds',adminCredentials);}
  }
@@ -3634,7 +3735,7 @@ function startPOMetaPoll(){
  stopPOMetaPoll();
  if(!fbConfig)return;
  checkPOMeta();
- poMetaTimer=setInterval(checkPOMeta,30000);
+ poMetaTimer=setInterval(checkPOMeta,12000);
 }
 function stopPOMetaPoll(){if(poMetaTimer){clearInterval(poMetaTimer);poMetaTimer=null;}}
 
@@ -3662,7 +3763,7 @@ async function checkPOMeta(){
  if(!isAdminOrigin){
 
  let fbPO=null;
- const delays=[2000,4000,8000,16000,30000];
+ const delays=[2000,4000,8000,15000,20000,30000,30000,30000];
  for(let attempt=0;attempt<=delays.length;attempt++){
  fbPO=await fbGet('po');
  const hasData=Array.isArray(fbPO)?fbPO.length>0:(fbPO&&typeof fbPO==='object'&&Object.keys(fbPO).length>0);
@@ -3671,6 +3772,15 @@ async function checkPOMeta(){
  setBanner('connecting','⏳ Waiting for PO data… (attempt '+(attempt+1)+')');
  await new Promise(r=>setTimeout(r,delays[attempt]));
  }
+ }
+ const hasFinalData=Array.isArray(fbPO)?fbPO.length>0:(fbPO&&typeof fbPO==='object'&&Object.keys(fbPO).length>0);
+ if(!hasFinalData){
+ // Large PO upload likely still being written by admin — don't mark as consumed,
+ // recheck shortly so the same po_meta event isn't missed permanently.
+ setBanner('queued','⏳ PO data not yet available — will retry shortly');
+ lastKnownPoMetaTs=meta.ts-1;
+ setTimeout(checkPOMeta,15000);
+ return;
  }
  if(Array.isArray(fbPO)&&fbPO.length){poData=fbPO;}
  else if(fbPO&&typeof fbPO==='object'&&!Array.isArray(fbPO)){const arr=Object.values(fbPO).filter(Boolean);if(arr.length)poData=arr;}
@@ -3943,6 +4053,7 @@ function onLoginSuccess(){
  goPage('scan');
  document.getElementById('myTableDisplay').textContent='Table '+String(currentUser.table).padStart(2,'0');
  document.getElementById('scanPageSub').textContent='Scanning for Table '+String(currentUser.table).padStart(2,'0');
+ restoreActiveSession(currentUser.table);
  if(fbConfig){
  fbConnected=true;isOnline=navigator.onLine;
  setBanner('syncing','⟳ Firebase connecting · Table '+String(currentUser.table).padStart(2,'0')+'…');
@@ -4235,13 +4346,17 @@ function confirmUpload(){
 
  if(!session){const selPO=document.getElementById('selPO');if(selPO&&selPO.value.trim())onPOChange();}
  if(fbConfig){
- fbPut('po_meta',{status:'set',ts:Date.now(),fname,count:poData.length,uploadedBy:currentUser&&currentUser.username?currentUser.username:'admin'});
  window._poUploadPending=true;
  queueWrite('po',poData);
  const _guardTs=Date.now();
  const _checkGuard=setInterval(()=>{
  const stillQueued=writeQueue.some(w=>w.path==='po');
- if(!stillQueued||Date.now()-_guardTs>90000){window._poUploadPending=false;clearInterval(_checkGuard);}
+ if(!stillQueued||Date.now()-_guardTs>90000){
+ window._poUploadPending=false;clearInterval(_checkGuard);
+ // Notify other tables only once the bulk PO data has actually landed in Firebase
+ // (or after the 90s guard window), so they don't poll for data that isn't there yet.
+ fbPut('po_meta',{status:'set',ts:Date.now(),fname,count:poData.length,uploadedBy:currentUser&&currentUser.username?currentUser.username:'admin'});
+ }
  },2000);
  }
  }else if(type==='inward'){
@@ -4426,6 +4541,39 @@ function clearPO(){
  refreshPODropdown();updateHeaderStats();
  toast('PO data cleared','warn');
 }
+function clearSTO(){
+ stoData=[];
+ LS.remove('sto');LS.save('sto_cleared',true);
+ if(fbConfig){
+ fbDelete('sto');
+ fbPut('sto_meta',{status:'cleared',ts:Date.now(),clearedBy:currentUser&&currentUser.username?currentUser.username:'admin'});
+ }
+ updateHeaderStats();
+ toast('STO data cleared','warn');
+}
+function clearSTOSheetData(){
+ if(!confirm('Clear all STO data fetched from Google Sheet and reset the sheet connection?'))return;
+ stoData=[];
+ LS.remove('sto');LS.save('sto_cleared',true);
+ // Reset GSheet config locally and in Firebase
+ LS.remove('gsheet_sto_url');LS.remove('gsheet_sto_sheet');LS.remove('gs_sto_cfg_ts');
+ const urlInp=document.getElementById('gsheet-sto-url');if(urlInp)urlInp.value='';
+ const sheetInp=document.getElementById('gsheet-sto-sheet');if(sheetInp)sheetInp.value='';
+ const tagContainer=document.getElementById('sto-sheet-tags');if(tagContainer)tagContainer.innerHTML='';
+ const btn=document.getElementById('gsheet-sto-fetch-btn');if(btn)btn.disabled=true;
+ const statusEl=document.getElementById('sto-sync-status');if(statusEl)statusEl.textContent='';
+ if(typeof _stoStatusMsg==='function')_stoStatusMsg('STO sheet data cleared',false);
+ if(typeof _gsStoLastHash!=='undefined')_gsStoLastHash='';
+ if(fbConfig){
+ fbDelete('sto');
+ fbDelete('gs_sto_cfg');
+ fbPut('sto_meta',{status:'cleared',ts:Date.now(),clearedBy:currentUser&&currentUser.username?currentUser.username:'admin'});
+ }
+ updateHeaderStats();
+ const activePage=document.querySelector('.page.active');
+ if(activePage&&activePage.id==='page-stostatus'&&typeof renderSTOStatus==='function')renderSTOStatus();
+ toast('STO Sheet data & connection cleared','warn');
+}
 function clearInward(){
  inwardData=[];
  LS.remove('inward');LS.remove('inward_fname');
@@ -4458,6 +4606,7 @@ function onGSheetUrlInput(){
  }else{
  LS.remove('gsheet_inward_url');
  }
+ if(fbConfig){const _ts=Date.now();LS.save('gs_inward_cfg_ts',_ts);queueWrite('gs_inward_cfg',{url,sheet:LS.load('gsheet_inward_sheet',''),ts:_ts});}
 }
 
 function onGSheetSheetInput(){
@@ -4472,6 +4621,7 @@ function onGSheetSheetInput(){
  const names=sh.split(',').map(s=>s.trim()).filter(Boolean);
  tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
  }
+ if(fbConfig){const _ts=Date.now();LS.save('gs_inward_cfg_ts',_ts);queueWrite('gs_inward_cfg',{url:LS.load('gsheet_inward_url',''),sheet:sh,ts:_ts});}
 }
 
 function saveGsColOverrides(){
@@ -4853,6 +5003,7 @@ function onGSheet2UrlInput(){
  }else{
  LS.remove('gsheet2_inward_url');
  }
+ if(fbConfig){const _ts=Date.now();LS.save('gs_inward2_cfg_ts',_ts);queueWrite('gs_inward2_cfg',{url,sheet:LS.load('gsheet2_inward_sheet',''),ts:_ts});}
 }
 
 function onGSheet2SheetInput(){
@@ -4863,6 +5014,7 @@ function onGSheet2SheetInput(){
  const names=sh.split(',').map(s=>s.trim()).filter(Boolean);
  tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(8,145,178,.09);color:var(--teal);border:1px solid rgba(8,145,178,.25)">📋 ${n}</span>`).join('');
  }
+ if(fbConfig){const _ts=Date.now();LS.save('gs_inward2_cfg_ts',_ts);queueWrite('gs_inward2_cfg',{url:LS.load('gsheet2_inward_url',''),sheet:sh,ts:_ts});}
 }
 
 function setGSheet2Status(msg,type){
@@ -5163,6 +5315,7 @@ function onGSheetStoUrlInput(){
  const url=(document.getElementById('gsheet-sto-url').value||'').trim();
  document.getElementById('gsheet-sto-fetch-btn').disabled=!url;
  if(url)LS.save('gsheet_sto_url',url);else LS.remove('gsheet_sto_url');
+ if(fbConfig){const _ts=Date.now();LS.save('gs_sto_cfg_ts',_ts);queueWrite('gs_sto_cfg',{url,sheet:LS.load('gsheet_sto_sheet',''),ts:_ts});}
 }
 function onGSheetStoSheetInput(){
  const sh=(document.getElementById('gsheet-sto-sheet').value||'').trim();
@@ -5170,6 +5323,7 @@ function onGSheetStoSheetInput(){
  const names=sh?sh.split(',').map(x=>x.trim()).filter(Boolean):[];
  const tagContainer=document.getElementById('sto-sheet-tags');
  if(tagContainer)tagContainer.innerHTML=names.map(n=>`<span style="display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:700;background:rgba(124,58,237,.09);color:var(--purple);border:1px solid rgba(124,58,237,.25)">📋 ${n}</span>`).join('');
+ if(fbConfig){const _ts=Date.now();LS.save('gs_sto_cfg_ts',_ts);queueWrite('gs_sto_cfg',{url:LS.load('gsheet_sto_url',''),sheet:sh,ts:_ts});}
 }
 function _stoStatusMsg(msg,ok){
  const el=document.getElementById('gsheet-sto-status');
@@ -5731,6 +5885,7 @@ function startSession(){
 
  _scanStats.cartonRecs=0;
  _scanStats.sizeMap={};
+ LS.save('activeSession_'+tbl,session);
  }else{
 
  const szBreakdown=readSzBdInputs();
@@ -5744,7 +5899,16 @@ function startSession(){
  };
  mrpPromptedDescs=new Set();
  }
+ LS.save('activeSession_'+tbl,session);
 
+ _activateSessionUI();
+ toast('Carton started · '+carton+' · '+units+' units · '+dt.shift+' shift','ok');
+}
+
+function _activateSessionUI(){
+ if(!session)return;
+ const tbl=session.tbl,po=session.po,invNo=session.invNo,carton=session.carton,units=session.units;
+ const dt={date:session.startDt,time:session.startTime,shift:session.shift};
  document.getElementById('bcInput').disabled=false;document.getElementById('bcBtn').disabled=false;
  document.getElementById('bcInput').focus();
  document.getElementById('scanBox').className='scan-box ready';
@@ -5783,7 +5947,16 @@ function startSession(){
 
  resetScanStats();
  renderScannedTable();updateStats();updateScanCounts();
- toast('Carton started · '+carton+' · '+units+' units · '+dt.shift+' shift','ok');
+}
+
+function restoreActiveSession(tbl){
+ const saved=LS.load('activeSession_'+tbl,null);
+ if(!saved||!saved.po)return false;
+ session=saved;
+ mrpPromptedDescs=new Set();
+ _activateSessionUI();
+ toast('Restored active session · PO '+session.po+' · Carton '+session.carton,'ok');
+ return true;
 }
 
 function renderCartonLog(){
@@ -5957,10 +6130,8 @@ function endSession(){
  if(fbConfig&&closedRecs.length){
  closedRecs.forEach(r=>queueScanWrite(r));
  scheduleFlush(300);
- }
+ } LS.remove('activeSession_'+session.tbl);
  session=null;
- mrpPromptedDescs=new Set();
- document.getElementById('bcInput').disabled=true;document.getElementById('bcBtn').disabled=true;
  document.getElementById('bcInput').value='';
  document.getElementById('scanBox').className='scan-box';
  document.getElementById('sbStatus').className='sb-status idle';document.getElementById('sbStatus').textContent='Not Active';
@@ -9848,6 +10019,8 @@ function exportCombinedDashImage(){
  const upInv=underList.length,upQty=underList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  const issueList=il.filter(i=>i.grnStatus!=='Done'&&i.grnRemark&&i.grnRemark.trim()&&!(i.grnRemark||'').toLowerCase().includes('grn done'));
  const iInv=issueList.length,iQty=issueList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
+ const pendList=il.filter(i=>i.grnStatus!=='Done');
+ const pQty=pendList.reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  let capRem=DAILY_CAP,bcQty=0;const wc={};
  il.forEach(inv=>{const q=parseInt(inv.totalInvQty)||0;if(capRem<=0){bcQty+=q;}else if(q<=capRem){wc[inv.id]=q;capRem-=q;}else{wc[inv.id]=capRem;bcQty+=q-capRem;capRem=0;}});
  // tatList: _gdTAT() classifies by grnStatus + GRN Date vs Issue Resolved Date diff
@@ -9855,7 +10028,7 @@ function exportCombinedDashImage(){
  const rawWithin=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
  const within=rawWithin;
- const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within);
+ const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within-pQty);
  T.uInv+=uInv;T.uBoxes+=uBoxes;T.uQty+=uQty;T.dInv+=dInv;T.dQty+=dQty;T.upInv+=upInv;T.upQty+=upQty;T.iInv+=iInv;T.iQty+=iQty;T.above+=above;T.within+=within;T.bc+=bcQty;
  const t2=above+within;
  return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty,wPct:t2>0?((within/t2)*100).toFixed(1)+'%':'—',aPct:t2>0?((above/t2)*100).toFixed(1)+'%':'—',dPct:uInv>0?((dInv/uInv)*100).toFixed(0)+'%':'—'};
@@ -10856,7 +11029,7 @@ function exportGRNDashImage(){
  const rawWithinJ=tatList.filter(i=>_gdTAT(i)==='within').reduce((s,i)=>s+(parseInt(i.totalInvQty)||0),0);
  // Business rule: if Invoice Qty <= 30000 → Above TAT = Total Invoice Qty - Within TAT; if > 30000 → Above TAT = 30000 - Within TAT; min 0
  const within=rawWithinJ;
- const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within);
+ const above=Math.max(0,(uQty<=DAILY_CAP?uQty:DAILY_CAP)-within-(upQty+iQty));
  return{date,uInv,uBoxes,uQty,dInv,dQty,upInv,upQty,iInv,iQty,above,within,bc:bcQty};
  });
 
