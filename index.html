@@ -3197,7 +3197,8 @@ async function sheetsApiV4BatchGet(spreadsheetId,apiKey,sheetNames){
  const all=await _sheetsApiGetTabNames(spreadsheetId,apiKey);
  names=[all[0]];
  }
- const rangeParams=names.map(n=>'ranges='+encodeURIComponent(n)).join('&');
+ const _qName=n=>{n=String(n).trim();if(/^'.*'$/.test(n))return n;return "'"+n.replace(/'/g,"''")+"'";};
+ const rangeParams=names.map(n=>'ranges='+encodeURIComponent(_qName(n))).join('&');
  const url='https://sheets.googleapis.com/v4/spreadsheets/'+encodeURIComponent(spreadsheetId)
  +'/values:batchGet?'+rangeParams+'&valueRenderOption=UNFORMATTED_VALUE&key='+encodeURIComponent(apiKey);
  const resp=await fetchWithTimeout(url,{cache:'no-cache'},15000);
